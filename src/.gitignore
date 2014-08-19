@@ -5,12 +5,13 @@
 *.suo
 *.user
 *.sln.docstates
+*.userprefs
 
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
-x64/
+#x64/
 build/
 bld/
 [Bb]in/
@@ -123,7 +124,7 @@ publish/
 *.azurePubxml
 
 # NuGet Packages Directory
-packages/
+#packages/
 ## TODO: If the tool you use requires repositories.config uncomment the next line
 #!packages/repositories.config
 
