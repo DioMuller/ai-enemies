@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Enemies.Screens;
 
 namespace Enemies
 {
@@ -20,6 +21,11 @@ namespace Enemies
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            var baseScreen = new Screen<bool>(this);
+            Components.Add(baseScreen);
+            baseScreen.Post(GameMain);
+
             base.Initialize();
         }
 
@@ -44,29 +50,19 @@ namespace Enemies
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
+        public async void GameMain(Screen<bool> baseScreen)
         {
-            // TODO: Add your update logic here
+            // TODO: Run game screens
 
-            base.Update(gameTime);
-        }
+            while (true)
+            {
+                var titleSelection = await baseScreen.Run(new TitleScreen(this));
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+                if (titleSelection == TitleScreen.Result.Exit)
+                    break;
+            }
 
-            // TODO: Add your drawing code here
-
-            base.Draw(gameTime);
+            Exit();
         }
     }
 }
