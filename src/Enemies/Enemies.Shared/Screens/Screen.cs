@@ -1,14 +1,26 @@
 ﻿using Jv.Games.Xna.Async;
-using System.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 
 namespace Enemies.Screens
 {
-    public class Screen<TResult> : Activity<TResult>
+    class Screen<TResult> : Activity<TResult>
     {
+        #region Nested
+        public enum RunState
+        {
+            NotRunning,
+            Initializing,
+            Running,
+            Finalizing,
+            Completed
+        }
+        #endregion
+
         #region Attributes
 
-        bool _initialized;
+        bool _contentInitialized;
+        protected RunState State;
 
         #endregion
 
@@ -27,13 +39,13 @@ namespace Enemies.Screens
 
         #endregion
 
-        #region Life-Cycle
+        #region Life Cycle
 
         protected override void Initialize()
         {
-            if (!_initialized)
+            if (!_contentInitialized)
             {
-                _initialized = true;
+                _contentInitialized = true;
                 LoadContent();
             }
         }
@@ -50,15 +62,23 @@ namespace Enemies.Screens
         /// <returns>The activity task.</returns>
         protected async override Task<TResult> RunActivity()
         {
+            State = RunState.Initializing;
+
             var initializeTask = InitializeScreen();
             if (initializeTask != null)
                 await initializeTask;
 
+            State = RunState.Running;
+
             var result = await base.RunActivity();
+
+            State = RunState.Finalizing;
 
             var finalizeTask = FinalizeScreen();
             if (finalizeTask != null)
                 await finalizeTask;
+
+            State = RunState.Completed;
 
             return result;
         }

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Enemies.MonoGame
 {
-    public class MainGame : Enemies.MainGame
+    class MainGame : Enemies.MainGame
     {
         public MainGame()
         {

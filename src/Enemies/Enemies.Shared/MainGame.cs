@@ -1,13 +1,14 @@
+using Enemies.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Enemies.Screens;
+using System;
 
 namespace Enemies
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class MainGame : Game
+    class MainGame : Game
     {
         protected GraphicsDeviceManager Graphics;
         protected SpriteBatch SpriteBatch;
@@ -52,14 +53,29 @@ namespace Enemies
 
         public async void GameMain(Screen<bool> baseScreen)
         {
-            // TODO: Run game screens
-
             while (true)
             {
-                var titleSelection = await baseScreen.Run(new TitleScreen(this));
+                try
+                {
+                    var titleSelection = await baseScreen.Run(new TitleScreen(this));
+                    Console.WriteLine("TitleScreen result: " + titleSelection);
 
-                if (titleSelection == TitleScreen.Result.Exit)
-                    break;
+                    if (titleSelection == TitleScreen.Result.Exit)
+                        break;
+
+                    var gameResult = await baseScreen.Run(new GameScreen(this));
+                    Console.WriteLine("GameScreen result: " + gameResult);
+                }
+                catch (AggregateException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    foreach (var inner in ex.InnerExceptions)
+                        Console.WriteLine("Error: {0}", ex);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: {0}", ex);
+                }
             }
 
             Exit();
