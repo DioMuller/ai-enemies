@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jv.Games.Portable.Async</name>
+    </assembly>
+    <members>
+        <member name="M:Jv.Games.Xna.Async.IOperation.Continue(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the operation.
+            </summary>
+            <param name="gameTime">Current game time.</param>
+            <returns>True if the operation can continue (its not complete).</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Async.ContextTimer.Continue(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the timer CurrentDuration.
+            </summary>
+            <param name="gameTime">Current game time.</param>
+            <returns>True if the timer is complete.</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Async.ContextTimerExtensions.Delay(Jv.Games.Xna.Async.AsyncContext,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Creates a task that will complete after a time delay.
+            </summary>
+            <param name = "context">The context to run the operation.</param>
+            <param name="dueTime">The time span to wait before completing the returned task.</param>
+            <param name="cancellationToken">The cancellation token that will be checked prior to completing the returned task.</param>
+        </member>
+    </members>
+</doc>

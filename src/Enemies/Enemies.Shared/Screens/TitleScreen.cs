@@ -1,6 +1,6 @@
-﻿using Enemies.Extensions;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Jv.Games.Xna.Async;
 
 namespace Enemies.Screens
 {
