@@ -15,16 +15,24 @@ namespace Enemies.Entities
         protected readonly AsyncContext UpdateContext, DrawContext;
         #endregion
 
+        #region Constructors
+        public Entity()
+        {
+            UpdateContext = new AsyncContext();
+            DrawContext = new AsyncContext();
+        }
+        #endregion
+
         #region IEntity
         void IEntity.Update(GameTime gameTime)
         {
-            UpdateContext.Send(Update, gameTime);
+            Update(gameTime);
             UpdateContext.Update(gameTime);
         }
 
         void IEntity.Draw(GameTime gameTime)
         {
-            DrawContext.Send(Draw, gameTime);
+            Draw(gameTime);
             DrawContext.Update(gameTime);
         }
         #endregion

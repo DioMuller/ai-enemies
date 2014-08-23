@@ -60,23 +60,23 @@ namespace Enemies.Screens
         /// complete with the result.
         /// </summary>
         /// <returns>The activity task.</returns>
-        protected async override Task<TResult> RunActivity()
+        protected async override Task<TResult> Run()
         {
             State = RunState.Initializing;
 
             var initializeTask = InitializeScreen();
             if (initializeTask != null)
-                await initializeTask;
+                await UpdateContext.Wait(initializeTask);
 
             State = RunState.Running;
 
-            var result = await base.RunActivity();
+            var result = await UpdateContext.Wait(base.Run());
 
             State = RunState.Finalizing;
 
             var finalizeTask = FinalizeScreen();
             if (finalizeTask != null)
-                await finalizeTask;
+                await UpdateContext.Wait(finalizeTask);
 
             State = RunState.Completed;
 
