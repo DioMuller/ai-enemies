@@ -28,6 +28,8 @@ namespace Enemies.Screens
         #region Life Cycle
         protected override void LoadContent()
         {
+            Entities = Entities.Add(new Player1(Content));
+
             // TODO: Load game content!
             base.LoadContent();
         }
@@ -67,8 +69,12 @@ namespace Enemies.Screens
         {
             GraphicsDevice.Clear(Color.Yellow);
 
+            SpriteBatch.Begin();
+
             foreach (var entity in Entities)
-                entity.Draw(gameTime);
+                entity.Draw(SpriteBatch, gameTime);
+
+            SpriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -1,18 +1,21 @@
 ﻿using Jv.Games.Xna.Async;
+using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Enemies.Entities
 {
     interface IEntity
     {
         void Update(GameTime gameTime);
-        void Draw(GameTime gameTime);
+        void Draw(SpriteBatch spriteBatch, GameTime gameTime);
     }
 
     class Entity : IEntity
     {
         #region Attributes
-        protected readonly AsyncContext UpdateContext, DrawContext;
+        public readonly AsyncContext UpdateContext, DrawContext;
+        public readonly Sprite Sprite;
         #endregion
 
         #region Constructors
@@ -20,6 +23,7 @@ namespace Enemies.Entities
         {
             UpdateContext = new AsyncContext();
             DrawContext = new AsyncContext();
+            Sprite = new Sprite();
         }
         #endregion
 
@@ -30,9 +34,9 @@ namespace Enemies.Entities
             UpdateContext.Update(gameTime);
         }
 
-        void IEntity.Draw(GameTime gameTime)
+        void IEntity.Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            Draw(gameTime);
+            Draw(spriteBatch, gameTime);
             DrawContext.Update(gameTime);
         }
         #endregion
@@ -40,12 +44,12 @@ namespace Enemies.Entities
         #region Game Loop
         protected virtual void Update(GameTime gameTime)
         {
-
         }
 
-        protected virtual void Draw(GameTime gameTime)
+        protected virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-
+            Sprite.Update(gameTime);
+            Sprite.Draw(spriteBatch, gameTime);
         }
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using Jv.Games.Xna.Async;
+using Microsoft.Xna.Framework;
 using System;
 using System.Threading.Tasks;
 
@@ -103,6 +104,33 @@ namespace Enemies.Screens
             return null;
         }
 
+        #endregion
+
+        #region Game Loop
+
+        protected override void DrawActivity(GameTime gameTime)
+        {
+            try
+            {
+                base.DrawActivity(gameTime);
+            }
+            catch (Exception ex)
+            {
+                ActivityCompletion.TrySetException(ex);
+            }
+        }
+
+        protected override void UpdateActivity(GameTime gameTime)
+        {
+            try
+            {
+                base.UpdateActivity(gameTime);
+            }
+            catch (Exception ex)
+            {
+                ActivityCompletion.TrySetException(ex);
+            }
+        }
         #endregion
 
         #region Public Methods

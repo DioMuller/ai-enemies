@@ -69,16 +69,26 @@ namespace Enemies
                 catch (AggregateException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    foreach (var inner in ex.InnerExceptions)
-                        Console.WriteLine("Error: {0}", ex);
+                    ex.Handle(HandleError);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error: {0}", ex);
+                    HandleError(ex);
                 }
             }
 
             Exit();
+        }
+
+        bool HandleError(Exception ex)
+        {
+            var oldColor = Console.ForegroundColor;
+            Console.Write("Error: ");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(ex.Message);
+            Console.ForegroundColor = oldColor;
+            //Console.WriteLine(ex.StackTrace);
+            return true;
         }
     }
 }
