@@ -28,7 +28,9 @@ namespace Enemies.Screens
         #region Life Cycle
         protected override void LoadContent()
         {
-            Entities = Entities.Add(new Player1(Content));
+            var p = new PythonEntityFactory();
+
+            Entities = Entities.Add(p.LoadEntity(Content, "main"));
 
             // TODO: Load game content!
             base.LoadContent();
@@ -71,10 +73,15 @@ namespace Enemies.Screens
 
             SpriteBatch.Begin();
 
-            foreach (var entity in Entities)
-                entity.Draw(SpriteBatch, gameTime);
-
-            SpriteBatch.End();
+            try
+            {
+                foreach (var entity in Entities)
+                    entity.Draw(SpriteBatch, gameTime);
+            }
+            finally
+            {
+                SpriteBatch.End();
+            }
 
             base.Draw(gameTime);
         }

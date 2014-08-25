@@ -15,5 +15,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\Screen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\TitleScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\IBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\IScriptEntityFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\PythonEntityFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />
   </ItemGroup>
 </Project>

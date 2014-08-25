@@ -2,20 +2,23 @@
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Immutable;
+using Enemies.Behaviors;
 
 namespace Enemies.Entities
 {
-    interface IEntity
+    public interface IEntity
     {
         void Update(GameTime gameTime);
         void Draw(SpriteBatch spriteBatch, GameTime gameTime);
     }
 
-    class Entity : IEntity
+    public class Entity : IEntity
     {
         #region Attributes
         public readonly AsyncContext UpdateContext, DrawContext;
         public readonly Sprite Sprite;
+        public IImmutableList<IBehavior> Behaviors = ImmutableList<IBehavior>.Empty;
         #endregion
 
         #region Constructors
@@ -44,6 +47,11 @@ namespace Enemies.Entities
         #region Game Loop
         protected virtual void Update(GameTime gameTime)
         {
+            foreach(var behavior in Behaviors)
+            {
+                if (behavior.Enabled)
+                    behavior.Update(gameTime);
+            }
         }
 
         protected virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)

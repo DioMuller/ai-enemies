@@ -30,10 +30,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Jv.Games.Portable.Async, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Jv.Games.Portable.Async.dll</HintPath>
-    </Reference>
     <Reference Include="Jv.Games.Portable.Base">
       <HintPath>..\References\Jv.Games.Portable.Base.dll</HintPath>
     </Reference>
@@ -53,17 +49,39 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>..\packages\MonoGame.Binaries.3.2.2-alpha\build\net40\x86\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="Jv.Games.Portable.Async">
+      <HintPath>..\References\Jv.Games.Portable.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython">
+      <HintPath>..\packages\IronPython.2.7.4\lib\Net45\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules">
+      <HintPath>..\packages\IronPython.2.7.4\lib\Net45\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.SQLite">
+      <HintPath>..\packages\IronPython.2.7.4\lib\Net45\IronPython.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Wpf">
+      <HintPath>..\packages\IronPython.2.7.4\lib\Net45\IronPython.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Dynamic">
+      <HintPath>..\packages\IronPython.2.7.4\lib\Net45\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.AspNet">
+      <HintPath>..\packages\IronPython.2.7.4\lib\Net45\Microsoft.Scripting.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting">
+      <HintPath>..\packages\IronPython.2.7.4\lib\Net45\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata">
+      <HintPath>..\packages\IronPython.2.7.4\lib\Net45\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainGame.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\Content\**\*.*">
-      <Link>Content\%(RecursiveDir)%(FileName)%(Extension)</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="..\Enemies.Shared\Enemies.Shared.projitems" Label="Shared" Condition="Exists('..\Enemies.Shared\Enemies.Shared.projitems')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -71,6 +89,20 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="SDL.dll" />
+    <None Include="..\Content\sprites\Characters\main.png">
+      <Link>Content\sprites\characters\main.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Content\entities\main.py">
+      <Link>Content\entities\main.py</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="Content\entities\" />
+    <Folder Include="Content\sprites\" />
+    <Folder Include="Content\sprites\characters\" />
+  </ItemGroup>
 </Project>
