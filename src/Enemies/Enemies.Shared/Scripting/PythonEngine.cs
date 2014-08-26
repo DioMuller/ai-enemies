@@ -1,16 +1,18 @@
-﻿using Microsoft.Scripting.Hosting;
+﻿using Enemies.Entities;
 using IronPython.Hosting;
-using System.Collections.Generic;
-using System.Reflection;
+using Microsoft.Scripting.Hosting;
 using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
-namespace Enemies.Entities
+namespace Enemies.Scripting
 {
-    class PythonEntityFactory : IScriptEntityFactory
+    class PythonEngine : IScriptEntityFactory
     {
         readonly static ScriptEngine Engine;
 
-        static PythonEntityFactory()
+        static PythonEngine()
         {
             ScriptRuntime runtime = Python.CreateRuntime(new Dictionary<string, object> {
                 #if DEBUG
@@ -34,10 +36,7 @@ namespace Enemies.Entities
 
         public Entity LoadEntity(ContentManager content, string name)
         {
-            /*ScriptRuntime runtime = ScriptRuntime.Create();
-            runtime.LoadAssembly( Assembly.GetAssembly( typeof( n1.MyType1)));*/
-
-            var scriptFile = content.RootDirectory + "/entities/" + name + ".py";
+            var scriptFile = Path.Combine(content.RootDirectory, "entities", name + ".py");
 
             var script = Engine.CreateScriptSourceFromFile(scriptFile);
             var scope = Engine.CreateScope();

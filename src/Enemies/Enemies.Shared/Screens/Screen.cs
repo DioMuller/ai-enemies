@@ -1,7 +1,10 @@
-﻿using Jv.Games.Xna.Async;
+﻿using Jv.Games.Xna.Context;
+using Jv.Games.Xna.Async;
+using Jv.Games.Xna.Base;
 using Microsoft.Xna.Framework;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Enemies.Screens
 {
@@ -22,7 +25,8 @@ namespace Enemies.Screens
 
         bool _contentInitialized;
         protected RunState State;
-
+        protected Reference<Color> FadeColor = Color.Transparent;
+        Texture2D _fadeTexture;
         #endregion
 
         #region Properties
@@ -47,6 +51,8 @@ namespace Enemies.Screens
             if (!_contentInitialized)
             {
                 _contentInitialized = true;
+                _fadeTexture = new Texture2D(GraphicsDevice, 1, 1);
+                _fadeTexture.SetData(new[] { Color.White });
                 LoadContent();
             }
         }
@@ -113,6 +119,12 @@ namespace Enemies.Screens
             try
             {
                 base.DrawActivity(gameTime);
+                if (FadeColor != Color.Transparent)
+                {
+                    SpriteBatch.Begin();
+                    SpriteBatch.Draw(_fadeTexture, new Rectangle(0, 0, Viewport.Width, Viewport.Height), FadeColor.Value);
+                    SpriteBatch.End();
+                }
             }
             catch (Exception ex)
             {
@@ -145,6 +157,20 @@ namespace Enemies.Screens
             UpdateContext.Post(gameTime => asyncMethod(this));
         }
 
+        #endregion
+
+        #region Protected Methods
+        public ContextOperation<TimeSpan> FadeIn(TimeSpan? duration = null)
+        {
+            duration = duration ?? TimeSpan.FromSeconds(0.5);
+            return DrawContext.Animate(duration.Value, FadeColor, Color.Transparent);
+        }
+
+        public ContextOperation<TimeSpan> FadeOut(TimeSpan? duration = null)
+        {
+            duration = duration ?? TimeSpan.FromSeconds(0.5);
+            return DrawContext.Animate(duration.Value, FadeColor, Color.Black);
+        }
         #endregion
     }
 }

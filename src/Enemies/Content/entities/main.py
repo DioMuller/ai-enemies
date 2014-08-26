@@ -5,6 +5,7 @@ from Enemies.Entities import Entity
 
 class ScriptEntity(Entity):
 	def __init__(self, content):
+		super(Entity,self).__init__()
 		texture = content.Load[Texture2D]("sprites/characters/main")
 		sprite_sheet = SpriteSheet(texture, 9, 13)
 
@@ -28,6 +29,5 @@ class ScriptEntity(Entity):
 
 		self.Sprite.PlayAnimation("stopped_down")
 	
-	@classmethod
 	def Update(self, game_time):
-		super().Update(self, game_time)
+		super(ScriptEntity, self).Update(game_time)

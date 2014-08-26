@@ -1,9 +1,9 @@
-﻿using Jv.Games.Xna.Async;
+﻿using Enemies.Behaviors;
+using Jv.Games.Xna.Context;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Immutable;
-using Enemies.Behaviors;
 
 namespace Enemies.Entities
 {
@@ -16,7 +16,7 @@ namespace Enemies.Entities
     public class Entity : IEntity
     {
         #region Attributes
-        public readonly AsyncContext UpdateContext, DrawContext;
+        public readonly Context UpdateContext, DrawContext;
         public readonly Sprite Sprite;
         public IImmutableList<IBehavior> Behaviors = ImmutableList<IBehavior>.Empty;
         #endregion
@@ -24,8 +24,8 @@ namespace Enemies.Entities
         #region Constructors
         public Entity()
         {
-            UpdateContext = new AsyncContext();
-            DrawContext = new AsyncContext();
+            UpdateContext = new Context();
+            DrawContext = new Context();
             Sprite = new Sprite();
         }
         #endregion
@@ -33,14 +33,26 @@ namespace Enemies.Entities
         #region IEntity
         void IEntity.Update(GameTime gameTime)
         {
-            Update(gameTime);
-            UpdateContext.Update(gameTime);
+            try
+            {
+                Update(gameTime);
+            }
+            finally
+            {
+                UpdateContext.Update(gameTime);
+            }
         }
 
         void IEntity.Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            Draw(spriteBatch, gameTime);
-            DrawContext.Update(gameTime);
+            try
+            {
+                Draw(spriteBatch, gameTime);
+            }
+            finally
+            {
+                DrawContext.Update(gameTime);
+            }
         }
         #endregion
 

@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Jv.Games.Portable</name>
+    </assembly>
+    <members>
+        <member name="M:Jv.Games.Xna.Context.IGameOperation.Continue(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the operation.
+            </summary>
+            <param name="gameTime">Current game time.</param>
+            <returns>True if the operation can continue (its not complete).</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Context.IGameOperation.Cancel">
+            <summary>
+            Set the operation in a cancelled state.
+            </summary>
+        </member>
+        <member name="M:Jv.Games.Xna.Context.IGameOperation.GetResult">
+            <summary>
+            Throws the resulting exception if the operation failed.
+            </summary>
+        </member>
+        <member name="P:Jv.Games.Xna.Context.IGameOperation.IsCompleted">
+            <summary>
+            Gets whether this IGameOperation has completed.
+            </summary>
+            <value><c>true</c> if this operation is completed; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Jv.Games.Xna.Context.IGameOperation.IsFaulted">
+            <summary>
+            Gets whether the IGameOperation completed due to an exception.
+            </summary>
+            <value><c>true</c> if this instance is completed in a faulted state; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Jv.Games.Xna.Context.IGameOperation.IsCanceled">
+            <summary>
+            Gets whether this IGameOperation instance has completed execution due to being canceled.
+            </summary>
+            <value><c>true</c> if this instance is completed in a canceled state; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Jv.Games.Xna.Context.IGameOperation.Error">
+            <summary>
+            Gets the error of the operation, if it is in a faulted state.
+            </summary>
+            <value>The resulting error.</value>
+        </member>
+        <member name="M:Jv.Games.Xna.Context.IGameOperation`1.GetResult">
+            <summary>
+            Throws the resulting exception if the operation failed.
+            </summary>
+            <returns>The result of the operation.</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Context.ContextTimer.Continue(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the timer CurrentDuration.
+            </summary>
+            <param name="gameTime">Current game time.</param>
+            <returns>True if the timer is complete.</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Context.ContextTimerExtensions.Delay(Jv.Games.Xna.Context.IContext,System.TimeSpan,System.Threading.CancellationToken)">
+            <summary>
+            Creates a task that will complete after a time delay.
+            </summary>
+            <param name = "context">The context to run the operation.</param>
+            <param name="dueTime">The time span to wait before completing the returned task.</param>
+            <param name="cancellationToken">The cancellation token that will be checked prior to completing the returned task.</param>
+        </member>
+        <member name="T:Jv.Games.Xna.Sprites.Frame">
+            <summary>
+            Represents a single image inside a sprite sheet.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.Frame.Origin">
+            <summary>
+            The origin of the sprite.
+            </summary>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Frame.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Vector2,System.Single)">
+            <summary>
+            Initializes a new <see cref="T:Jv.Games.Xna.Sprites.Frame"/> class.
+            </summary>
+            <param name="texture">Texture image used to render this frame.</param>
+            <param name="rectangle">Region of the Frame inside the texture.</param>
+            <param name="origin">/// The origin of the sprite. Specify (0,0) for the upper-left corner.</param>
+            <param name="durationWeight">Frame duration weight.</param>
+        </member>
+        <member name="P:Jv.Games.Xna.Sprites.Frame.Texture">
+            <summary>
+            Texture image used to render this frame.
+            </summary>
+        </member>
+        <member name="P:Jv.Games.Xna.Sprites.Frame.Rectangle">
+            <summary>
+            The frame's position inside the sprite sheet.
+            </summary>
+        </member>
+        <member name="P:Jv.Games.Xna.Sprites.Frame.DurationWeight">
+            <summary>
+            The speed factor in which the annimation will be played.
+            </summary>
+        </member>
+        <member name="P:Jv.Games.Xna.Sprites.Frame.Width">
+            <summary>
+            The Width of this frame.
+            </summary>
+        </member>
+        <member name="P:Jv.Games.Xna.Sprites.Frame.Height">
+            <summary>
+            The Height of this frame.
+            </summary>
+        </member>
+    </members>
+</doc>

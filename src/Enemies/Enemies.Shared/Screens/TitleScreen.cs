@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Jv.Games.Xna.Async;
+using Jv.Games.Xna.Context;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Jv.Games.Xna.Async;
+using System.Threading.Tasks;
 
 namespace Enemies.Screens
 {
@@ -12,6 +14,10 @@ namespace Enemies.Screens
             Exit,
             StartGame
         }
+        #endregion
+
+        #region Attributes
+        Task _preloadGameContent;
         #endregion
 
         #region Constructors
@@ -28,9 +34,24 @@ namespace Enemies.Screens
             base.LoadContent();
         }
 
-        protected async override System.Threading.Tasks.Task InitializeScreen()
+        protected async override Task InitializeScreen()
         {
-            await UpdateContext.CompleteWhen(gt => !Keyboard.GetState().IsKeyDown(Keys.Escape));
+            _preloadGameContent = GameScreen.PreloadContent(Content);
+
+            FadeColor = Color.Black;
+            await UpdateContext.CompleteWhen(CanStart);
+            await FadeIn();
+        }
+
+        bool CanStart(GameTime gameTime)
+        {
+            var keyboard = Keyboard.GetState();
+            return !keyboard.IsKeyDown(Keys.Escape) && !keyboard.IsKeyDown(Keys.Enter);
+        }
+
+        protected override async Task FinalizeScreen()
+        {
+            await FadeOut();
         }
         #endregion
 

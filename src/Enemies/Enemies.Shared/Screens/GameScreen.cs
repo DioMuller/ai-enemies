@@ -1,12 +1,33 @@
 ﻿using Enemies.Entities;
+using Enemies.Scripting;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Immutable;
+using System.Threading.Tasks;
+using Jv.Games.Xna.Async;
 
 namespace Enemies.Screens
 {
     class GameScreen : Screen<GameScreen.Result>
     {
+        #region Static
+        static ScriptEntityFactory _scriptEntityFactory;
+
+        static Task _contentLoad;
+        public static Task PreloadContent(ContentManager content)
+        {
+            if (_contentLoad != null)
+                return _contentLoad;
+
+            return _contentLoad = Task.Factory.StartNew(delegate
+            {
+                _scriptEntityFactory = new ScriptEntityFactory();
+                _scriptEntityFactory.LoadEntity(content, "main");
+            });
+        }
+        #endregion
+
         #region Nested
         public enum Result
         {
@@ -26,15 +47,19 @@ namespace Enemies.Screens
         #endregion
 
         #region Life Cycle
-        protected override void LoadContent()
+        protected override async Task InitializeScreen()
         {
-            var p = new PythonEntityFactory();
-
-            Entities = Entities.Add(p.LoadEntity(Content, "main"));
-
-            // TODO: Load game content!
-            base.LoadContent();
+            FadeColor = Color.Black;
+            await PreloadContent(Content);
+            Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, "main"));
+            await FadeIn();
         }
+
+        protected override async Task FinalizeScreen()
+        {
+            await FadeOut();
+        }
+
         #endregion
 
         #region Game Loop
@@ -42,6 +67,9 @@ namespace Enemies.Screens
         #region Update
         protected override void Update(GameTime gameTime)
         {
+            if (State == RunState.Initializing)
+                return;
+
             if (CheckFinish(gameTime))
                 return;
 
@@ -83,7 +111,7 @@ namespace Enemies.Screens
                 SpriteBatch.End();
             }
 
-            base.Draw(gameTime);
+            //base.Draw(gameTime);
         }
 
         #endregion

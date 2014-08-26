@@ -30,11 +30,9 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Jv.Games.Portable.Base">
-      <HintPath>..\References\Jv.Games.Portable.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Jv.Games.Portable.Sprites">
-      <HintPath>..\References\Jv.Games.Portable.Sprites.dll</HintPath>
+    <Reference Include="Jv.Games.Portable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Jv.Games.Portable.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="OpenTK">
@@ -48,9 +46,6 @@
     </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>..\packages\MonoGame.Binaries.3.2.2-alpha\build\net40\x86\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Jv.Games.Portable.Async">
-      <HintPath>..\References\Jv.Games.Portable.Async.dll</HintPath>
     </Reference>
     <Reference Include="IronPython">
       <HintPath>..\packages\IronPython.2.7.4\lib\Net45\IronPython.dll</HintPath>
@@ -99,10 +94,5 @@
     </None>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Content\" />
-    <Folder Include="Content\entities\" />
-    <Folder Include="Content\sprites\" />
-    <Folder Include="Content\sprites\characters\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

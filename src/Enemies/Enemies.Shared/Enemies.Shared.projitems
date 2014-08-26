@@ -10,14 +10,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Entity.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Entities\Player1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\Screen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\TitleScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\IBehavior.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Entities\IScriptEntityFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Entities\PythonEntityFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\IScriptEntityFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\PythonEngine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptEntityFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />

@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Enemies.Entities;
+using Microsoft.Xna.Framework.Content;
 
-namespace Enemies.Entities
+namespace Enemies.Scripting
 {
     interface IScriptEntityFactory
     {
