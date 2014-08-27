@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Jv.Games.Xna.Async;
+using System;
 
 namespace Enemies.Screens
 {
@@ -74,9 +75,22 @@ namespace Enemies.Screens
                 return;
 
             foreach (var entity in Entities)
-                entity.Update(gameTime);
+                TryUpdateEntity(gameTime, entity);
 
             base.Update(gameTime);
+        }
+
+        void TryUpdateEntity(GameTime gameTime, IEntity entity)
+        {
+            try
+            {
+                entity.Update(gameTime);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                Entities = Entities.Remove(entity);
+            }
         }
 
         bool CheckFinish(GameTime gameTime)
@@ -100,18 +114,22 @@ namespace Enemies.Screens
             GraphicsDevice.Clear(Color.Yellow);
 
             SpriteBatch.Begin();
+            foreach (var entity in Entities)
+                TryDrawEntity(gameTime, entity);
+            SpriteBatch.End();
+        }
 
+        void TryDrawEntity(GameTime gameTime, IEntity entity)
+        {
             try
             {
-                foreach (var entity in Entities)
-                    entity.Draw(SpriteBatch, gameTime);
+                entity.Draw(SpriteBatch, gameTime);
             }
-            finally
+            catch (Exception ex)
             {
-                SpriteBatch.End();
+                Log.Error(ex);
+                Entities = Entities.Remove(entity);
             }
-
-            //base.Draw(gameTime);
         }
 
         #endregion
