@@ -9,9 +9,6 @@
     <Import_RootNamespace>Enemies.Content</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Content" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\scripts\entity_main.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\scripts\__init__" />
     <None Include="$(MSBuildThisFileDirectory)Content\sprites\license.txt" />
@@ -31,5 +28,10 @@
     <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\water-dragon.png" />
     <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\zombie.png" />
     <None Include="$(MSBuildThisFileDirectory)Content\scripts\spritesheet_entity.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\cursor\glove1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\cursor\glove2_0.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\cursor\glove3_0.png" />
   </ItemGroup>
 </Project>
