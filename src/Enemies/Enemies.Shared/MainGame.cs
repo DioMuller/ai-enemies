@@ -10,7 +10,9 @@ namespace Enemies
     /// </summary>
     class MainGame : Game
     {
-        protected GraphicsDeviceManager Graphics;
+        const string Tag = "MainGame";
+
+        public GraphicsDeviceManager Graphics;
         protected SpriteBatch SpriteBatch;
 
         /// <summary>
@@ -71,13 +73,13 @@ namespace Enemies
                     Console.WriteLine(ex.Message);
                     ex.Handle(inner =>
                     {
-                        Log.Error(inner);
+                        Log.Error(Tag, inner);
                         return true;
                     });
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex);
+                    Log.Error(Tag, ex);
                 }
             }
 

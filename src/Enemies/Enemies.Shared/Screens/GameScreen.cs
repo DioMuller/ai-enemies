@@ -7,15 +7,20 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Jv.Games.Xna.Async;
 using System;
+using System.Linq;
 
 namespace Enemies.Screens
 {
     class GameScreen : Screen<GameScreen.Result>
     {
         #region Static
+
+        const string Tag = "GameScreen";
+
         static ScriptEntityFactory _scriptEntityFactory;
 
         static Task _contentLoad;
+
         public static Task PreloadContent(ContentManager content)
         {
             if (_contentLoad != null)
@@ -23,36 +28,60 @@ namespace Enemies.Screens
 
             return _contentLoad = Task.Factory.StartNew(delegate
             {
-                _scriptEntityFactory = new ScriptEntityFactory();
-                _scriptEntityFactory.LoadEntity(content, "main");
+                _scriptEntityFactory = new ScriptEntityFactory(content);
+
+                var preloadEntities = _scriptEntityFactory.AvailableEntities(content)
+                        .Select(s =>
+                {
+                    try
+                    {
+                        return _scriptEntityFactory.LoadEntity(content, s);
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                })
+                        .ToList();
             });
         }
+
         #endregion
 
         #region Nested
+
         public enum Result
         {
             ReturnToTitle
         }
+
         #endregion
 
         #region Properties
+
         public ImmutableList<IEntity> Entities = ImmutableList<IEntity>.Empty;
+
         #endregion
 
         #region Constructors
+
         public GameScreen(MainGame game)
             : base(game)
         {
         }
+
         #endregion
 
         #region Life Cycle
+
         protected override async Task InitializeScreen()
         {
             FadeColor = Color.Black;
             await PreloadContent(Content);
-            Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, "main"));
+            var availableEntities = _scriptEntityFactory.AvailableEntities(Content).ToList();
+
+            if (availableEntities.Count > 0)
+                Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, availableEntities[0]));
             await FadeIn();
         }
 
@@ -66,6 +95,7 @@ namespace Enemies.Screens
         #region Game Loop
 
         #region Update
+
         protected override void Update(GameTime gameTime)
         {
             if (State == RunState.Initializing)
@@ -88,7 +118,7 @@ namespace Enemies.Screens
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(Tag, ex);
                 Entities = Entities.Remove(entity);
             }
         }
@@ -127,7 +157,7 @@ namespace Enemies.Screens
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(Tag, ex);
                 Entities = Entities.Remove(entity);
             }
         }

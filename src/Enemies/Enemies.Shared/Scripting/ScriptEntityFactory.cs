@@ -11,18 +11,20 @@ namespace Enemies.Scripting
     {
         IDictionary<string, IScriptEntityFactory> _runtimes;
 
-        public ScriptEntityFactory()
+        public ScriptEntityFactory(ContentManager content)
         {
-            _runtimes = new Dictionary<string, IScriptEntityFactory> {
-                { "py", new PythonEngine() }
+            _runtimes = new Dictionary<string, IScriptEntityFactory>
+            {
+                #if !__ANDROID__
+                { "py", new PythonEngine(content) },
+                #endif
+                { "lua", new LuaEngine(content) }
             };
         }
 
         public Entity LoadEntity(ContentManager content, string name)
         {
-            var dir = Path.Combine(content.RootDirectory, "entities");
-            var file = Directory.GetFiles(dir, name + "*").FirstOrDefault();
-            var type = Path.GetExtension(file).ToLower().TrimStart('.');
+            var type = Path.GetExtension(name).ToLower().TrimStart('.');
 
             IScriptEntityFactory factory;
 
@@ -30,6 +32,11 @@ namespace Enemies.Scripting
                 throw new InvalidOperationException("No factory registered for " + type);
 
             return factory.LoadEntity(content, name);
+        }
+
+        public IEnumerable<string> AvailableEntities(ContentManager content)
+        {
+            return _runtimes.SelectMany(r => r.Value.AvailableEntities(content));
         }
     }
 }

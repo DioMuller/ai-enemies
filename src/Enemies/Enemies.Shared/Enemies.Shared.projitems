@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\IScriptEntityFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\PythonEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptEntityFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\LuaEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />

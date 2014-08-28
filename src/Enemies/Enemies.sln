@@ -43,9 +43,6 @@ Global
 		{63C779CE-E53F-49BF-AC0D-1B9878E1160D} = {EB6F89C6-DD91-4852-89BE-17ABBB2E671A}
 		{3502560B-1F62-4443-96D7-36D818B36699} = {63C779CE-E53F-49BF-AC0D-1B9878E1160D}
 	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Enemies.MonoGame\Enemies.MonoGame.csproj
 	EndGlobalSection
