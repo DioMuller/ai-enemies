@@ -11,9 +11,9 @@ namespace Enemies.Scripting
 {
     class PythonEngine : IScriptEntityFactory
     {
-        readonly static ScriptEngine Engine;
+        readonly ScriptEngine Engine;
 
-        static PythonEngine()
+        public PythonEngine(ContentManager content)
         {
             ScriptRuntime runtime = Python.CreateRuntime(new Dictionary<string, object>
             {
@@ -21,7 +21,7 @@ namespace Enemies.Scripting
                 { "Debug", true },
 #endif
             });
-            var interopClasses = new []
+            var interopClasses = new[]
             {
                 typeof(Entity),
                 typeof(Microsoft.Xna.Framework.Graphics.Texture2D),
@@ -32,17 +32,16 @@ namespace Enemies.Scripting
                 runtime.LoadAssembly(Assembly.GetAssembly(interopType));
 
             Engine = runtime.GetEngine("py");
-        }
-
-        public PythonEngine(ContentManager content)
-        {
+            var paths = Engine.GetSearchPaths();
+            paths.Add(Path.Combine(content.RootDirectory, "scripts"));
+            Engine.SetSearchPaths(paths);
         }
 
         #region IScriptEntityFactory implementation
 
         public Entity LoadEntity(ContentManager content, string entityFileName)
         {
-            var scriptFile = Path.Combine(content.RootDirectory, "entities", entityFileName);
+            var scriptFile = Path.Combine(content.RootDirectory, "scripts", entityFileName);
 
             var script = Engine.CreateScriptSourceFromFile(scriptFile);
             var scope = Engine.CreateScope();
@@ -54,8 +53,8 @@ namespace Enemies.Scripting
 
         public IEnumerable<string> AvailableEntities(ContentManager content)
         {
-            var scriptsDir = Path.Combine(content.RootDirectory, "entities");
-            foreach (var file in Directory.GetFiles(scriptsDir, "*.py"))
+            var scriptsDir = Path.Combine(content.RootDirectory, "scripts");
+            foreach (var file in Directory.GetFiles(scriptsDir, "entity_*.py"))
             {
                 var script = Engine.CreateScriptSourceFromFile(file);
                 var scope = Engine.CreateScope();

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{D38F8A0F-D762-4659-AF94-2AC006A60F9E}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Enemies.Content</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Content" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\scripts\entity_main.py" />
+    <None Include="$(MSBuildThisFileDirectory)Content\scripts\__init__" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\license.txt" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\bat.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\boomerang-skeleton.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\crab.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\flame-dragon.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\goon.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\knight.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\mage.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\main.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\master-goon.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\oldman.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\skeleton.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\slime.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\slimeworm.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\water-dragon.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\zombie.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\scripts\spritesheet_entity.py" />
+  </ItemGroup>
+</Project>

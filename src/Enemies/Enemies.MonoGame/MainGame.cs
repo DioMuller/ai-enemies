@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.IO;
+using System.Diagnostics;
 
 namespace Enemies.MonoGame
 {
@@ -19,7 +21,8 @@ namespace Enemies.MonoGame
 
             // Linux MonoGame Bug ( https://github.com/mono/MonoGame/issues/628 )
             Window.AllowUserResizing = true;
-            Window.ClientSizeChanged += (sender, e) => {
+            Window.ClientSizeChanged += (sender, e) =>
+            {
                 Window.AllowUserResizing = false;
             };
         }

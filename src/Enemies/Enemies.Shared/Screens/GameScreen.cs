@@ -32,16 +32,17 @@ namespace Enemies.Screens
 
                 var preloadEntities = _scriptEntityFactory.AvailableEntities(content)
                         .Select(s =>
-                {
-                    try
-                    {
-                        return _scriptEntityFactory.LoadEntity(content, s);
-                    }
-                    catch
-                    {
-                        return null;
-                    }
-                })
+                        {
+                            try
+                            {
+                                return _scriptEntityFactory.LoadEntity(content, s);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error(Tag, ex);
+                                return null;
+                            }
+                        })
                         .ToList();
             });
         }
