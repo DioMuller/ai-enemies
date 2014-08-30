@@ -1,16 +1,18 @@
 ﻿using System;
 using System.IO;
 using Enemies.Entities;
+using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using NLua;
 
 namespace Enemies.Scripting
 {
     public class LuaEngine : IScriptEntityFactory
     {
-
         public LuaEngine(ContentManager content)
         {
+            
         }
 
         #region IScriptEntityFactory implementation
@@ -28,7 +30,7 @@ namespace Enemies.Scripting
         {
             var scriptFile = Path.Combine(content.RootDirectory, "scripts", name);
 
-            return new LuaEntity(scriptFile);
+            return new LuaEntity(content, scriptFile);
         }
 
         #endregion

@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\scripts\entity_main.py" />
+    <None Include="$(MSBuildThisFileDirectory)Content\scripts\entity_test.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\scripts\__init__" />
     <None Include="$(MSBuildThisFileDirectory)Content\sprites\license.txt" />
     <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\bat.png" />
