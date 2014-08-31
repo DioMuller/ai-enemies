@@ -24,15 +24,13 @@ namespace Enemies.Entities
             _context = new Lua();
             _context.LoadFile(script);
 
+            _context["entity"] = this;
+
             _content = content;
 
-            // Adds References
-            _context.RegisterFunction("LoadSpritesheet", this, this.GetType().GetMethod("LoadSpritesheet"));
-            _context.RegisterFunction("AddAnimation", this, this.GetType().GetMethod("AddAnimation"));
-
             // Obtains functions
-            InitializeFunc = _context.GetFunction("Initialize");
-            UpdateFunc = _context.GetFunction("Update");
+            InitializeFunc = _context["Initialize"] as LuaFunction;
+            UpdateFunc = _context["Update"] as LuaFunction;
 
             InitializeFunc.Call();
         }
@@ -46,13 +44,13 @@ namespace Enemies.Entities
 
         #region Lua Calls
 
-        private void LoadSpritesheet(string spritesheet, int cols, int rows)
+        public void LoadSpritesheet(string spritesheet, int cols, int rows)
         {
             _texture = _content.Load<Texture2D>(spritesheet);
             _spriteSheet = new SpriteSheet(_texture, cols, rows);
         }
 
-        private void AddAnimation(string name, int line, int count, int time, bool repeat, int skipFrames)
+        public void AddAnimation(string name, int line, int count, int time, bool repeat, int skipFrames)
         {
             Animation animation = _spriteSheet.GetAnimation(name, line, count, TimeSpan.FromMilliseconds(time), repeat, skipFrames);
             Sprite.Add(animation);
