@@ -1,4 +1,6 @@
-﻿function Initialize()
+﻿script = {}
+
+function script.Initialize()
 	entity:LoadSpritesheet("sprites/characters/main", 9, 13)
 
 	entity:AddAnimation("stopped_up", 0, 1, 100, true, 0)
@@ -12,5 +14,5 @@
 	entity:AddAnimation("walking_right", 3, 8, 100, true, 0)
 end
 
-function Update(delta)
+function script.Update(delta)
 end

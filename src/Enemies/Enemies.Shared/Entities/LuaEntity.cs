@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
@@ -12,6 +13,7 @@ namespace Enemies.Entities
     class LuaEntity : Entity
     {
         private Lua _context;
+
         private ContentManager _content;
         private Texture2D _texture;
         private SpriteSheet _spriteSheet;
@@ -22,7 +24,9 @@ namespace Enemies.Entities
         public LuaEntity(ContentManager content, string script)
         {
             _context = new Lua();
-            _context.LoadFile(script);
+            _context.LoadCLRPackage();
+            if(File.Exists(script))
+                _context.LoadFile(script);
 
             _context["entity"] = this;
 
