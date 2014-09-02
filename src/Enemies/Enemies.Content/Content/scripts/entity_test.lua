@@ -16,3 +16,5 @@ end
 
 function script.Update(delta)
 end
+
+return script

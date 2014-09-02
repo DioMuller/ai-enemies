@@ -21,20 +21,21 @@ namespace Enemies.Entities
         public LuaFunction InitializeFunc;
         public LuaFunction UpdateFunc;
 
-        public LuaEntity(ContentManager content, string script)
+        public LuaEntity(ContentManager content, string script) : base()
         {
             _context = new Lua();
             _context.LoadCLRPackage();
+
             if(File.Exists(script))
-                _context.LoadFile(script);
+                _context["script"] = _context.DoFile(script)[0] as LuaTable;
 
             _context["entity"] = this;
 
             _content = content;
 
             // Obtains functions
-            InitializeFunc = _context["Initialize"] as LuaFunction;
-            UpdateFunc = _context["Update"] as LuaFunction;
+            InitializeFunc = (_context["script"] as LuaTable)["Initialize"] as LuaFunction;
+            UpdateFunc = (_context["script"] as LuaTable)["Update"] as LuaFunction;
 
             InitializeFunc.Call();
         }
