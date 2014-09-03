@@ -59,6 +59,12 @@ namespace Enemies.Entities
         {
             Animation animation = _spriteSheet.GetAnimation(name, line, count, TimeSpan.FromMilliseconds(time), repeat, skipFrames);
             Sprite.Add(animation);
+            Sprite.PlayAnimation(name);
+        }
+
+        public void SetCurrentAnimation(string name)
+        {
+            Sprite.PlayAnimation(name);
         }
         #endregion Lua Calls
     }
