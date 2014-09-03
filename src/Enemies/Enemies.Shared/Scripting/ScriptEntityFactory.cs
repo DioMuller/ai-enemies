@@ -16,7 +16,7 @@ namespace Enemies.Scripting
             _runtimes = new Dictionary<string, IScriptEntityFactory>
             {
                 #if !__ANDROID__
-                //{ "py", new PythonEngine(content) },
+                { "py", new PythonEngine(content) },
                 #endif
                 { "lua", new LuaEngine(content) }
             };

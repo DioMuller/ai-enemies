@@ -28,7 +28,6 @@
     <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\slimeworm.png" />
     <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\water-dragon.png" />
     <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\zombie.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\scripts\spritesheet_entity.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\cursor\glove1.png" />
