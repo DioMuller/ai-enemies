@@ -10,21 +10,17 @@ using NLua;
 
 namespace Enemies.Entities
 {
-    class LuaEntity : Entity
+    class LuaEntity : IAEntity
     {
         #region Attributes
         private Lua _context;
 
-        private ContentManager _content;
-        private Texture2D _texture;
-        private SpriteSheet _spriteSheet;
-
-        public LuaFunction InitializeFunc;
-        public LuaFunction UpdateFunc;
+        private LuaFunction InitializeFunc;
+        private LuaFunction UpdateFunc;
         #endregion Attributes
 
         #region Constructor
-        public LuaEntity(ContentManager content, string script) : base()
+        public LuaEntity(ContentManager content, string script) : base(content)
         {
             _context = new Lua();
             _context.LoadCLRPackage();
@@ -33,8 +29,6 @@ namespace Enemies.Entities
                 _context["script"] = _context.DoFile(script)[0] as LuaTable;
 
             _context["entity"] = this;
-
-            _content = content;
 
             // Obtains functions
             InitializeFunc = (_context["script"] as LuaTable)["Initialize"] as LuaFunction;
@@ -45,39 +39,12 @@ namespace Enemies.Entities
         #endregion Constructor
 
         #region Game Loop
-        protected override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
             UpdateFunc.Call(gameTime.ElapsedGameTime.Milliseconds);
         }
         #endregion Game Loop
-
-        #region Lua Calls
-
-        public void LoadSpritesheet(string spritesheet, int cols, int rows)
-        {
-            _texture = _content.Load<Texture2D>(spritesheet);
-            _spriteSheet = new SpriteSheet(_texture, cols, rows);
-        }
-
-        public void AddAnimation(string name, int line, int count, int time, bool repeat, int skipFrames)
-        {
-            Animation animation = _spriteSheet.GetAnimation(name, line, count, TimeSpan.FromMilliseconds(time), repeat, skipFrames);
-            Sprite.Add(animation);
-            Sprite.PlayAnimation(name);
-        }
-
-        public void SetCurrentAnimation(string name)
-        {
-            Sprite.PlayAnimation(name);
-        }
-
-        public void Move(int x, int y)
-        {
-            Sprite.Position.X += x;
-            Sprite.Position.Y += y;
-        }
-        #endregion Lua Calls
     }
 }

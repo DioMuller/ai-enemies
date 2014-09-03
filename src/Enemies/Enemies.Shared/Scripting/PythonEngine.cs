@@ -39,7 +39,7 @@ namespace Enemies.Scripting
 
         #region IScriptEntityFactory implementation
 
-        public Entity LoadEntity(ContentManager content, string entityFileName)
+        public IAEntity LoadEntity(ContentManager content, string entityFileName)
         {
             var scriptFile = Path.Combine(content.RootDirectory, "scripts", entityFileName);
 

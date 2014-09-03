@@ -26,7 +26,7 @@ namespace Enemies.Scripting
             }
         }
 
-        public Enemies.Entities.Entity LoadEntity(ContentManager content, string name)
+        public IAEntity LoadEntity(ContentManager content, string name)
         {
             var scriptFile = Path.Combine(content.RootDirectory, "scripts", name);
 
