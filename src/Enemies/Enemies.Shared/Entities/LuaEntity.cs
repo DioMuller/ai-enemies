@@ -12,6 +12,7 @@ namespace Enemies.Entities
 {
     class LuaEntity : Entity
     {
+        #region Attributes
         private Lua _context;
 
         private ContentManager _content;
@@ -20,7 +21,9 @@ namespace Enemies.Entities
 
         public LuaFunction InitializeFunc;
         public LuaFunction UpdateFunc;
+        #endregion Attributes
 
+        #region Constructor
         public LuaEntity(ContentManager content, string script) : base()
         {
             _context = new Lua();
@@ -39,13 +42,16 @@ namespace Enemies.Entities
 
             InitializeFunc.Call();
         }
+        #endregion Constructor
 
+        #region Game Loop
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
             UpdateFunc.Call(gameTime.ElapsedGameTime.Milliseconds);
         }
+        #endregion Game Loop
 
         #region Lua Calls
 
@@ -65,6 +71,12 @@ namespace Enemies.Entities
         public void SetCurrentAnimation(string name)
         {
             Sprite.PlayAnimation(name);
+        }
+
+        public void Move(int x, int y)
+        {
+            Sprite.Position.X += x;
+            Sprite.Position.Y += y;
         }
         #endregion Lua Calls
     }
