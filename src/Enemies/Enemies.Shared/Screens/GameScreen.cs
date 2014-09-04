@@ -8,14 +8,21 @@ using System.Threading.Tasks;
 using Jv.Games.Xna.Async;
 using System;
 using System.Linq;
+using Enemies.Parameters;
 
 namespace Enemies.Screens
 {
     class GameScreen : Screen<GameScreen.Result>
     {
+        #region Const
+        const string Tag = "GameScreen";
+
+        private const float ParameterUpdateTime = 100.0f;
+        #endregion Const
+
         #region Static
 
-        const string Tag = "GameScreen";
+        static float _parameterUpdateCounter = ParameterUpdateTime;
 
         static ScriptEntityFactory _scriptEntityFactory;
 
@@ -104,7 +111,20 @@ namespace Enemies.Screens
                 return;
 
             if (CheckFinish(gameTime))
+            {
+                _parameterUpdateCounter = 0.0f;
                 return;
+            }
+
+            #region Parameter Update
+            _parameterUpdateCounter += gameTime.ElapsedGameTime.Milliseconds;
+            if (_parameterUpdateCounter >= ParameterUpdateTime)
+            {
+                _parameterUpdateCounter -= ParameterUpdateTime;
+
+                GameParameters.UpdateEntities(Entities);
+            }
+            #endregion Parameter Update
 
             foreach (var entity in Entities)
                 TryUpdateEntity(gameTime, entity);

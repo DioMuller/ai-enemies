@@ -9,6 +9,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.IO;
+using Enemies.Parameters;
 
 
 namespace Enemies.Entities
@@ -48,12 +49,13 @@ namespace Enemies.Entities
         /// <summary>
         /// Idle animation name.
         /// </summary>
-        private string idleAnimation = "";
+        private string _idleAnimation = "";
 
         /// <summary>
         /// Moving animation name.
         /// </summary>
-        private string movingAnimation = "";
+        private string _movingAnimation = "";
+
         #endregion Sprite Attributes
         #endregion Attributes
 
@@ -178,8 +180,8 @@ namespace Enemies.Entities
 
             #region Load Animations
             var animations = root.Element("animations");
-            idleAnimation = animations.Attribute("idleAnimation").Value;
-            movingAnimation = animations.Attribute("movingAnimation").Value;
+            _idleAnimation = animations.Attribute("idleAnimation").Value;
+            _movingAnimation = animations.Attribute("movingAnimation").Value;
 
             foreach (var animation in animations.Elements("animation"))
             {
@@ -213,6 +215,20 @@ namespace Enemies.Entities
         {
             _entity.Sprite.Position.X += x;
             _entity.Sprite.Position.Y += y;
+        }
+
+        /// <summary>
+        /// Gets Entities with the specified tag. 
+        /// If tag is null, will return all the entities.
+        /// </summary>
+        /// <param name="tag">Entity tag.</param>
+        /// <returns></returns>
+        public BaseEntity[] GetNeighbours(string tag = null)
+        {
+            var entities = GameParameters.Entities;
+
+            if (tag != null) return entities.Where((e) => e.Tag == tag).ToArray();
+            else return entities.ToArray();
         }
         #endregion Methods
     }

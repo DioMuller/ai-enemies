@@ -5,6 +5,8 @@ function script.Initialize()
 end
 
 function script.Update(delta)
+	entities = entity:GetNeighbours()
+
 	entity:Move(1,1)
 end
 
