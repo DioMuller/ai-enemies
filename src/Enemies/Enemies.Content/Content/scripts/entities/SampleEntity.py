@@ -2,7 +2,7 @@
 
 class ScriptEntity(BaseEntity):
 	def Initialize(self):
-		self.LoadSpritesheet("spritesheets/main", 9, 13)
+		self.LoadSpritesheet("Spritesheets/main", 9, 13)
 
 		frame_duration = 100
 		

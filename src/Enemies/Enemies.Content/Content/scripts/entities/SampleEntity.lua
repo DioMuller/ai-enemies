@@ -1,7 +1,7 @@
 ﻿script = {}
 
 function script.Initialize()
-	entity:LoadSpritesheet("spritesheets/main", 9, 13)
+	entity:LoadSpritesheet("Spritesheets/main", 9, 13)
 
 	entity:AddAnimation("stopped_up", 0, 1, 100, true, 0)
 	entity:AddAnimation("stopped_left", 1, 1, 100, true, 0)

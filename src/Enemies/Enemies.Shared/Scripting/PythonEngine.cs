@@ -33,8 +33,8 @@ namespace Enemies.Scripting
 
             Engine = runtime.GetEngine("py");
             var paths = Engine.GetSearchPaths();
-            paths.Add(Path.Combine(content.RootDirectory, "scripts"));
-            paths.Add(Path.Combine(content.RootDirectory, "scripts/entities"));
+            paths.Add(Path.Combine(content.RootDirectory, "Scripts"));
+            paths.Add(Path.Combine(content.RootDirectory, "Scripts/Entities"));
             Engine.SetSearchPaths(paths);
         }
 
@@ -42,7 +42,7 @@ namespace Enemies.Scripting
 
         public BaseEntity LoadEntity(ContentManager content, string entityFileName)
         {
-            var scriptFile = Path.Combine(content.RootDirectory, "scripts/entities", entityFileName);
+            var scriptFile = Path.Combine(content.RootDirectory, "Scripts/Entities", entityFileName);
 
             var script = Engine.CreateScriptSourceFromFile(scriptFile);
             var scope = Engine.CreateScope();
@@ -54,7 +54,7 @@ namespace Enemies.Scripting
 
         public IEnumerable<string> AvailableEntities(ContentManager content)
         {
-            var scriptsDir = Path.Combine(content.RootDirectory, "scripts/entities");
+            var scriptsDir = Path.Combine(content.RootDirectory, "Scripts/Entities");
             foreach (var file in Directory.GetFiles(scriptsDir, "*.py"))
             {
                 var script = Engine.CreateScriptSourceFromFile(file);
