@@ -5,6 +5,11 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
+using System.IO;
+
 
 namespace Enemies.Entities
 {
@@ -16,6 +21,12 @@ namespace Enemies.Entities
         /// Encapsulated Entity.
         /// </summary>
         private EntityCore _entity;
+
+        /// <summary>
+        /// Entity RNG.
+        /// </summary>
+        private Random _random;
+
         #endregion Entity Attributes
 
         #region Sprite Attributes
@@ -33,6 +44,16 @@ namespace Enemies.Entities
         /// Entity Spritesheet.
         /// </summary>
         private SpriteSheet _spriteSheet;
+
+        /// <summary>
+        /// Idle animation name.
+        /// </summary>
+        private string idleAnimation = "";
+
+        /// <summary>
+        /// Moving animation name.
+        /// </summary>
+        private string movingAnimation = "";
         #endregion Sprite Attributes
         #endregion Attributes
 
@@ -60,6 +81,7 @@ namespace Enemies.Entities
         {
             _entity = new EntityCore();
             _content = content;
+            _random = new Random();
 
             Initialize();
         }
@@ -101,7 +123,7 @@ namespace Enemies.Entities
         /// <param name="spritesheet">Spritesheet file.</param>
         /// <param name="cols">Number of columns on the spritesheet.</param>
         /// <param name="rows">Number of rows on the spritesheet.</param>
-        public void LoadSpritesheet(string spritesheet, int cols, int rows)
+        private void LoadSpritesheet(string spritesheet, int cols, int rows)
         {
             _texture = _content.Load<Texture2D>(spritesheet);
             _spriteSheet = new SpriteSheet(_texture, cols, rows);
@@ -116,7 +138,7 @@ namespace Enemies.Entities
         /// <param name="time">Time interval between frame changes.</param>
         /// <param name="repeat">Specifies if the animation loop does loop.</param>
         /// <param name="skipFrames">Number of frames ignored on the line.</param>
-        public void AddAnimation(string name, int line, int count, int time, bool repeat, int skipFrames)
+        private void AddAnimation(string name, int line, int count, int time, bool repeat, int skipFrames)
         {
             Animation animation = _spriteSheet.GetAnimation(name, line, count, TimeSpan.FromMilliseconds(time), repeat, skipFrames);
             _entity.Sprite.Add(animation);
@@ -126,6 +148,53 @@ namespace Enemies.Entities
         #endregion Sprite Methods
 
         #region Exposed Methods
+        /// <summary>
+        /// Loads spritesheet from an xml file definition.
+        /// </summary>
+        /// <param name="file">Spritesheet definition file name (without extension).</param>
+        public void SetSpritesheet(string file)
+        {
+            string path = Path.Combine(_content.RootDirectory, file.Replace('/','\\') + ".xml");
+            XDocument doc = XDocument.Load(path);
+            XElement root = doc.Element("sprite");
+
+            #region Load Spritesheets
+            var sheets = root.Element("spritesheets");
+            int columns = Convert.ToInt32(sheets.Attribute("columns").Value);
+            int rows = Convert.ToInt32(sheets.Attribute("rows").Value);
+            List<string> files = new List<string>();
+
+            foreach(var sheet in sheets.Elements("spritesheet"))
+            {
+                files.Add(sheet.Attribute("file").Value);
+            }
+
+            if( files.Count > 0)
+            {
+                // Chooses an random spritesheet from the defined ones.
+                LoadSpritesheet(files[_random.Next(0, files.Count)], columns, rows);
+            }   
+            #endregion Load Spritesheets
+
+            #region Load Animations
+            var animations = root.Element("animations");
+            idleAnimation = animations.Attribute("idleAnimation").Value;
+            movingAnimation = animations.Attribute("movingAnimation").Value;
+
+            foreach (var animation in animations.Elements("animation"))
+            {
+                string name = animation.Attribute("name").Value;
+                int line = Convert.ToInt32(animation.Attribute("line").Value);
+                int count = Convert.ToInt32(animation.Attribute("count").Value); ;
+                int time = Convert.ToInt32(animation.Attribute("time").Value); ;
+                bool repeat = Convert.ToBoolean(animation.Attribute("repeat").Value); ;
+                int skipFrames = Convert.ToInt32(animation.Attribute("skipFrames").Value); ;
+
+                AddAnimation(name, line, count, time, repeat, skipFrames);
+            }
+            #endregion Load Animations
+        }
+
         /// <summary>
         /// Changes the current character animation.
         /// </summary>
