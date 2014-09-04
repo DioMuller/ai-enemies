@@ -6,7 +6,7 @@ namespace Enemies.Scripting
 {
     interface IScriptEntityFactory
     {
-        IAEntity LoadEntity(ContentManager content, string name);
+        BaseEntity LoadEntity(ContentManager content, string name);
 
         IEnumerable<string> AvailableEntities(ContentManager content);
     }

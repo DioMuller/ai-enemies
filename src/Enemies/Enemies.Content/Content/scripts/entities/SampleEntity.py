@@ -1,11 +1,8 @@
-﻿from System import TimeSpan
-from Enemies.Entities import IAEntity
+﻿from Enemies.Entities import BaseEntity
 
-class ScriptEntity(IAEntity):
-	def __init__(self, content):
-		super(ScriptEntity, self).__init__(content)
-
-		self.LoadSpritesheet("sprites/characters/main", 9, 13)
+class ScriptEntity(BaseEntity):
+	def Initialize(self):
+		self.LoadSpritesheet("spritesheets/main", 9, 13)
 
 		frame_duration = 100
 		

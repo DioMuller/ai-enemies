@@ -10,7 +10,7 @@ using NLua;
 
 namespace Enemies.Entities
 {
-    class LuaEntity : IAEntity
+    class LuaEntity : BaseEntity
     {
         #region Attributes
         private Lua _context;

@@ -22,7 +22,7 @@ namespace Enemies.Scripting
             };
         }
 
-        public IAEntity LoadEntity(ContentManager content, string name)
+        public BaseEntity LoadEntity(ContentManager content, string name)
         {
             var type = Path.GetExtension(name).ToLower().TrimStart('.');
 

@@ -8,14 +8,14 @@ using System.Text;
 
 namespace Enemies.Entities
 {
-    public class IAEntity : IEntity
+    public class BaseEntity : IEntity
     {
         #region Attributes
         #region Entity Attributes
         /// <summary>
         /// Encapsulated Entity.
         /// </summary>
-        private Entity _entity;
+        private EntityCore _entity;
         #endregion Entity Attributes
 
         #region Sprite Attributes
@@ -47,7 +47,7 @@ namespace Enemies.Entities
         /// </summary>
         public Vector2 Position
         {
-            get { return Sprite.Position; }
+            get { return _entity.Sprite.Position; }
         }
         #endregion Properties
 
@@ -56,16 +56,24 @@ namespace Enemies.Entities
         /// Creates an encapsulated entity with only the necessary commands exposed to the script entities.
         /// </summary>
         /// <param name="content">Content manager.</param>
-        public IAEntity(ContentManager content)
+        public BaseEntity(ContentManager content)
         {
-            _entity = new Entity();
+            _entity = new EntityCore();
             _content = content;
+
+            Initialize();
         }
         #endregion Constructor
 
-        #region Methods
-
         #region Game Loop Methods
+        /// <summary>
+        /// Script initialization logic.
+        /// </summary>
+        public virtual void Initialize()
+        {
+
+        }
+        
         /// <summary>
         /// Entity update logic.
         /// </summary>
@@ -80,7 +88,7 @@ namespace Enemies.Entities
         /// </summary>
         /// <param name="spriteBatch">Spritebatch used for drawing.</param>
         /// <param name="gameTime">Current game time.</param>
-        public virtual void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             (_entity as IEntity).Draw(spriteBatch, gameTime);
         }
@@ -115,18 +123,28 @@ namespace Enemies.Entities
             _entity.Sprite.PlayAnimation(name);
         }
 
+        #endregion Sprite Methods
+
+        #region Exposed Methods
+        /// <summary>
+        /// Changes the current character animation.
+        /// </summary>
+        /// <param name="name">Animation name.</param>
         public void SetCurrentAnimation(string name)
         {
             _entity.Sprite.PlayAnimation(name);
         }
 
-        public void Move(int x, int y)
+        /// <summary>
+        /// Moves entity.
+        /// </summary>
+        /// <param name="x">Movement X.</param>
+        /// <param name="y">Movement Y.</param>
+        public void Move(float x, float y)
         {
             _entity.Sprite.Position.X += x;
             _entity.Sprite.Position.Y += y;
         }
-        #endregion Sprite Methods
-
         #endregion Methods
     }
 }

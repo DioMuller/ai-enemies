@@ -19,16 +19,16 @@ namespace Enemies.Scripting
 
         public System.Collections.Generic.IEnumerable<string> AvailableEntities(ContentManager content)
         {
-            var scriptsDir = Path.Combine(content.RootDirectory, "scripts");
-            foreach (var file in Directory.GetFiles(scriptsDir, "entity_*.lua"))
+            var scriptsDir = Path.Combine(content.RootDirectory, "scripts/entities");
+            foreach (var file in Directory.GetFiles(scriptsDir, "*.lua"))
             {
                 yield return Path.GetFileName(file);
             }
         }
 
-        public IAEntity LoadEntity(ContentManager content, string name)
+        public BaseEntity LoadEntity(ContentManager content, string name)
         {
-            var scriptFile = Path.Combine(content.RootDirectory, "scripts", name);
+            var scriptFile = Path.Combine(content.RootDirectory, "scripts/entities", name);
 
             return new LuaEntity(content, scriptFile);
         }

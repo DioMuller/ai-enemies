@@ -9,29 +9,14 @@
     <Import_RootNamespace>Enemies.Content</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Content\scripts\entity_main.py" />
-    <None Include="$(MSBuildThisFileDirectory)Content\scripts\entity_test.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\scripts\entities\SampleEntity.py" />
+    <None Include="$(MSBuildThisFileDirectory)Content\scripts\entities\SampleEntity.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\scripts\__init__" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\license.txt" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\bat.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\boomerang-skeleton.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\crab.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\flame-dragon.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\goon.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\knight.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\mage.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\main.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\master-goon.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\oldman.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\skeleton.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\slime.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\slimeworm.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\water-dragon.png" />
-    <None Include="$(MSBuildThisFileDirectory)Content\sprites\characters\zombie.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\spritesheets\main.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Content\cursor\glove1.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\cursor\glove2_0.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\cursor\glove3_0.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\gui\cursor_open.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\gui\cursor_closed.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\gui\cursor_pointer.png" />
   </ItemGroup>
 </Project>

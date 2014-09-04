@@ -13,7 +13,7 @@ namespace Enemies.Entities
         void Draw(SpriteBatch spriteBatch, GameTime gameTime);
     }
 
-    public class Entity : IEntity
+    internal class EntityCore : IEntity
     {
         #region Attributes
         public readonly Context UpdateContext, DrawContext;
@@ -22,7 +22,7 @@ namespace Enemies.Entities
         #endregion
 
         #region Constructors
-        public Entity()
+        public EntityCore()
         {
             UpdateContext = new Context();
             DrawContext = new Context();

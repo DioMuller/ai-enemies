@@ -23,7 +23,7 @@ namespace Enemies.Scripting
             });
             var interopClasses = new[]
             {
-                typeof(Entity),
+                typeof(BaseEntity),
                 typeof(Microsoft.Xna.Framework.Graphics.Texture2D),
                 typeof(Jv.Games.Xna.Sprites.Sprite),
             };
@@ -34,14 +34,15 @@ namespace Enemies.Scripting
             Engine = runtime.GetEngine("py");
             var paths = Engine.GetSearchPaths();
             paths.Add(Path.Combine(content.RootDirectory, "scripts"));
+            paths.Add(Path.Combine(content.RootDirectory, "scripts/entities"));
             Engine.SetSearchPaths(paths);
         }
 
         #region IScriptEntityFactory implementation
 
-        public IAEntity LoadEntity(ContentManager content, string entityFileName)
+        public BaseEntity LoadEntity(ContentManager content, string entityFileName)
         {
-            var scriptFile = Path.Combine(content.RootDirectory, "scripts", entityFileName);
+            var scriptFile = Path.Combine(content.RootDirectory, "scripts/entities", entityFileName);
 
             var script = Engine.CreateScriptSourceFromFile(scriptFile);
             var scope = Engine.CreateScope();
@@ -53,8 +54,8 @@ namespace Enemies.Scripting
 
         public IEnumerable<string> AvailableEntities(ContentManager content)
         {
-            var scriptsDir = Path.Combine(content.RootDirectory, "scripts");
-            foreach (var file in Directory.GetFiles(scriptsDir, "entity_*.py"))
+            var scriptsDir = Path.Combine(content.RootDirectory, "scripts/entities");
+            foreach (var file in Directory.GetFiles(scriptsDir, "*.py"))
             {
                 var script = Engine.CreateScriptSourceFromFile(file);
                 var scope = Engine.CreateScope();
