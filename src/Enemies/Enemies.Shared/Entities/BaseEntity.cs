@@ -223,12 +223,17 @@ namespace Enemies.Entities
         /// </summary>
         /// <param name="tag">Entity tag.</param>
         /// <returns></returns>
-        public BaseEntity[] GetNeighbours(string tag = null)
+        public EntityInfo[] GetNeighbours(string tag = null)
         {
             var entities = GameParameters.Entities;
 
             if (tag != null) return entities.Where((e) => e.Tag == tag).ToArray();
             else return entities.ToArray();
+        }
+
+        public EntityInfo GetInfo()
+        {
+            return new EntityInfo(Tag, Position);
         }
         #endregion Methods
     }

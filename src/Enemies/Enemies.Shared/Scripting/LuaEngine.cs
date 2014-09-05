@@ -20,9 +20,14 @@ namespace Enemies.Scripting
         public System.Collections.Generic.IEnumerable<string> AvailableEntities(ContentManager content)
         {
             var scriptsDir = Path.Combine(content.RootDirectory, "Scripts/Entities");
+            Lua context = new Lua();
+
             foreach (var file in Directory.GetFiles(scriptsDir, "*.lua"))
             {
-                yield return Path.GetFileName(file);
+                var script = context.DoFile(file);
+                
+                if (script != null)
+                    yield return Path.GetFileName(file);
             }
         }
 

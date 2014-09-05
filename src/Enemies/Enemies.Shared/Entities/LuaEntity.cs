@@ -12,6 +12,10 @@ namespace Enemies.Entities
 {
     class LuaEntity : BaseEntity
     {
+        #region Static
+        private LuaTable luaLib = null;
+        #endregion Static
+
         #region Attributes
         private Lua _context;
 
@@ -24,6 +28,17 @@ namespace Enemies.Entities
         {
             _context = new Lua();
             _context.LoadCLRPackage();
+
+            
+            if( luaLib == null )
+            {
+                string libpath = Path.Combine(content.RootDirectory, "Scripts/Libs/lualib.lua");
+
+                if( File.Exists(libpath))
+                    luaLib = _context.DoFile(libpath)[0] as LuaTable;
+            }
+          
+            _context["lualib"] = luaLib;
 
             if(File.Exists(script))
                 _context["script"] = _context.DoFile(script)[0] as LuaTable;

@@ -11,7 +11,7 @@ namespace Enemies.Parameters
         /// <summary>
         /// Entity List
         /// </summary>
-        public static BaseEntity[] Entities { get; private set; }
+        public static EntityInfo[] Entities { get; private set; }
 
         #region Methods
         /// <summary>
@@ -21,7 +21,10 @@ namespace Enemies.Parameters
         public static void UpdateEntities(IEnumerable<IEntity> entities)
         {
             if (entities == null) Entities = null;
-            else Entities = entities.OfType<BaseEntity>().ToArray();
+            else
+            {
+                Entities = entities.OfType<BaseEntity>().Select( (entity) => entity.GetInfo() ).ToArray();
+            }
         }
         #endregion Methods
     }

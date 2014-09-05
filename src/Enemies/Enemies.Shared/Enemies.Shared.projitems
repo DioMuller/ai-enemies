@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\BaseEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LuaEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parameters\EntityInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\GameParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\Screen.cs" />
