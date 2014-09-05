@@ -29,6 +29,7 @@ namespace Enemies.Entities
             _context = new Lua();
             _context.LoadCLRPackage();
 
+            Tag = "Lua";
             
             if( libs == null )
             {
@@ -58,18 +59,18 @@ namespace Enemies.Entities
 
             // Obtains functions
             InitializeFunc = (_context["script"] as LuaTable)["Initialize"] as LuaFunction;
-            UpdateFunc = (_context["script"] as LuaTable)["Update"] as LuaFunction;
+            UpdateFunc = (_context["script"] as LuaTable)["DoUpdate"] as LuaFunction;
 
             InitializeFunc.Call();
         }
         #endregion Constructor
 
         #region Game Loop
-        public override void Update(GameTime gameTime)
+        public override void DoUpdate(float delta)
         {
-            base.Update(gameTime);
+            base.DoUpdate(delta);
 
-            UpdateFunc.Call(gameTime.ElapsedGameTime.Milliseconds);
+            UpdateFunc.Call(delta);
         }
         #endregion Game Loop
     }

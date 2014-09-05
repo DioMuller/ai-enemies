@@ -5,5 +5,5 @@ class ScriptEntity(BaseEntity):
 		self.SetSpritesheet("Sprites/HeroSprite")		
 		self.SetCurrentAnimation("stopped_down")
 	
-	def Update(self, game_time):
-		super(ScriptEntity, self).Update(game_time)
+	def DoUpdate(self, game_time):
+		super(ScriptEntity, self).DoUpdate(game_time)

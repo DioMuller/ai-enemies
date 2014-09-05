@@ -4,11 +4,12 @@ function script.Initialize()
 	entity:SetSpritesheet("Sprites/HeroSprite")
 end
 
-function script.Update(delta)
+function script.DoUpdate(delta)
 	entities = entity:GetNeighbours()
 
 	for value in lualib.foreach(entities) do
 		-- Do Something
+		print(string.format("Tag: ", value.Tag))
 	end
 
 	entity:Move(1,1)

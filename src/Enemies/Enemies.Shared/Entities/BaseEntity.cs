@@ -97,14 +97,21 @@ namespace Enemies.Entities
         {
 
         }
+
+        public virtual void DoUpdate(float delta)
+        {
+
+        }
+
         
         /// <summary>
         /// Entity update logic.
         /// </summary>
         /// <param name="gameTime">Current game time.</param>
-        public virtual void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             (_entity as IEntity).Update(gameTime);
+            DoUpdate(gameTime.ElapsedGameTime.Milliseconds);
         }
 
         /// <summary>
@@ -233,7 +240,7 @@ namespace Enemies.Entities
 
         public EntityInfo GetInfo()
         {
-            return new EntityInfo(Tag, Position);
+            return new EntityInfo(Tag, _entity.Sprite.Position);
         }
         #endregion Methods
     }
