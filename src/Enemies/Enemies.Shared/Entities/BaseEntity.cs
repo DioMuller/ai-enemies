@@ -64,6 +64,16 @@ namespace Enemies.Entities
         /// Entity Tag.
         /// </summary>
         public string Tag { get; set; }
+
+        /// <summary>
+        /// Target Tag.
+        /// </summary>
+        public string TargetTag { get; set; }
+
+        /// <summary>
+        /// Enemy Tag.
+        /// </summary>
+        public string EnemyTag { get; set; }
         
         /// <summary>
         /// Entity Position.
@@ -156,6 +166,22 @@ namespace Enemies.Entities
 
         #endregion Sprite Methods
 
+        #region Helper Methods
+        /// <summary>
+        /// Gets Entities with the specified tag. 
+        /// If tag is null, will return all the entities.
+        /// </summary>
+        /// <param name="tag">Entity tag.</param>
+        /// <returns></returns>
+        private EntityInfo[] GetNeighbours(string tag = null)
+        {
+            var entities = GameParameters.Entities;
+
+            if (tag != null) return entities.Where((e) => e.Tag == tag).ToArray();
+            else return entities.ToArray();
+        }
+        #endregion Helper Methods
+
         #region Exposed Methods
         /// <summary>
         /// Loads spritesheet from an xml file definition.
@@ -225,22 +251,42 @@ namespace Enemies.Entities
         }
 
         /// <summary>
-        /// Gets Entities with the specified tag. 
-        /// If tag is null, will return all the entities.
+        /// Obtains the nearest target.
         /// </summary>
-        /// <param name="tag">Entity tag.</param>
-        /// <returns></returns>
-        public EntityInfo[] GetNeighbours(string tag = null)
+        /// <returns>Nearest target info.</returns>
+        public EntityInfo GetNearestTarget()
         {
-            var entities = GameParameters.Entities;
 
-            if (tag != null) return entities.Where((e) => e.Tag == tag).ToArray();
-            else return entities.ToArray();
+            return GetNeighbours(TargetTag).OrderBy(e => GetDistanceFrom(e)).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Obtains the nearest target.
+        /// </summary>
+        /// <returns>Nearest target info.</returns>
+        public EntityInfo[] GetNearbyEnemies()
+        {
+
+            return GetNeighbours(EnemyTag).OrderBy(e => GetDistanceFrom(e)).ToArray();
+        }
+
+        /// <summary>
+        /// Obtains entity info.
+        /// </summary>
+        /// <returns>The entity info.</returns>
         public EntityInfo GetInfo()
         {
             return new EntityInfo(Tag, _entity.Sprite.Position);
+        }
+
+        /// <summary>
+        /// Obtains the squared distance from another entity.
+        /// </summary>
+        /// <returns>Distance from the other entity.</returns>
+        public float GetDistanceFrom(EntityInfo entity)
+        {
+            return (Position.X - entity.Position.X)*(Position.X - entity.Position.X) +
+                   (Position.Y - entity.Position.Y)*(Position.Y - entity.Position.Y);
         }
         #endregion Methods
     }

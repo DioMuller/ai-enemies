@@ -5,7 +5,7 @@ function script.Initialize()
 end
 
 function script.DoUpdate(delta)
-	entities = entity:GetNeighbours()
+	entities = entity:GetNearbyEnemies()
 
 	for value in lualib.foreach(entities) do
 		-- Do Something
