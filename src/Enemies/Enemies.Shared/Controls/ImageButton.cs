@@ -1,6 +1,5 @@
 ﻿namespace Enemies.Controls
 {
-    using Microsoft.Xna.Framework.Graphics;
     using System;
     using Xamarin.Forms;
 

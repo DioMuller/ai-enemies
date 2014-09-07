@@ -9,6 +9,7 @@
     <Import_RootNamespace>Enemies</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\GUI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButtonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\EntityCore.cs" />

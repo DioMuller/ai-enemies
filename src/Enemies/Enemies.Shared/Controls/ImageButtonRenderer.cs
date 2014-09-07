@@ -2,9 +2,9 @@
 namespace Enemies.Controls
 {
     using Jv.Games.Xna.XForms.Renderers;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework.Graphics;
 
     public class ImageButtonRenderer : LabelRenderer
     {

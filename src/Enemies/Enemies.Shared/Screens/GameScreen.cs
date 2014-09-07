@@ -9,6 +9,7 @@ using Jv.Games.Xna.Async;
 using System;
 using System.Linq;
 using Enemies.Parameters;
+using Enemies.Controls;
 
 namespace Enemies.Screens
 {
@@ -65,6 +66,10 @@ namespace Enemies.Screens
 
         #endregion
 
+        #region Attributes
+        public readonly UIEntity GUI;
+        #endregion
+
         #region Properties
 
         public ImmutableList<IEntity> Entities = ImmutableList<IEntity>.Empty;
@@ -76,6 +81,8 @@ namespace Enemies.Screens
         public GameScreen(MainGame game)
             : base(game)
         {
+            GUI = new GUI().AsEntity();
+            GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
         }
 
         #endregion
@@ -107,6 +114,8 @@ namespace Enemies.Screens
 
         protected override void Update(GameTime gameTime)
         {
+            GUI.Update(gameTime);
+
             if (State == RunState.Initializing)
                 return;
 
@@ -169,6 +178,8 @@ namespace Enemies.Screens
             foreach (var entity in Entities)
                 TryDrawEntity(gameTime, entity);
             SpriteBatch.End();
+
+            GUI.Draw(SpriteBatch, gameTime);
         }
 
         void TryDrawEntity(GameTime gameTime, IEntity entity)
