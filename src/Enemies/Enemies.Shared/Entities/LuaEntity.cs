@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Enemies.Entities;
 using Enemies.Scripting;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
@@ -11,8 +12,41 @@ using NLua;
 
 namespace Enemies.Entities
 {
-    class LuaEntity : BaseEntity
+    public class LuaEntity : BaseEntity
     {
+
+        #region Libs
+
+        private Dictionary<string, LuaTable> _libs = null;
+
+        private void LoadLibs(ContentManager content)
+        {
+            // If libs are not loaded.
+            if( _libs == null )
+            {
+                _libs = new Dictionary<string, LuaTable>();
+
+                string libpath = Path.Combine(content.RootDirectory, "Scripts/Libs/");
+
+                foreach (var file in Directory.GetFiles(libpath, "*.lua"))
+                {
+                    var lib = _context.DoFile(file);
+
+                    if (lib != null)
+                    {
+                        _libs.Add(Path.GetFileName(file).Replace(".lua", String.Empty), lib[0] as LuaTable);
+                    }
+                }
+            }
+
+            // Add libs to context.
+            foreach (string key in _libs.Keys)
+            {
+                _context[key] = _libs[key];
+            }
+        }
+        #endregion Libs
+
         #region Attributes
         private Lua _context;
 
@@ -28,10 +62,7 @@ namespace Enemies.Entities
 
             Tag = "Lua";
 
-            foreach (string key in LuaEngine.Libs.Keys)
-            {
-                _context[key] = LuaEngine.Libs[key];
-            }
+            LoadLibs(content);
 
             if(File.Exists(script))
                 _context["script"] = _context.DoFile(script)[0] as LuaTable;
@@ -54,5 +85,13 @@ namespace Enemies.Entities
             UpdateFunc.Call(delta);
         }
         #endregion Game Loop
+
+        #region Lua Specific Exposed Methods
+
+        public void InitializeValue(string key, object value)
+        {
+            (_context["script"]as LuaTable)[key] = value;
+        }
+        #endregion Lua Specific Exposed Methods
     }
 }

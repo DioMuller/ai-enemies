@@ -1,15 +1,14 @@
 ﻿script = {}
 
-script.target = vector:create( 0, 0 )
-script.direction = vector:create( 1, 1 )
-script.movement = vector:create( 1, 1 )
-
-script.jitter= 1.25
-script.distance = 1
-script.radius = 100
-script.maxSpeed = 10
-
 function script.Initialize()
+	script.target = vector:create( 0, 0 )
+	script.direction = vector:create( 1, 1 )
+	script.movement = vector:create( 1, 1 )
+
+	script.jitter= 1.25
+	script.distance = 1
+	script.radius = 100
+	script.maxSpeed = 10
 	entity:SetSpritesheet("Sprites/HeroSprite")
 end
 
