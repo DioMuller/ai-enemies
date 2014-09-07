@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Enemies.Scripting;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -12,10 +13,6 @@ namespace Enemies.Entities
 {
     class LuaEntity : BaseEntity
     {
-        #region Static
-        private Dictionary<string, LuaTable> libs = null;
-        #endregion Static
-
         #region Attributes
         private Lua _context;
 
@@ -30,26 +27,10 @@ namespace Enemies.Entities
             _context.LoadCLRPackage();
 
             Tag = "Lua";
-            
-            if( libs == null )
+
+            foreach (string key in LuaEngine.Libs.Keys)
             {
-                libs = new Dictionary<string,LuaTable>();
-                string libpath = Path.Combine(content.RootDirectory, "Scripts/Libs/");
-
-                foreach (var file in Directory.GetFiles(libpath, "*.lua"))
-                {
-                    var lib = _context.DoFile(file);
-
-                    if (lib != null)
-                    {
-                        libs.Add(Path.GetFileName(file).Replace(".lua", String.Empty), lib[0] as LuaTable);
-                    }
-                }
-            }
-
-            foreach (string key in libs.Keys)
-            {
-                _context[key] = libs[key];
+                _context[key] = LuaEngine.Libs[key];
             }
 
             if(File.Exists(script))
