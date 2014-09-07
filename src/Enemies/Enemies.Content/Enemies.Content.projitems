@@ -9,6 +9,7 @@
     <Import_RootNamespace>Enemies.Content</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\Fonts\DefaultFont.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sample.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sample.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\lualib.lua" />

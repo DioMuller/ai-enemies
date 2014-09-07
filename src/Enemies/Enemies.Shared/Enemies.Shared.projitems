@@ -9,9 +9,12 @@
     <Import_RootNamespace>Enemies</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButtonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\EntityCore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\BaseEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LuaEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\UIEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\EntityInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\GameParameters.cs" />
