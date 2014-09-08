@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-VisualStudioVersion = 12.0.30324.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{EB6F89C6-DD91-4852-89BE-17ABBB2E671A}"
 EndProject
@@ -13,7 +13,20 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Enemies.Shared", "Enemies.S
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Enemies.Content", "Enemies.Content\Enemies.Content.shproj", "{D38F8A0F-D762-4659-AF94-2AC006A60F9E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{262CC625-1369-4466-B6AE-8E4ED15AF29B}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Enemies.Shared\Enemies.Shared.projitems*{ff7ebfc5-b8e7-4538-9bec-e33f096f5201}*SharedItemsImports = 13
+		Enemies.Content\Enemies.Content.projitems*{3502560b-1f62-4443-96d7-36d818b36699}*SharedItemsImports = 4
+		Enemies.Shared\Enemies.Shared.projitems*{3502560b-1f62-4443-96d7-36d818b36699}*SharedItemsImports = 4
+		Enemies.Content\Enemies.Content.projitems*{d38f8a0f-d762-4659-af94-2ac006a60f9e}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -34,20 +47,14 @@ Global
 		{3502560B-1F62-4443-96D7-36D818B36699}.Release|x86.ActiveCfg = Release|x86
 		{3502560B-1F62-4443-96D7-36D818B36699}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{63C779CE-E53F-49BF-AC0D-1B9878E1160D} = {EB6F89C6-DD91-4852-89BE-17ABBB2E671A}
 		{3502560B-1F62-4443-96D7-36D818B36699} = {63C779CE-E53F-49BF-AC0D-1B9878E1160D}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Enemies.MonoGame\Enemies.MonoGame.csproj
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Enemies.Shared\Enemies.Shared.projitems*{ff7ebfc5-b8e7-4538-9bec-e33f096f5201}*SharedItemsImports = 13
-		Enemies.Content\Enemies.Content.projitems*{3502560b-1f62-4443-96d7-36d818b36699}*SharedItemsImports = 4
-		Enemies.Shared\Enemies.Shared.projitems*{3502560b-1f62-4443-96d7-36d818b36699}*SharedItemsImports = 4
-		Enemies.Content\Enemies.Content.projitems*{d38f8a0f-d762-4659-af94-2ac006a60f9e}*SharedItemsImports = 13
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

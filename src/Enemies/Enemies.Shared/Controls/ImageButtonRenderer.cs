@@ -1,4 +1,6 @@
-﻿[assembly: Jv.Games.Xna.XForms.ExportRenderer(typeof(Enemies.Controls.ImageButton), typeof(Enemies.Controls.ImageButtonRenderer))]
+﻿using System;
+
+[assembly: Jv.Games.Xna.XForms.ExportRenderer(typeof(Enemies.Controls.ImageButton), typeof(Enemies.Controls.ImageButtonRenderer))]
 namespace Enemies.Controls
 {
     using Jv.Games.Xna.XForms.Renderers;
@@ -37,19 +39,27 @@ namespace Enemies.Controls
 
         public override void Update(GameTime gameTime)
         {
-            var mouse = Microsoft.Xna.Framework.Input.Mouse.GetState();
-            var region = GetArea();
-            if (region.Contains(new Xamarin.Forms.Point(mouse.X, mouse.Y)))
+            try
             {
-                UseImage(_imageOver);
+                var mouse = Microsoft.Xna.Framework.Input.Mouse.GetState();
+                var region = GetArea();
+                if (region.Contains(new Xamarin.Forms.Point(mouse.X, mouse.Y)))
+                {
+                    UseImage(_imageOver);
 
-                if (mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
-                    Model.FireClicked();
+                    if (mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+                        Model.FireClicked();
+                }
+                else
+                {
+                    UseImage(_imageNormal);
+                }
             }
-            else
+            catch (InvalidOperationException invalidOpEx)
             {
-                UseImage(_imageNormal);
+                System.Console.WriteLine(invalidOpEx.Message);
             }
+
 
             base.Update(gameTime);
         }

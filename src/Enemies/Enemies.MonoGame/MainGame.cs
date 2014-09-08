@@ -17,6 +17,8 @@ namespace Enemies.MonoGame
                 IsFullScreen = false,
             };
 
+            IsMouseVisible = true;
+
             Content.RootDirectory = "Content";
 
             // Linux MonoGame Bug ( https://github.com/mono/MonoGame/issues/628 )

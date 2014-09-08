@@ -95,9 +95,9 @@ namespace Enemies.Screens
             await PreloadContent(Content);
             var availableEntities = _scriptEntityFactory.AvailableEntities(Content).ToList();
 
-            //if (availableEntities.Count > 0)
-            //foreach (var entity in availableEntities)
-            //    Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, entity));//availableEntities[0]));
+            if (availableEntities.Count > 0)
+            foreach (var entity in availableEntities)
+                Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, entity, new Vector2(0,0)));//availableEntities[0]));
             await FadeIn();
         }
 
