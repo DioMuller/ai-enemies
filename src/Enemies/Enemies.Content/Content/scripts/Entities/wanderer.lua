@@ -10,10 +10,17 @@ function script.Initialize()
 	script.radius = 100
 	script.maxSpeed = 10
 	entity:SetSpritesheet("Sprites/HeroSprite")
+
+	vector.print("Position", entity.Position )
+	vector.print("Target", script.target )
+	vector.print("Direction", script.direction )
+	vector.print("Movement", script.movement )
 end
 
 function script.DoUpdate(delta)
-	--script.target, script.direction, script.movement = steering:wander(entity.Position, script.target, script.direction, script.radius, script.distance, script.jitter, delta, script.maxSpeed)
+	local newTarget, newDirection, movement = steering:wander(entity.Position, script.target, script.direction, script.radius, script.distance, script.jitter, delta, script.maxSpeed)
+	script.target = newTarget
+	script.direction = newDirection
 
 	--entity:Move(movement.X, movement.Y)
 end

@@ -42,7 +42,7 @@ namespace Enemies.Screens
                         {
                             try
                             {
-                                return _scriptEntityFactory.LoadEntity(content, s);
+                                return _scriptEntityFactory.LoadEntity(content, s, new Vector2(0,0));
                             }
                             catch (Exception ex)
                             {
@@ -89,8 +89,8 @@ namespace Enemies.Screens
             var availableEntities = _scriptEntityFactory.AvailableEntities(Content).ToList();
 
             //if (availableEntities.Count > 0)
-            foreach (var entity in availableEntities)
-                Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, entity));//availableEntities[0]));
+            //foreach (var entity in availableEntities)
+            //    Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, entity));//availableEntities[0]));
             await FadeIn();
         }
 
@@ -100,6 +100,17 @@ namespace Enemies.Screens
         }
 
         #endregion
+
+        #region Exposed Methods
+
+        public bool AddEntity(string entity, Vector2 position)
+        {
+            if (!_scriptEntityFactory.AvailableEntities(Content).Contains(entity)) return false;
+
+            Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, entity, position));
+            return true;
+        }
+        #endregion Exposed Methods
 
         #region Game Loop
 

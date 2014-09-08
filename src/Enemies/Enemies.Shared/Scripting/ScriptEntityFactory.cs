@@ -1,4 +1,5 @@
 ﻿using Enemies.Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Enemies.Scripting
             };
         }
 
-        public BaseEntity LoadEntity(ContentManager content, string name)
+        public BaseEntity LoadEntity(ContentManager content, string name, Vector2 position)
         {
             var type = Path.GetExtension(name).ToLower().TrimStart('.');
 
@@ -31,7 +32,7 @@ namespace Enemies.Scripting
             if (!_runtimes.TryGetValue(type, out factory))
                 throw new InvalidOperationException("No factory registered for " + type);
 
-            return factory.LoadEntity(content, name);
+            return factory.LoadEntity(content, name, position);
         }
 
         public IEnumerable<string> AvailableEntities(ContentManager content)

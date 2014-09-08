@@ -55,7 +55,7 @@ namespace Enemies.Entities
         #endregion Attributes
 
         #region Constructor
-        public LuaEntity(ContentManager content, string script) : base(content)
+        public LuaEntity(ContentManager content, string script, Vector2 position) : base(content, position)
         {
             _context = new Lua();
             _context.LoadCLRPackage();

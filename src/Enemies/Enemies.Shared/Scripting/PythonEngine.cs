@@ -1,4 +1,5 @@
-﻿#if !__ANDROID__
+﻿using Microsoft.Xna.Framework;
+#if !__ANDROID__
 using Enemies.Entities;
 using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
@@ -40,7 +41,7 @@ namespace Enemies.Scripting
 
         #region IScriptEntityFactory implementation
 
-        public BaseEntity LoadEntity(ContentManager content, string entityFileName)
+        public BaseEntity LoadEntity(ContentManager content, string entityFileName, Vector2 position)
         {
             var scriptFile = Path.Combine(content.RootDirectory, "Scripts/Entities", entityFileName);
 
@@ -49,7 +50,7 @@ namespace Enemies.Scripting
             script.Execute(scope);
 
             dynamic entityClass = scope.GetVariable("ScriptEntity");
-            return entityClass(content);
+            return entityClass(content, position);
         }
 
         public IEnumerable<string> AvailableEntities(ContentManager content)

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using Enemies.Entities;
 using Jv.Games.Xna.Sprites;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NLua;
@@ -31,11 +32,11 @@ namespace Enemies.Scripting
             }
         }
 
-        public BaseEntity LoadEntity(ContentManager content, string name)
+        public BaseEntity LoadEntity(ContentManager content, string name, Vector2 position)
         {
             var scriptFile = Path.Combine(content.RootDirectory, "Scripts/Entities", name);
 
-            return new LuaEntity(content, scriptFile);
+            return new LuaEntity(content, scriptFile, position );
         }
 
         #endregion

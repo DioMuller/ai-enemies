@@ -90,11 +90,13 @@ namespace Enemies.Entities
         /// Creates an encapsulated entity with only the necessary commands exposed to the script entities.
         /// </summary>
         /// <param name="content">Content manager.</param>
-        public BaseEntity(ContentManager content)
+        public BaseEntity(ContentManager content, Vector2 position)
         {
             _entity = new EntityCore();
             _content = content;
             _random = new Random();
+
+            _entity.Sprite.Position = position;
 
             Initialize();
         }

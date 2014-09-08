@@ -1,7 +1,14 @@
 ﻿vector = {}
 
+function vector.print(label, v)
+	print(label .. " = [ " .. v.X .. ", " .. v.Y .. "];")
+end
+
 function vector.create(x,y)
-	return { X = x, Y = y }
+	local vector = {}
+	vector.X = x
+	vector.Y = y
+	return vector --{ X = x, Y = y }
 end
 
 function vector.size(v)
