@@ -29,6 +29,9 @@ namespace Enemies
             Components.Add(baseScreen);
             baseScreen.Post(GameMain);
 
+            Jv.Games.Xna.XForms.Forms.Init(this);
+            Jv.Games.Xna.XForms.Renderers.LabelRenderer.DefaultFont = Content.Load<SpriteFont>("Fonts/DefaultFont");
+
             base.Initialize();
         }
 

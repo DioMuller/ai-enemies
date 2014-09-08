@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Jv.Games.Portable</name>
+        <name>Jv.Games.Xna</name>
     </assembly>
     <members>
         <member name="M:Jv.Games.Xna.Context.IGameOperation.Continue(Microsoft.Xna.Framework.GameTime)">
