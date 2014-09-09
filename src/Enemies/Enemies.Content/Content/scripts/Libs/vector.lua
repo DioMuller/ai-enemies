@@ -1,14 +1,15 @@
 ﻿vector = {}
 
 function vector.print(label, v)
-	print(label .. " = [ " .. v.X .. ", " .. v.Y .. "];")
+	print(label, v.X, v.Y)
 end
 
 function vector.create(x,y)
-	local vector = {}
-	vector.X = x
-	vector.Y = y
-	return vector --{ X = x, Y = y }
+	vec = {}
+	vec.X = x
+	vec.Y = y
+
+	return vec
 end
 
 function vector.size(v)
@@ -17,7 +18,7 @@ end
 
 function vector.normalize(v)
 	result = {}
-	siz = size(v)
+	siz = vector.size(v)
 	result.X = v.X / siz
 	result.Y = v.Y / siz
 

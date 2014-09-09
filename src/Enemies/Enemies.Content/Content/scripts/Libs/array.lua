@@ -1,6 +1,6 @@
-﻿lualib = {}
+﻿array = {}
 
-function lualib.foreach(o)
+function array.foreach(o)
    local e = o:GetEnumerator()
    return function()
       if e:MoveNext() then
@@ -9,4 +9,4 @@ function lualib.foreach(o)
    end
 end
 
-return lualib
+return array
