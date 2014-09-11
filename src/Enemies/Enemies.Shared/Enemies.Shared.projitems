@@ -9,7 +9,10 @@
     <Import_RootNamespace>Enemies</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\GUI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\GUI.xaml.cs">
+      <DependentUpon>GUI.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButtonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\EntityCore.cs" />
@@ -31,5 +34,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Controls\GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

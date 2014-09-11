@@ -6,6 +6,13 @@
     public class ImageButton : Label
     {
         public static BindableProperty ImageNormalProperty = BindableProperty.Create<ImageButton, string>(p => p.ImageNormal, defaultValue: null);
+
+        public ImageButton()
+        {
+            XAlign = TextAlignment.Center;
+            YAlign = TextAlignment.Center;
+        }
+
         public string ImageNormal
         {
             get { return (string)GetValue(ImageNormalProperty); }

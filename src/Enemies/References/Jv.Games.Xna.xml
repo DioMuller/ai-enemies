@@ -76,6 +76,21 @@
             The origin of the sprite.
             </summary>
         </member>
+        <member name="F:Jv.Games.Xna.Sprites.Frame.Texture">
+            <summary>
+            Texture image used to render this frame.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.Frame.Rectangle">
+            <summary>
+            The frame's position inside the sprite sheet.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.Frame.DurationWeight">
+            <summary>
+            The speed factor in which the annimation will be played.
+            </summary>
+        </member>
         <member name="M:Jv.Games.Xna.Sprites.Frame.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Vector2,System.Single)">
             <summary>
             Initializes a new <see cref="T:Jv.Games.Xna.Sprites.Frame"/> class.
@@ -84,21 +99,6 @@
             <param name="rectangle">Region of the Frame inside the texture.</param>
             <param name="origin">/// The origin of the sprite. Specify (0,0) for the upper-left corner.</param>
             <param name="durationWeight">Frame duration weight.</param>
-        </member>
-        <member name="P:Jv.Games.Xna.Sprites.Frame.Texture">
-            <summary>
-            Texture image used to render this frame.
-            </summary>
-        </member>
-        <member name="P:Jv.Games.Xna.Sprites.Frame.Rectangle">
-            <summary>
-            The frame's position inside the sprite sheet.
-            </summary>
-        </member>
-        <member name="P:Jv.Games.Xna.Sprites.Frame.DurationWeight">
-            <summary>
-            The speed factor in which the annimation will be played.
-            </summary>
         </member>
         <member name="P:Jv.Games.Xna.Sprites.Frame.Width">
             <summary>
@@ -109,6 +109,196 @@
             <summary>
             The Height of this frame.
             </summary>
+        </member>
+        <member name="T:Jv.Games.Xna.Sprites.Sprite">
+            <summary>
+            Animated game Sprite.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.Sprite.Color">
+            <summary>
+            The color to tint the sprite. Use <c>Color.White</c> for full color with no tinting.
+            Default is <c>Color.White</c>.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.Sprite.Position">
+            <summary>
+            The location (in screen coordinates) to draw the sprite.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.Sprite.Effect">
+            <summary>
+            Effects to apply when drawing the sprite.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.Sprite.Rotation">
+            <summary>
+            Specifies the angle (in radians) to rotate the sprite about its center.
+            </summary>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.#ctor">
+            <summary>
+            Creates a new sprite, containing no animations.
+            </summary>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the current animation state.
+            </summary>
+            <param name="gameTime"></param>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the current animation frame at the current <c>Position</c>.
+            </summary>
+            <param name="spriteBatch">
+            Spritebatch used to draw the sprite.
+            <c>spritebatch.Begin()</c> and <c>spritebatch.End()</c> should be called before and after this method call.
+            </param>
+            <param name="gameTime">Current game time.</param>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.PlayAnimation(System.String)">
+            <summary>
+            Changes the currently playing animation.
+            The selected animation will be played from beggining.
+            If the animation is already playing nothing will be done.
+            </summary>
+            <param name="name">Name of the animation to be played.</param>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.PlayAnimation(Jv.Games.Xna.Sprites.Animation)">
+            <summary>
+            Changes the currently playing animation.
+            The selected animation will be played from beggining.
+            If the animation is already playing nothing will be done.
+            </summary>
+            <param name="animation">The animation to be played.</param>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.Add(Jv.Games.Xna.Sprites.Animation)">
+            <summary>
+            Add an animation to this sprite.
+            </summary>
+            <param name="item"><c>Jv.Games.Xna.Sprites.Animation</c> to be added.</param>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.Clear">
+            <summary>
+            Removes all registered animation.
+            </summary>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.Contains(Jv.Games.Xna.Sprites.Animation)">
+            <summary>
+            Test if an animation is registered in this sprite.
+            </summary>
+            <param name="item">Animation to test.</param>
+            <returns><c>True</c> is this sprite contains the animation item.</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.Remove(Jv.Games.Xna.Sprites.Animation)">
+            <summary>
+            Removes a single animation from the <see cref="T:Jv.Games.Xna.Sprites.Sprite"/>.
+            </summary>
+            <param name="item">Animation to be removed.</param>
+            <returns><c>True</c> if the animation was removed.</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.Sprite.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the registered animations.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Jv.Games.Xna.Sprites.Sprite.CurrentAnimation">
+            <summary>
+            Animation used to draw the sprite.
+            </summary>
+        </member>
+        <member name="P:Jv.Games.Xna.Sprites.Sprite.AnimationIsFinished">
+            <summary>
+            Indicates if the current animation is finished, or no animation is playing.
+            </summary>
+        </member>
+        <member name="P:Jv.Games.Xna.Sprites.Sprite.Count">
+            <summary>
+            Returns the number of animations in this <see cref="T:Jv.Games.Xna.Sprites.Sprite"/>.
+            </summary>
+        </member>
+        <member name="T:Jv.Games.Xna.Sprites.SpriteSheet">
+            <summary>
+            Sprite sheet image reader.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.SpriteSheet.Texture">
+            <summary>
+            Sprite sheet image.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.SpriteSheet.Columns">
+            <summary>
+            Number of image frames per row.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.SpriteSheet.Rows">
+            <summary>
+            Number of image frames per column.
+            </summary>
+        </member>
+        <member name="F:Jv.Games.Xna.Sprites.SpriteSheet.FrameSize">
+            <summary>
+            The size in pixels of each image frame.
+            </summary>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.SpriteSheet.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,System.Int32)">
+            <summary>
+            Creates a new <see cref="T:Jv.Games.Xna.Sprites.SpriteSheet"/> grid.
+            </summary>
+            <param name="texture">Texture image containing the animations.</param>
+            <param name="columns">The number of columns this sprite sheet contains.</param>
+            <param name="rows">The number of rows this sprite sheet contains.</param>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.SpriteSheet.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Point)">
+            <summary>
+            Creates a new <see cref="T:Jv.Games.Xna.Sprites.SpriteSheet"/>
+            </summary>
+            <param name="texture">Texture image containing the animations.</param>
+            <param name="frameSize">The size in pixels of each image frame.</param>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.SpriteSheet.GetAnimation(System.String,Microsoft.Xna.Framework.Rectangle[],System.TimeSpan,System.Boolean)">
+            <summary>
+            Extracts a <see cref="T:Jv.Games.Xna.Sprites.Animation"/> with the specified frame locations.
+            </summary>
+            <param name="name">Name of the extracted animation.</param>
+            <param name="frameRects">Location coordinates of each frame in the animation.</param>
+            <param name="frameDuration">How long each frame is displayed, before switching to the next frame.</param>
+            <param name="repeat"><c>True</c> if the animation should repeat after the last frame finishes.</param>
+            <returns>The extracted animation.</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.SpriteSheet.GetAnimation(System.String,System.Int32[],System.TimeSpan,System.Boolean)">
+            <summary>
+            Extracts a <see cref="T:Jv.Games.Xna.Sprites.Animation"/> with the specified frames.
+            </summary>
+            <param name="name">Name of the extracted animation.</param>
+            <param name="frameIndexes">
+            Zero based index of the frame, inside the sprite sheet grid.
+            </param>
+            <param name="frameDuration">How long each frame is displayed, before switching to the next frame.</param>
+            <param name="repeat"><c>True</c> if the animation should repeat after the last frame finishes.</param>
+            <returns>The extracted animation.</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.SpriteSheet.GetAnimation(System.String,System.Int32,System.Int32,System.TimeSpan,System.Boolean,System.Int32)">
+            <summary>
+            Extracts a <see cref="T:Jv.Games.Xna.Sprites.Animation"/> from a specified animation row.
+            </summary>
+            <param name="name">Name of the extracted animation.</param>
+            <param name="line">Zero based index of the animation line.</param>
+            <param name="count">How many sequential frames should be picked.</param>
+            <param name="frameDuration">How long each frame is displayed, before switching to the next frame.</param>
+            <param name="repeat"><c>True</c> if the animation should repeat after the last frame finishes.</param>
+            <param name="skipFrames">How many frames should be ignored from the line, before starting to pick frames.</param>
+            <returns>The extracted animation.</returns>
+        </member>
+        <member name="M:Jv.Games.Xna.Sprites.SpriteSheet.GetFrame(System.Int32)">
+            <summary>
+            Extracts a single frame from the sprite sheet.
+            </summary>
+            <param name="index">Zero based index of the frame, inside the sprite sheet grid.</param>
+            <returns>The extracted frame.</returns>
         </member>
     </members>
 </doc>
