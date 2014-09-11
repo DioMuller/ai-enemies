@@ -15,6 +15,14 @@ using Enemies.Parameters;
 
 namespace Enemies.Entities
 {
+    public enum TypeTag
+    {
+        Enemy = 0,
+        Player = 1,
+        Objective = 2,
+        None = 3
+    }
+
     public class BaseEntity : IEntity
     {
         #region Attributes
@@ -29,6 +37,10 @@ namespace Enemies.Entities
         /// </summary>
         private Random _random;
 
+        /// <summary>
+        /// Current type tag.
+        /// </summary>
+        private TypeTag _tag = TypeTag.None;
         #endregion Entity Attributes
 
         #region Sprite Attributes
@@ -61,20 +73,48 @@ namespace Enemies.Entities
         #endregion Attributes
 
         #region Properties
+
         /// <summary>
         /// Entity Tag.
         /// </summary>
-        public string Tag { get; set; }
+        public TypeTag Tag
+        {
+            get { return _tag; }
+            set
+            {
+                _tag = value;
+
+                switch (_tag)
+                {
+                    case TypeTag.Enemy:
+                        EnemyTag = TypeTag.None;
+                        TargetTag = TypeTag.Player;
+                        break;
+                    case TypeTag.Player:
+                        EnemyTag = TypeTag.Enemy;
+                        TargetTag = TypeTag.Objective;
+                        break;
+                    case TypeTag.Objective:
+                        EnemyTag = TypeTag.Player;
+                        TargetTag = TypeTag.None;
+                        break;
+                    default:
+                        EnemyTag = TypeTag.None;
+                        TargetTag = TypeTag.None;
+                        break;
+                }
+            }
+        }
 
         /// <summary>
         /// Target Tag.
         /// </summary>
-        public string TargetTag { get; set; }
+        public TypeTag TargetTag { get; private set; }
 
         /// <summary>
         /// Enemy Tag.
         /// </summary>
-        public string EnemyTag { get; set; }
+        public TypeTag EnemyTag { get; private set; }
         
         /// <summary>
         /// Entity Position.
@@ -176,11 +216,11 @@ namespace Enemies.Entities
         /// </summary>
         /// <param name="tag">Entity tag.</param>
         /// <returns></returns>
-        private EntityInfo[] GetNeighbours(string tag = null)
+        private EntityInfo[] GetNeighbours(TypeTag tag = TypeTag.None)
         {
             var entities = GameParameters.Entities;
 
-            if (tag != null) return entities.Where((e) => e.Tag == tag).ToArray();
+            if (tag != TypeTag.None) return entities.Where((e) => e.Tag == tag).ToArray();
             else return entities.ToArray();
         }
         #endregion Helper Methods

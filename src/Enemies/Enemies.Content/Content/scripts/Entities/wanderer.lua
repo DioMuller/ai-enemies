@@ -6,9 +6,9 @@ function script.Initialize()
 	script.movement = vector.create( 1, 1 )
 
 	script.jitter= 1.05
-	script.distance = 1
+	script.distance = 15
 	script.radius = 100
-	script.maxSpeed = 5
+	script.maxSpeed = 2
 	entity:SetSpritesheet("Sprites/HeroSprite")
 
 end

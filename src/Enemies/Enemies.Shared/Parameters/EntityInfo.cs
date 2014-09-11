@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Enemies.Entities;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,10 +8,10 @@ namespace Enemies.Parameters
 {
     public class EntityInfo
     {
-        public string Tag { get; private set; }
+        public TypeTag Tag { get; private set; }
         public Vector2 Position { get; private set; }
 
-        public EntityInfo(string tag, Vector2 position)
+        public EntityInfo(TypeTag tag, Vector2 position)
         {
             Tag = tag;
             Position = position;

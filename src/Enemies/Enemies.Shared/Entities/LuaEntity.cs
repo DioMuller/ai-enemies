@@ -60,7 +60,7 @@ namespace Enemies.Entities
             _context = new Lua();
             _context.LoadCLRPackage();
 
-            Tag = "Lua";
+            Tag = TypeTag.Enemy;
 
             LoadLibs(content);
 
