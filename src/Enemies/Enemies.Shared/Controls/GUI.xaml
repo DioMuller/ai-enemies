@@ -3,6 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Enemies.Controls;assembly=Enemies.MonoGame"
              x:Class="Enemies.Controls.GUI">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <controls:Style x:Key="buttonStyle">
+                <controls:Setter Property="VerticalOptions" Value="Center"/>
+                <controls:Setter Property="HorizontalOptions" Value="Center"/>
+                <controls:Setter Property="ImageNormal" Value="GUI/cursor_closed"/>
+                <controls:Setter Property="ImageOver" Value="GUI/cursor_pointer"/>
+                <controls:Setter Property="TextColor" Value="Black"/>
+            </controls:Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,8 +25,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:ImageButton OnClick="AddPlayer_Click" Grid.Row="0" Grid.Column="1" Text="Player" TextColor="Black" ImageNormal="GUI/cursor_closed" ImageOver="GUI/cursor_pointer" VerticalOptions="Center" HorizontalOptions="Center" />
-        <controls:ImageButton OnClick="AddEnemy_Click" Grid.Row="1" Grid.Column="1" Text="Enemy" TextColor="Black" ImageNormal="GUI/cursor_closed" ImageOver="GUI/cursor_pointer" VerticalOptions="Center" HorizontalOptions="Center"/>
-        <controls:ImageButton x:Name="AddObjective" OnClick="AddObjective_Click" Grid.Row="2" Grid.Column="1" Text="Objective" TextColor="Black" ImageNormal="GUI/cursor_closed" ImageOver="GUI/cursor_pointer" VerticalOptions="Center" HorizontalOptions="Center"/>
+        <controls:ImageButton OnClick="AddPlayer_Click" Grid.Row="0" Grid.Column="1" Text="Player" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="AddEnemy_Click" Grid.Row="1" Grid.Column="1" Text="Enemy" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton x:Name="AddObjective" OnClick="AddObjective_Click" Grid.Row="2" Grid.Column="1" Text="Objective" controls:Style.Style="{StaticResource buttonStyle}"/>
     </Grid>
 </ContentPage>
