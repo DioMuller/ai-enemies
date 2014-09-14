@@ -110,11 +110,13 @@ namespace Enemies.Screens
 
         #region Exposed Methods
 
-        public bool AddEntity(string entity, Vector2 position)
+        public bool AddEntity(string entity, Vector2 position, TypeTag tag)
         {
             if (!_scriptEntityFactory.AvailableEntities(Content).Contains(entity)) return false;
 
-            Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, entity, position));
+            var e = _scriptEntityFactory.LoadEntity(Content, entity, position);
+            e.Tag = tag;
+            Entities = Entities.Add(e);
             return true;
         }
         #endregion Exposed Methods

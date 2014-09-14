@@ -10,7 +10,6 @@ function script.Initialize()
 	script.radius = 100
 	script.maxSpeed = 2
 	entity:SetSpritesheet("Sprites/HeroSprite")
-
 end
 
 function script.DoUpdate(delta)
