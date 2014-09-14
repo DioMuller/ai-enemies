@@ -20,10 +20,16 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Spritesheets\main.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_normal.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_over.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_pressed.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_open.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_closed.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_pointer.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\map01.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\HeroSprite.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Empty.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Grass.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Wall.png" />
   </ItemGroup>
 </Project>

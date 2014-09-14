@@ -98,6 +98,10 @@ namespace Enemies.Screens
             if (availableEntities.Count > 0)
             foreach (var entity in availableEntities)
                 Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, entity, new Vector2(0,0)));//availableEntities[0]));
+
+            // TODO: non-fixed map loading.
+            GameParameters.LoadMap(this, new Point(800, 600), Content, "Maps/map01");
+
             await FadeIn();
         }
 
@@ -188,6 +192,8 @@ namespace Enemies.Screens
             GraphicsDevice.Clear(Color.Yellow);
 
             SpriteBatch.Begin();
+
+            if (GameParameters.CurrentMap != null) GameParameters.CurrentMap.Draw(SpriteBatch, gameTime);
             foreach (var entity in Entities)
                 TryDrawEntity(gameTime, entity);
             SpriteBatch.End();
