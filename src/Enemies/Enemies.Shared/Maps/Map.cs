@@ -27,6 +27,7 @@ namespace Enemies.Maps
         private GameScreen _game;
 
         private Vector2 _tileSize;
+        private List<Rectangle> _collisions;
 
         #region Textures
 
@@ -56,6 +57,8 @@ namespace Enemies.Maps
             XDocument doc = XDocument.Load(path);
             XElement root = doc.Element("level");
 
+            _collisions = new List<Rectangle>();
+
             #region Load Map
             var map = root.Element("map");
             int height = Convert.ToInt32(map.Attribute("height").Value);
@@ -75,6 +78,13 @@ namespace Enemies.Maps
                         char type = mapTiles[j];
                         if (type == '0' || type == '1') _tiles[i, j] = (Tile) type;
                         else _tiles[i, j] = Tile.Empty;
+
+                        if( _tiles[i,j] == Tile.Wall || _tiles[i,j] == Tile.Empty)
+                        {
+                            _collisions.Add(new Rectangle(Convert.ToInt32(j * _tileSize.X), 
+                                Convert.ToInt32(i * _tileSize.Y), 
+                                Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y)));
+                        }
                     }
                 }
                 else
@@ -82,6 +92,9 @@ namespace Enemies.Maps
                     for (int j = 0; j < width; j++)
                     {
                         _tiles[i, j] = Tile.Empty;
+                        _collisions.Add(new Rectangle(Convert.ToInt32(j * _tileSize.X),
+                                Convert.ToInt32(i * _tileSize.Y),
+                                Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y)));
                     }
                 }
             }
@@ -154,6 +167,13 @@ namespace Enemies.Maps
                     
                 }
             }
+        }
+
+        public bool CollidesWithMap(Rectangle rect)
+        {
+            var collisions = _collisions.Where(r => r.Intersects(rect));
+
+            return collisions.Count() > 0;
         }
     }
 }

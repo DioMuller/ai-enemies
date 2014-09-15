@@ -25,6 +25,10 @@ namespace Enemies.Entities
 
     public class BaseEntity : IEntity
     {
+        #region Static
+        private static Texture2D markerTexture = null;
+        #endregion Static
+
         #region Attributes
         #region Entity Attributes
         /// <summary>
@@ -123,6 +127,20 @@ namespace Enemies.Entities
         {
             get { return _entity.Sprite.Position; }
         }
+
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle
+                (
+                    Convert.ToInt32(Position.X - _entity.Sprite.CurrentAnimation.Frames[0].Origin.X),
+                    Convert.ToInt32(Position.Y - _entity.Sprite.CurrentAnimation.Frames[0].Origin.Y),
+                    _entity.Sprite.CurrentAnimation.Frames[0].Width,
+                    _entity.Sprite.CurrentAnimation.Frames[0].Height
+                );
+            }
+        }
         #endregion Properties
 
         #region Constructor
@@ -137,6 +155,11 @@ namespace Enemies.Entities
             _random = new Random();
 
             _entity.Sprite.Position = position;
+
+            if(markerTexture == null)
+            {
+                markerTexture = content.Load<Texture2D>("GUI/entity_type");
+            }
 
             Initialize();
         }
@@ -174,6 +197,9 @@ namespace Enemies.Entities
         /// <param name="gameTime">Current game time.</param>
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
+            Rectangle baseRect = BoundingBox; //new Rectangle(BoundingBox.X + BoundingBox.Width - 48, BoundingBox.Y + BoundingBox.Height - 24, 32, 32);
+            spriteBatch.Draw(markerTexture, baseRect, null, GetColor(Tag));
+
             (_entity as IEntity).Draw(spriteBatch, gameTime);
         }
         #endregion Game Loop Methods
@@ -222,6 +248,26 @@ namespace Enemies.Entities
 
             if (tag != TypeTag.None) return entities.Where((e) => e.Tag == tag).ToArray();
             else return entities.ToArray();
+        }
+
+        /// <summary>
+        /// Obtains color related to tag.
+        /// </summary>
+        /// <param name="tag">Entity tag.</param>
+        /// <returns></returns>
+        private Color GetColor(TypeTag tag)
+        {
+            switch(tag)
+            {
+                case TypeTag.Enemy:
+                    return Color.Red;
+                case TypeTag.Player:
+                    return Color.Green;
+                case TypeTag.Objective:
+                    return Color.Yellow;
+                default:
+                    return Color.White;
+            }
         }
         #endregion Helper Methods
 
@@ -289,8 +335,15 @@ namespace Enemies.Entities
         /// <param name="y">Movement Y.</param>
         public void Move(float x, float y)
         {
+            Vector2 oldPos = Position;
+                
             _entity.Sprite.Position.X += x;
             _entity.Sprite.Position.Y += y;
+
+            if(GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
+            {
+                _entity.Sprite.Position = oldPos;
+            }
         }
 
         /// <summary>
@@ -299,7 +352,6 @@ namespace Enemies.Entities
         /// <returns>Nearest target info.</returns>
         public EntityInfo GetNearestTarget()
         {
-
             return GetNeighbours(TargetTag).OrderBy(e => GetDistanceFrom(e)).FirstOrDefault();
         }
 
