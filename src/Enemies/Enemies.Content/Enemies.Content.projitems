@@ -17,7 +17,6 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\steering.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\vector.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\__init__" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Spritesheets\main.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_normal.png" />
@@ -28,7 +27,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_pointer.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\entity_type.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\map01.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\HeroSprite.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\human-01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\zombie-01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Zombie.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Human.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Empty.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Grass.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Wall.png" />

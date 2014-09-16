@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sprite>
+  <spritesheets columns="3" rows="5">
+    <spritesheet file="Spritesheets/zombie-01"/>
+  </spritesheets>
+  <animations idleAnimation="stopped" movingAnimation="walking">
+    <animation name="stopped_up" line="0" count="1" time="100" repeat="true" skipFrames="0"/>
+    <animation name="stopped_left" line="1" count="1" time="100" repeat="true" skipFrames="0"/>
+    <animation name="stopped_down" line="2" count="1" time="100" repeat="true" skipFrames="0"/>
+    <animation name="stopped_right" line="3" count="1" time="100" repeat="true" skipFrames="0"/>
+    <animation name="walking_up" line="0" count="3" time="100" repeat="true" skipFrames="0"/>
+    <animation name="walking_left" line="1" count="3" time="100" repeat="true" skipFrames="0"/>
+    <animation name="walking_down" line="2" count="3" time="100" repeat="true" skipFrames="0"/>
+    <animation name="walking_right" line="3" count="3" time="100" repeat="true" skipFrames="0"/>
+  </animations>
+</sprite>

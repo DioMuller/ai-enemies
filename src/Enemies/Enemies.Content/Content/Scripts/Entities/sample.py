@@ -2,7 +2,7 @@
 
 class ScriptEntity(BaseEntity):
 	def Initialize(self):
-		self.SetSpritesheet("Sprites/HeroSprite")
+		self.SetSpritesheet("Sprites/Human")
 		self.SetCurrentAnimation("stopped_down")
 	
 	def DoUpdate(self, game_time):

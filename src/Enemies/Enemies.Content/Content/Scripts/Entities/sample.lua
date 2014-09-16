@@ -1,7 +1,7 @@
 ﻿script = {}
 
 function script.Initialize()
-	entity:SetSpritesheet("Sprites/HeroSprite")
+	entity:SetSpritesheet("Sprites/Human")
 end
 
 function script.DoUpdate(delta)

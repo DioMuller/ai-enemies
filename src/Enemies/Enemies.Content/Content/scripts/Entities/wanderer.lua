@@ -9,7 +9,7 @@ function script.Initialize()
 	script.distance = 15
 	script.radius = 100
 	script.maxSpeed = 2
-	entity:SetSpritesheet("Sprites/HeroSprite")
+	entity:SetSpritesheet("Sprites/Human")
 end
 
 function script.DoUpdate(delta)
