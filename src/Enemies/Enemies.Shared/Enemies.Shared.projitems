@@ -9,6 +9,8 @@
     <Import_RootNamespace>Enemies</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonTextColorConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\GUI.xaml.cs">
       <DependentUpon>GUI.xaml</DependentUpon>
       <SubType>Code</SubType>

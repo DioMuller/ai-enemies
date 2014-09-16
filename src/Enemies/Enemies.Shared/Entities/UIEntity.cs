@@ -5,7 +5,7 @@ namespace Enemies.Entities
 {
     class UIEntity : IEntity
     {
-        public readonly RendererGameComponent Component;
+        public readonly UIGameComponent Component;
 
         Vector2 _position;
         Xamarin.Forms.Size? _size;
@@ -30,7 +30,7 @@ namespace Enemies.Entities
             }
         }
 
-        public UIEntity(RendererGameComponent controlRenderer)
+        public UIEntity(UIGameComponent controlRenderer)
         {
             Component = controlRenderer;
             UpdateArrange();
@@ -48,15 +48,17 @@ namespace Enemies.Entities
 
         private void UpdateArrange()
         {
-            var measuredSize = Component.Page.GetSizeRequest(Size != null ? Size.Value.Width : -1, Size != null ? Size.Value.Height : -1);
-            Component.Area = new Xamarin.Forms.Rectangle(Position.X, Position.Y, measuredSize.Request.Width, measuredSize.Request.Height);
+            var measuredSize = Size != null ? Size.Value
+                : Component.Page.GetSizeRequest(double.PositiveInfinity, double.PositiveInfinity).Request;
+
+            Component.Area = new Xamarin.Forms.Rectangle(Position.X, Position.Y, measuredSize.Width, measuredSize.Height);
         }
     }
 
     class UIEntity<TModel> : UIEntity
         where TModel : Xamarin.Forms.VisualElement
     {
-        public UIEntity(RendererGameComponent controlRenderer, TModel model)
+        public UIEntity(UIGameComponent controlRenderer, TModel model)
             : base(controlRenderer)
         {
             Model = model;

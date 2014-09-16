@@ -9,12 +9,14 @@
     public class Setter
     {
         public string Property { get; set; }
-        public string Value { get; set; }
+        public object Value { get; set; }
     }
 
     [ContentProperty("Children")]
     public class Style
     {
+        const BindingFlags BindablePropertyFlags = BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Static;
+
         public Style()
         {
             Children = new List<Setter>();
@@ -27,13 +29,26 @@
                 propertyChanged: (bindable, oldvalue, newvalue) =>
                 {
                     foreach (var setter in newvalue.Children)
-                    {
-                        var pInfo = bindable.GetType().GetTypeInfo().GetRuntimeProperty(setter.Property);
-                        pInfo.SetMethod.Invoke(bindable, new[] { ConvertValue(pInfo, setter.Value) });
-                    }
+                        SetValue(bindable, setter);
                 });
 
-        private static object ConvertValue(PropertyInfo pInfo, string value)
+        static void SetValue(BindableObject bindable, Setter setter)
+        {
+            var binding = setter.Value as Binding;
+            if (binding != null)
+            {
+                var prop = (BindableProperty)bindable.GetType()
+                    .GetField(setter.Property + "Property", BindablePropertyFlags)
+                    .GetValue(null);
+                bindable.SetBinding(prop, new Binding(binding.Path, binding.Mode, binding.Converter, binding.ConverterParameter, binding.StringFormat));
+                return;
+            }
+
+            var pInfo = bindable.GetType().GetTypeInfo().GetRuntimeProperty(setter.Property);
+            pInfo.SetMethod.Invoke(bindable, new[] { ConvertValue(pInfo, (string)setter.Value) });
+        }
+
+        static object ConvertValue(PropertyInfo pInfo, string value)
         {
             var converterInfo = pInfo.PropertyType.GetCustomAttribute<TypeConverterAttribute>();
             if (converterInfo != null)

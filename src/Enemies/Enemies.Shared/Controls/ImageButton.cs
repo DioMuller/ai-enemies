@@ -3,27 +3,43 @@
     using System;
     using Xamarin.Forms;
 
+    public enum ButtonState
+    {
+        Normal,
+        Over,
+        Pressed,
+        Pressing
+    }
+
     public class ImageButton : Label
     {
-        public static BindableProperty ImageNormalProperty = BindableProperty.Create<ImageButton, string>(p => p.ImageNormal, defaultValue: null);
+        public static BindableProperty StateProperty = BindableProperty.Create<ImageButton, ButtonState>(p => p.State, defaultValue: ButtonState.Normal);
+        public static BindableProperty ImageProperty = BindableProperty.Create<ImageButton, string>(p => p.Image, defaultValue: null);
+        public static BindableProperty ContinuousClickProperty = BindableProperty.Create<ImageButton, bool>(p => p.ContinuousClick, defaultValue: false);
+
+        public ButtonState State
+        {
+            get { return (ButtonState)GetValue(StateProperty); }
+            set { SetValue(StateProperty, value); }
+        }
+
+        public string Image
+        {
+            get { return (string)GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
+        }
+
+        public bool ContinuousClick
+        {
+            get { return (bool)GetValue(ContinuousClickProperty); }
+            set { SetValue(ContinuousClickProperty, value); }
+        }
 
         public ImageButton()
         {
             XAlign = TextAlignment.Center;
             YAlign = TextAlignment.Center;
-        }
-
-        public string ImageNormal
-        {
-            get { return (string)GetValue(ImageNormalProperty); }
-            set { SetValue(ImageNormalProperty, value); }
-        }
-
-        public static BindableProperty ImageOverProperty = BindableProperty.Create<ImageButton, string>(p => p.ImageOver, defaultValue: null);
-        public string ImageOver
-        {
-            get { return (string)GetValue(ImageOverProperty); }
-            set { SetValue(ImageOverProperty, value); }
+            BindingContext = this;
         }
 
         public event EventHandler OnClick;

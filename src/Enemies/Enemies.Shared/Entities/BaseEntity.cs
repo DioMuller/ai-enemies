@@ -61,7 +61,7 @@ namespace Enemies.Entities
         /// <summary>
         /// Entity Spritesheet.
         /// </summary>
-        private SpriteSheet _spriteSheet;
+        private GridSpriteSheet _spriteSheet;
 
         /// <summary>
         /// Idle animation name.
@@ -214,7 +214,7 @@ namespace Enemies.Entities
         private void LoadSpritesheet(string spritesheet, int cols, int rows)
         {
             _texture = _content.Load<Texture2D>(spritesheet);
-            _spriteSheet = new SpriteSheet(_texture, cols, rows);
+            _spriteSheet = new GridSpriteSheet(_texture, cols, rows);
         }
 
         /// <summary>

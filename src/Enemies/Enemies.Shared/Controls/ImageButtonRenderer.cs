@@ -10,41 +10,27 @@ namespace Enemies.Controls
 
     public class ImageButtonRenderer : LabelRenderer
     {
-        Texture2D _currentImage;
-        Texture2D _imageNormal;
-        Texture2D _imageOver;
+        Texture2D _image;
 
         public new ImageButton Model { get { return (ImageButton)base.Model; } }
 
         public ImageButtonRenderer()
         {
-            PropertyTracker.AddHandler(ImageButton.ImageNormalProperty, HandleImageNormal);
-            PropertyTracker.AddHandler(ImageButton.ImageOverProperty, HandleImageOver);
+            PropertyTracker.AddHandler(ImageButton.ImageProperty, HandleImage);
         }
 
-        void HandleImageNormal(Xamarin.Forms.BindableProperty prop)
+        void HandleImage(Xamarin.Forms.BindableProperty prop)
         {
-            _imageNormal = Forms.Game.Content.Load<Texture2D>(Model.ImageNormal);
-            UseImage(_currentImage ?? _imageNormal ?? _imageOver);
-        }
-
-        void HandleImageOver(Xamarin.Forms.BindableProperty prop)
-        {
-            _imageOver = Forms.Game.Content.Load<Texture2D>(Model.ImageOver);
-            UseImage(_currentImage ?? _imageNormal ?? _imageOver);
+            _image = Model.Image == null ? null : Forms.Game.Content.Load<Texture2D>(Model.Image);
+            InvalidateMeasure();
         }
 
         public override Xamarin.Forms.SizeRequest Measure(Xamarin.Forms.Size availableSize)
         {
             var lblSize = base.Measure(availableSize);
-            if (_currentImage != null)
-                return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(_currentImage.Width, _currentImage.Height), default(Xamarin.Forms.Size));
+            if (_image != null)
+                return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(_image.Width, _image.Height), default(Xamarin.Forms.Size));
             return lblSize;
-        }
-
-        protected override void Arrange()
-        {
-            base.Arrange();
         }
 
         public override void Update(GameTime gameTime)
@@ -55,14 +41,29 @@ namespace Enemies.Controls
                 var region = GetArea();
                 if (region.Contains(new Xamarin.Forms.Point(mouse.X, mouse.Y)))
                 {
-                    UseImage(_imageOver);
-
                     if (mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
-                        Model.FireClicked();
+                    {
+                        if (Model.State != ButtonState.Pressed &&
+                            Model.State != ButtonState.Pressing)
+                        {
+                            Model.FireClicked();
+                            Model.State = ButtonState.Pressed;
+                        }
+                        else
+                        {
+                            Model.State = ButtonState.Pressing;
+                            if(Model.ContinuousClick)
+                                Model.FireClicked();
+                        }
+                    }
+                    else
+                    {
+                        Model.State = ButtonState.Over;
+                    }
                 }
                 else
                 {
-                    UseImage(_imageNormal);
+                    Model.State = ButtonState.Normal;
                 }
             }
             catch (InvalidOperationException invalidOpEx)
@@ -75,22 +76,12 @@ namespace Enemies.Controls
 
         protected override void LocalDraw(GameTime gameTime)
         {
-            if (_currentImage == null)
+            if (_image == null)
                 return;
 
             var drawArea = new Rectangle(0, 0, (int)Model.Bounds.Width, (int)Model.Bounds.Height);
-            SpriteBatch.Draw(_currentImage, drawArea, Color.White);
+            SpriteBatch.Draw(_image, drawArea, new Color(Color.White, (float)Model.Opacity));
             base.LocalDraw(gameTime);
-        }
-
-        void UseImage(Texture2D image)
-        {
-            if (_currentImage == image)
-                return;
-            _currentImage = image;
-            if (_currentImage == null)
-                return;
-            InvalidateMeasure();
         }
 
         Xamarin.Forms.Rectangle GetArea()

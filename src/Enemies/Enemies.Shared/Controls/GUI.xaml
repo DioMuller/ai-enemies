@@ -5,12 +5,13 @@
              x:Class="Enemies.Controls.GUI">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <controls:ButtonImageConverter x:Key="ButtonImageConverter" />
+            <controls:ButtonTextColorConverter x:Key="ButtonTextColorConverter" />
             <controls:Style x:Key="buttonStyle">
+                <controls:Setter Property="Opacity" Value="0.9"/>
                 <controls:Setter Property="VerticalOptions" Value="Center"/>
-                <controls:Setter Property="HorizontalOptions" Value="Center"/>
-                <controls:Setter Property="ImageNormal" Value="GUI/cursor_closed"/>
-                <controls:Setter Property="ImageOver" Value="GUI/cursor_pointer"/>
-                <controls:Setter Property="TextColor" Value="Black"/>
+                <controls:Setter Property="Image" Value="{Binding State, Converter={StaticResource ButtonImageConverter}}"/>
+                <controls:Setter Property="TextColor" Value="{Binding State, Converter={StaticResource ButtonTextColorConverter}}"/>
             </controls:Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -27,6 +28,6 @@
 
         <controls:ImageButton OnClick="AddPlayer_Click" Grid.Row="0" Grid.Column="1" Text="Player" controls:Style.Style="{StaticResource buttonStyle}"/>
         <controls:ImageButton OnClick="AddEnemy_Click" Grid.Row="1" Grid.Column="1" Text="Enemy" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton x:Name="AddObjective" OnClick="AddObjective_Click" Grid.Row="2" Grid.Column="1" Text="Objective" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton x:Name="AddObjective" ContinuousClick="True" OnClick="AddObjective_Click" Grid.Row="2" Grid.Column="1" Text="Objective" controls:Style.Style="{StaticResource buttonStyle}"/>
     </Grid>
 </ContentPage>
