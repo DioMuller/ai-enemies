@@ -338,12 +338,20 @@ namespace Enemies.Entities
             Vector2 oldPos = Position;
                 
             _entity.Sprite.Position.X += x;
+
+            if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
+            {
+                _entity.Sprite.Position.X = oldPos.X;
+            }
+
             _entity.Sprite.Position.Y += y;
 
-            if(GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
+            if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
             {
-                _entity.Sprite.Position = oldPos;
+                _entity.Sprite.Position.Y = oldPos.Y;
             }
+
+
         }
 
         /// <summary>

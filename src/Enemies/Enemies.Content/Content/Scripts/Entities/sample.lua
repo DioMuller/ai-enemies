@@ -1,7 +1,11 @@
 ﻿script = {}
 
 function script.Initialize()
-	entity:SetSpritesheet("Sprites/Human")
+	if entity.Tag == tags.player then
+		entity:SetSpritesheet("Sprites/Human")
+	else
+		entity:SetSpritesheet("Sprites/Zombie")
+	end
 end
 
 function script.DoUpdate(delta)

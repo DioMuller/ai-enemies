@@ -191,7 +191,7 @@ namespace Enemies.Screens
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Yellow);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             SpriteBatch.Begin();
 
