@@ -31,7 +31,24 @@ namespace Enemies.Screens
         public TitleScreen(MainGame game)
             : base(game)
         {
-            GUI = new TitleGUI().AsEntity();
+            var title = new TitleGUI();
+
+            title.OnNewGame += new OnButtonClickDelegate(() =>
+            {
+                Exit(Result.StartGame);
+            });
+
+            title.OnLoadGame += new OnButtonClickDelegate(() =>
+            {
+                Exit(Result.StartGame);
+            });
+
+            title.OnQuitGame += new OnButtonClickDelegate(() =>
+            {
+                Exit(Result.Exit);
+            });
+
+            GUI = title.AsEntity();
             GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
         }
         #endregion
