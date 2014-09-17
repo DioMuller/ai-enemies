@@ -246,6 +246,8 @@ namespace Enemies.Entities
         {
             var entities = GameParameters.Entities;
 
+            if (entities == null) return null;
+
             if (tag != TypeTag.None) return entities.Where((e) => e.Tag == tag).ToArray();
             else return entities.ToArray();
         }
@@ -363,7 +365,10 @@ namespace Enemies.Entities
         /// <returns>Nearest target info.</returns>
         public EntityInfo GetNearestTarget()
         {
-            return GetNeighbours(TargetTag).OrderBy(e => GetDistanceFrom(e)).FirstOrDefault();
+            var neigh = GetNeighbours(TargetTag);
+            if (neigh == null) return null;
+
+            return neigh.OrderBy(e => GetDistanceFrom(e)).FirstOrDefault();
         }
 
         /// <summary>

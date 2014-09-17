@@ -12,6 +12,7 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Fonts\DefaultFont.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sample.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sample.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\seeker.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\wanderer.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\tags.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\array.lua" />
