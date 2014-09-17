@@ -335,16 +335,19 @@ namespace Enemies.Entities
         /// <param name="y">Movement Y.</param>
         public void Move(float x, float y)
         {
+            Vector2 normalized = new Vector2(x, y);
             Vector2 oldPos = Position;
+
+            normalized.Normalize();
                 
-            _entity.Sprite.Position.X += x;
+            _entity.Sprite.Position.X += normalized.X;
 
             if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
             {
                 _entity.Sprite.Position.X = oldPos.X;
             }
 
-            _entity.Sprite.Position.Y += y;
+            _entity.Sprite.Position.Y += normalized.Y;
 
             if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
             {
