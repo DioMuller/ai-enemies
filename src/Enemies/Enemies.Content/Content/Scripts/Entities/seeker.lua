@@ -17,17 +17,15 @@ function script.DoUpdate(delta)
 	if script.updateTime <= 0 then
 		local targetEntity = entity:GetNearestTarget()
 		if targetEntity then
-			script.target = vector:create(targetEntity.Position.X, targetEntity.Position.Y) 
+			script.target = vector.create(targetEntity.Position.X, targetEntity.Position.Y) 
 		end
 
 		script.updateTime = 120
 	end
 
 	if script.target then
-		local newDirection = steering.seek(entity.Position, script.target, script.maxSpeed)
-		script.target = newTarget
-		script.direction = newDirection
-
+		local movement = steering.seek(entity.Position, script.target, script.maxSpeed)
+		
 		entity:Move(movement.X, movement.Y)
 	end
 end

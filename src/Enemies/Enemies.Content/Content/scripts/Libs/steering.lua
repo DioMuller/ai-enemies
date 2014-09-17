@@ -2,7 +2,7 @@
 
 -- Seek Steering Behavior
 function steering.seek(agent, target, maxSpeed)
-	local velocity = vector.subtract(target, agent.position)
+	local velocity = vector.subtract(target, agent)
 	velocity = vector.normalize(velocity)
 	return vector.multiply(velocity, maxSpeed)
 end
