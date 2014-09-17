@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using Enemies.Parameters;
 using Enemies.Controls;
+using Enemies.GUI;
 
 namespace Enemies.Screens
 {
@@ -81,7 +82,7 @@ namespace Enemies.Screens
         public GameScreen(MainGame game)
             : base(game)
         {
-            GUI = new GUI().AsEntity();
+            GUI = new GameGUI().AsEntity();
             GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
         }
 

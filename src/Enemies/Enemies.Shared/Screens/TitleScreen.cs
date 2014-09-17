@@ -1,6 +1,7 @@
 ﻿using Jv.Games.Xna.Async;
 using Jv.Games.Xna.Context;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@ namespace Enemies.Screens
 
         #region Attributes
         Task _preloadGameContent;
+        Texture2D _titleTexture;
+        Rectangle _positionRect;
         #endregion
 
         #region Constructors
@@ -32,6 +35,8 @@ namespace Enemies.Screens
         {
             // TODO: Load content here! (via base.Content)
             base.LoadContent();
+
+            _titleTexture = Content.Load<Texture2D>("GUI/title");
         }
 
         protected async override Task InitializeScreen()
@@ -39,6 +44,9 @@ namespace Enemies.Screens
             _preloadGameContent = GameScreen.PreloadContent(Content);
 
             FadeColor = Color.Black;
+
+            _positionRect = new Rectangle(0, 0, 800, 600);
+
             await UpdateContext.CompleteWhen(CanStart);
             await FadeIn();
         }
@@ -78,8 +86,11 @@ namespace Enemies.Screens
 
         protected override void Draw(GameTime gameTime)
         {
-            // TODO: Screen rendering (via base.SpriteBatch)
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            SpriteBatch.Begin();
+            SpriteBatch.Draw(_titleTexture, _positionRect, null, Color.White);
+            SpriteBatch.End();
         }
 
         #endregion

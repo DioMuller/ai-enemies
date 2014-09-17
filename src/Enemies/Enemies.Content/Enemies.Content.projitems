@@ -27,6 +27,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_closed.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_pointer.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\entity_type.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\title.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\map01.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\human-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\zombie-01.png" />

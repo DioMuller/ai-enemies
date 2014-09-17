@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Enemies.Controls
+namespace Enemies.GUI
 {
-	public partial class GUI
+	public partial class GameGUI
 	{
-		public GUI ()
+        public GameGUI()
 		{
 			InitializeComponent ();
 		}
