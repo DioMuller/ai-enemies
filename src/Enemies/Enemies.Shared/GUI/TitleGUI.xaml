@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Enemies.Controls;assembly=Enemies.MonoGame"
-             x:Class="Enemies.GUI.GameGUI">
+             x:Class="Enemies.GUI.TitleGUI">
     <ContentPage.Resources>
         <ResourceDictionary>
             <controls:ButtonImageConverter x:Key="ButtonImageConverter" />
@@ -18,16 +18,16 @@
     <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <controls:ImageButton OnClick="AddPlayer_Click" Grid.Row="0" Grid.Column="1" Text="Player" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton OnClick="AddEnemy_Click" Grid.Row="1" Grid.Column="1" Text="Enemy" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton OnClick="AddObjective_Click" Grid.Row="2" Grid.Column="1" Text="Objective" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="NewGame_Click" Grid.Row="1" Grid.Column="0" Text="New Game" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="LoadGame_Click" Grid.Row="1" Grid.Column="1" Text="Load Game" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="QuitGame_Click" Grid.Row="1" Grid.Column="2" Text="Quit Game" controls:Style.Style="{StaticResource buttonStyle}"/>
     </Grid>
 </ContentPage>

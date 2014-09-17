@@ -22,6 +22,9 @@
       <SubType>Code</SubType>
       <DependentUpon>GameGUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\TitleGUI.xaml.cs">
+      <DependentUpon>TitleGUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Map.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\EntityInfo.cs" />
@@ -39,6 +42,10 @@
     <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\TitleGUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\GameGUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

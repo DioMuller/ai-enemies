@@ -25,7 +25,7 @@ namespace Enemies.GUI
 
         public void AddObjective_Click(object sender, EventArgs e)
         {
-            AddObjective.RotationY++;
+            
         }
 	}
 }

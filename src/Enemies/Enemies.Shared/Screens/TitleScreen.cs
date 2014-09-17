@@ -1,4 +1,6 @@
-﻿using Jv.Games.Xna.Async;
+﻿using Enemies.Entities;
+using Enemies.GUI;
+using Jv.Games.Xna.Async;
 using Jv.Games.Xna.Context;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,12 +23,16 @@ namespace Enemies.Screens
         Task _preloadGameContent;
         Texture2D _titleTexture;
         Rectangle _positionRect;
+        public readonly UIEntity GUI;
+
         #endregion
 
         #region Constructors
         public TitleScreen(MainGame game)
             : base(game)
         {
+            GUI = new TitleGUI().AsEntity();
+            GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
         }
         #endregion
 
@@ -45,7 +51,7 @@ namespace Enemies.Screens
 
             FadeColor = Color.Black;
 
-            _positionRect = new Rectangle(0, 0, 800, 600);
+            _positionRect = new Rectangle(0, 0, Viewport.Width, Viewport.Height);
 
             await UpdateContext.CompleteWhen(CanStart);
             await FadeIn();
@@ -69,6 +75,8 @@ namespace Enemies.Screens
 
         protected override void Update(GameTime gameTime)
         {
+            GUI.Update(gameTime);
+
             if (State != RunState.Running)
                 return;
 
@@ -91,6 +99,8 @@ namespace Enemies.Screens
             SpriteBatch.Begin();
             SpriteBatch.Draw(_titleTexture, _positionRect, null, Color.White);
             SpriteBatch.End();
+
+            GUI.Draw(SpriteBatch, gameTime);
         }
 
         #endregion
