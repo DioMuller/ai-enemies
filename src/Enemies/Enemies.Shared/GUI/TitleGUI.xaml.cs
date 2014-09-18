@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace Enemies.GUI
 {
-    public delegate void OnButtonClickDelegate();
-
     public partial class TitleGUI
     {
         public OnButtonClickDelegate OnNewGame;

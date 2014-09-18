@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\BaseEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LuaEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\UIEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\Cursor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\Delegates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GUI\GameGUI.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>GameGUI.xaml</DependentUpon>
