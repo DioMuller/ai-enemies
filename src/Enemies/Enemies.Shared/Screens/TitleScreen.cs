@@ -5,11 +5,12 @@ using Jv.Games.Xna.Context;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace Enemies.Screens
 {
-    class TitleScreen : Screen<TitleScreen.Result>
+    class TitleScreen : Screen<TitleScreen.Result>, INotifyPropertyChanged
     {
         #region Nested
         public enum Result
@@ -21,17 +22,43 @@ namespace Enemies.Screens
 
         #region Attributes
         Task _preloadGameContent;
-        Texture2D _titleTexture;
         Rectangle _positionRect;
         public readonly UIEntity GUI;
+        float _titleAngleY, _titleAngleX;
+        #endregion
 
+        #region Properties
+        public float TitleAngleY
+        {
+            get { return _titleAngleY; }
+            set
+            {
+                _titleAngleY = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("TitleAngleY"));
+            }
+        }
+        public float TitleAngleX
+        {
+            get { return _titleAngleX; }
+            set
+            {
+                _titleAngleX = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("TitleAngleX"));
+            }
+        }
+        #endregion
+
+        #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Constructors
         public TitleScreen(MainGame game)
             : base(game)
         {
-            var title = new TitleGUI();
+            var title = new TitleGUI { BindingContext = this };
 
             title.OnNewGame += new OnButtonClickDelegate(() =>
             {
@@ -58,8 +85,6 @@ namespace Enemies.Screens
         {
             // TODO: Load content here! (via base.Content)
             base.LoadContent();
-
-            _titleTexture = Content.Load<Texture2D>("GUI/title");
         }
 
         protected async override Task InitializeScreen()
@@ -103,6 +128,10 @@ namespace Enemies.Screens
                 Exit(Result.Exit);
             if (keyboard.IsKeyDown(Keys.Enter))
                 Exit(Result.StartGame);
+
+            var mouse = Mouse.GetState();
+            TitleAngleY = (mouse.X / (float)Viewport.Width - 0.5f) * 45;
+            TitleAngleX = 1 - (mouse.Y / (float)Viewport.Height) * 45;
         }
 
         #endregion
@@ -111,11 +140,7 @@ namespace Enemies.Screens
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            SpriteBatch.Begin();
-            SpriteBatch.Draw(_titleTexture, _positionRect, null, Color.White);
-            SpriteBatch.End();
+            GraphicsDevice.Clear(Color.Black);
 
             GUI.Draw(SpriteBatch, gameTime);
         }
