@@ -175,5 +175,26 @@ namespace Enemies.Maps
 
             return collisions.Count() > 0;
         }
+
+        public Point GetQuadrant(Point position)
+        {
+            return new Point(Convert.ToInt32(position.X / _tileSize.X),
+                Convert.ToInt32(position.Y / _tileSize.Y));
+        }
+
+        public void ChangeQuadrant(Point quadrant, Tile tile)
+        {
+            if (quadrant.X < 0 || quadrant.X > _tiles.GetLength(0)) return;
+            if (quadrant.Y < 0 || quadrant.Y > _tiles.GetLength(1)) return;
+
+            _tiles[quadrant.Y, quadrant.X] = tile;
+        }
+
+        public Rectangle GetRectanglePosition(Vector2 position)
+        {
+            return new Rectangle(Convert.ToInt32(position.X * _tileSize.X),
+                                Convert.ToInt32(position.Y * _tileSize.Y),
+                                Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y));
+        }
     }
 }

@@ -26,6 +26,14 @@ namespace Enemies.GUI
 
         #region Properties
         public CursorState CurrentState { get; set; }
+
+        public Point Position
+        {
+            get
+            {
+                return new Point(_position.X + 5 , _position.Y + 5);
+            }
+        }
         #endregion Properties
 
         #region Constructor
@@ -50,6 +58,23 @@ namespace Enemies.GUI
             Point position = Mouse.GetState().Position;
             _position.X = position.X;
             _position.Y = position.Y;
+
+            var state = Keyboard.GetState();
+
+            if (state.IsKeyDown(Keys.B) || state.IsKeyDown(Keys.Enter))
+            {
+                CurrentState = CursorState.Build;
+            }
+
+            if (state.IsKeyDown(Keys.E) || state.IsKeyDown(Keys.A))
+            {
+                CurrentState = CursorState.AddEntity;
+            }
+
+            if (state.IsKeyDown(Keys.N) || state.IsKeyDown(Keys.Escape))
+            {
+                CurrentState = CursorState.Normal;
+            }
         }
 
         /// <summary>

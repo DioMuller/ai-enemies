@@ -1,4 +1,5 @@
 ﻿using Enemies.Entities;
+using Enemies.Maps;
 using Enemies.Scripting;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
@@ -12,6 +13,7 @@ using System.Linq;
 using Enemies.Parameters;
 using Enemies.Controls;
 using Enemies.GUI;
+using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 
 namespace Enemies.Screens
 {
@@ -141,6 +143,23 @@ namespace Enemies.Screens
             GUI.Update(gameTime);
             Cursor.Update(gameTime);
 
+            #region Cursor Actions
+            MouseState mouse = Mouse.GetState();
+
+            switch (Cursor.CurrentState)
+            {
+                case CursorState.Build:
+                    if (mouse.LeftButton == ButtonState.Pressed || mouse.RightButton == ButtonState.Pressed)
+                    {
+                        var quad = GameParameters.CurrentMap.GetQuadrant(Cursor.Position);
+                        GameParameters.CurrentMap.ChangeQuadrant(quad, mouse.LeftButton == ButtonState.Pressed ? Tile.Wall : Tile.Ground);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            #endregion Cursor Actions
+
             if (State == RunState.Initializing)
                 return;
 
@@ -182,7 +201,7 @@ namespace Enemies.Screens
         bool CheckFinish(GameTime gameTime)
         {
             var keyboard = Keyboard.GetState();
-            if (keyboard.IsKeyDown(Keys.Escape))
+            if (keyboard.IsKeyDown(Keys.Back))
             {
                 Exit(Result.ReturnToTitle);
                 return true;

@@ -1,4 +1,5 @@
-﻿using Enemies.Entities;
+﻿using System;
+using Enemies.Entities;
 using Enemies.GUI;
 using Jv.Games.Xna.Async;
 using Jv.Games.Xna.Context;
@@ -105,7 +106,7 @@ namespace Enemies.Screens
         bool CanStart(GameTime gameTime)
         {
             var keyboard = Keyboard.GetState();
-            return !keyboard.IsKeyDown(Keys.Escape) && !keyboard.IsKeyDown(Keys.Enter);
+            return !keyboard.IsKeyDown(Keys.Back) && !keyboard.IsKeyDown(Keys.Enter);
         }
 
         protected override async Task FinalizeScreen()
@@ -133,8 +134,8 @@ namespace Enemies.Screens
                 Exit(Result.StartGame);
 
             var mouse = Mouse.GetState();
-            TitleAngleY = (mouse.X / (float)Viewport.Width - 0.5f) * 45;
-            TitleAngleX = 1 - (mouse.Y / (float)Viewport.Height) * 45;
+            TitleAngleY = Math.Min( Math.Max( (mouse.X / (float)Viewport.Width - 0.5f) * 45, -10), 10);
+            TitleAngleX = Math.Min(Math.Max( 1 - (mouse.Y / (float)Viewport.Height) * 45, -10), 10);
 
             Cursor.Update(gameTime);
         }
