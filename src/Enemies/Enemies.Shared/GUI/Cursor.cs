@@ -31,7 +31,7 @@ namespace Enemies.GUI
         {
             get
             {
-                return new Point(_position.X + 5 , _position.Y + 5);
+                return new Point(_position.X, _position.Y);
             }
         }
         #endregion Properties

@@ -187,7 +187,11 @@ namespace Enemies.Maps
             if (quadrant.X < 0 || quadrant.X > _tiles.GetLength(0)) return;
             if (quadrant.Y < 0 || quadrant.Y > _tiles.GetLength(1)) return;
 
-            _tiles[quadrant.Y, quadrant.X] = tile;
+            if (_tiles[quadrant.Y, quadrant.X] != tile)
+            {
+                _tiles[quadrant.Y, quadrant.X] = tile;
+                UpdateCollisions();
+            }
         }
 
         public Rectangle GetRectanglePosition(Vector2 position)
@@ -195,6 +199,24 @@ namespace Enemies.Maps
             return new Rectangle(Convert.ToInt32(position.X * _tileSize.X),
                                 Convert.ToInt32(position.Y * _tileSize.Y),
                                 Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y));
+        }
+
+        public void UpdateCollisions()
+        {
+            _collisions = new List<Rectangle>();
+
+            for (int i = 0; i < _tiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < _tiles.GetLength(1); j++)
+                {
+                    if (_tiles[i, j] == Tile.Wall || _tiles[i, j] == Tile.Empty)
+                    {
+                        _collisions.Add(new Rectangle(Convert.ToInt32(j*_tileSize.X),
+                            Convert.ToInt32(i*_tileSize.Y),
+                            Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y)));
+                    }
+                }
+            }
         }
     }
 }
