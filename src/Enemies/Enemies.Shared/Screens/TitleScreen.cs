@@ -24,6 +24,7 @@ namespace Enemies.Screens
         Task _preloadGameContent;
         Rectangle _positionRect;
         public readonly UIEntity GUI;
+        public readonly Cursor Cursor;
         float _titleAngleY, _titleAngleX;
         #endregion
 
@@ -77,6 +78,8 @@ namespace Enemies.Screens
 
             GUI = title.AsEntity();
             GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
+
+            Cursor = new Cursor(Content);
         }
         #endregion
 
@@ -132,6 +135,8 @@ namespace Enemies.Screens
             var mouse = Mouse.GetState();
             TitleAngleY = (mouse.X / (float)Viewport.Width - 0.5f) * 45;
             TitleAngleX = 1 - (mouse.Y / (float)Viewport.Height) * 45;
+
+            Cursor.Update(gameTime);
         }
 
         #endregion
@@ -143,6 +148,8 @@ namespace Enemies.Screens
             GraphicsDevice.Clear(Color.Black);
 
             GUI.Draw(SpriteBatch, gameTime);
+
+            Cursor.Draw(SpriteBatch, gameTime);
         }
 
         #endregion

@@ -17,7 +17,7 @@ namespace Enemies.MonoGame
                 IsFullScreen = false,
             };
 
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
 
             Content.RootDirectory = "Content";
 

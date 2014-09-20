@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Jv.Games.Xna.Sprites;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -33,6 +34,9 @@ namespace Enemies.GUI
             _position = new Rectangle(0, 0, 32, 32);
 
             _textures = new Dictionary<CursorState, Texture2D>();
+            _textures[CursorState.Normal] = content.Load<Texture2D>("GUI/cursor_pointer");
+            _textures[CursorState.Build] = content.Load<Texture2D>("GUI/cursor_closed");
+            _textures[CursorState.AddEntity] = content.Load<Texture2D>("GUI/cursor_open");
         }
         #endregion Constructor
 
@@ -55,8 +59,9 @@ namespace Enemies.GUI
         /// <param name="gameTime">Current game time.</param>
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
+            spriteBatch.Begin();
             spriteBatch.Draw(_textures[CurrentState], _position, null, Color.White);
-
+            spriteBatch.End();
         }
         #endregion Game Cycle
     }

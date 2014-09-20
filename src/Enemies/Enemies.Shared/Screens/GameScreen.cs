@@ -1,5 +1,6 @@
 ﻿using Enemies.Entities;
 using Enemies.Scripting;
+using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
@@ -69,6 +70,7 @@ namespace Enemies.Screens
 
         #region Attributes
         public readonly UIEntity GUI;
+        public readonly Cursor Cursor;
         #endregion
 
         #region Properties
@@ -84,6 +86,8 @@ namespace Enemies.Screens
         {
             GUI = new GameGUI().AsEntity();
             GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
+
+            Cursor = new Cursor(Content);
         }
 
         #endregion
@@ -135,6 +139,7 @@ namespace Enemies.Screens
         protected override void Update(GameTime gameTime)
         {
             GUI.Update(gameTime);
+            Cursor.Update(gameTime);
 
             if (State == RunState.Initializing)
                 return;
@@ -202,6 +207,7 @@ namespace Enemies.Screens
             SpriteBatch.End();
 
             GUI.Draw(SpriteBatch, gameTime);
+            Cursor.Draw(SpriteBatch, gameTime);
         }
 
         void TryDrawEntity(GameTime gameTime, IEntity entity)
