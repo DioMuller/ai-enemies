@@ -73,6 +73,12 @@ namespace Enemies.Screens
         #region Attributes
         public readonly UIEntity GUI;
         public readonly Cursor Cursor;
+
+        private bool _guiVisible = true;
+        private bool _isPaused = false;
+        private TypeTag _currentTag = TypeTag.Enemy;
+
+        private bool _tabPressed = false;
         #endregion
 
         #region Properties
@@ -140,7 +146,7 @@ namespace Enemies.Screens
 
         protected override void Update(GameTime gameTime)
         {
-            GUI.Update(gameTime);
+            if( _guiVisible ) GUI.Update(gameTime);
             Cursor.Update(gameTime);
 
             #region Cursor Actions
@@ -159,6 +165,24 @@ namespace Enemies.Screens
                     break;
             }
             #endregion Cursor Actions
+
+            #region Keyboard Shortcuts
+
+            KeyboardState keys = Keyboard.GetState();
+
+            if (keys.IsKeyDown(Keys.Tab))
+            {
+                if (!_tabPressed)
+                {
+                    _guiVisible = !_guiVisible;
+                    _tabPressed = true;
+                }
+            }
+            else
+            {
+                _tabPressed = false;
+            }
+            #endregion Keyboard Shortcuts
 
             if (State == RunState.Initializing)
                 return;
@@ -225,7 +249,7 @@ namespace Enemies.Screens
                 TryDrawEntity(gameTime, entity);
             SpriteBatch.End();
 
-            GUI.Draw(SpriteBatch, gameTime);
+            if (_guiVisible) GUI.Draw(SpriteBatch, gameTime);
             Cursor.Draw(SpriteBatch, gameTime);
         }
 

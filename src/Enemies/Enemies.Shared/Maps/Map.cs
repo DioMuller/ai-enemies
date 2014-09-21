@@ -184,8 +184,8 @@ namespace Enemies.Maps
 
         public void ChangeQuadrant(Point quadrant, Tile tile)
         {
-            if (quadrant.X < 0 || quadrant.X > _tiles.GetLength(0)) return;
-            if (quadrant.Y < 0 || quadrant.Y > _tiles.GetLength(1)) return;
+            if (quadrant.X < 0 || quadrant.X >= _tiles.GetLength(1)) return;
+            if (quadrant.Y < 0 || quadrant.Y >= _tiles.GetLength(0)) return;
 
             if (_tiles[quadrant.Y, quadrant.X] != tile)
             {
