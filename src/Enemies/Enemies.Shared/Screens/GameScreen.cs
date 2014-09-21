@@ -13,6 +13,7 @@ using System.Linq;
 using Enemies.Parameters;
 using Enemies.Controls;
 using Enemies.GUI;
+using System.Collections.Generic;
 using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
 
 namespace Enemies.Screens
@@ -92,7 +93,7 @@ namespace Enemies.Screens
         public GameScreen(MainGame game)
             : base(game)
         {
-            GUI = new GameGUI().AsEntity();
+            GUI = CreateGUI().AsEntity();
             GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
 
             Cursor = new Cursor(Content);
@@ -101,6 +102,22 @@ namespace Enemies.Screens
         #endregion
 
         #region Life Cycle
+
+        Xamarin.Forms.Page CreateGUI()
+        {
+            var mainMenu = new GameScreenMenu();
+            mainMenu.AddPlayer_Clicked += delegate
+            {
+                var entityOptions = new List<EntitySelection.Item>
+                {
+                    new EntitySelection.Item { Name = "teste 1" },
+                    new EntitySelection.Item { Name = "teste 2" }
+                };
+
+                mainMenu.Navigation.PushAsync(new EntitySelection { Items = entityOptions });
+            };
+            return new Xamarin.Forms.NavigationPage(mainMenu);
+        }
 
         protected override async Task InitializeScreen()
         {

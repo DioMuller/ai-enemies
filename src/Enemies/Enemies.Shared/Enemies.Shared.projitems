@@ -20,9 +20,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\UIEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GUI\Cursor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GUI\Delegates.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GUI\GameGUI.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\EntitySelection.xaml.cs">
+      <DependentUpon>EntitySelection.xaml</DependentUpon>
       <SubType>Code</SubType>
-      <DependentUpon>GameGUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\GameScreenMenu.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>GameScreenMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\SelectionItem.xaml.cs">
+      <DependentUpon>SelectionItem.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)GUI\TitleGUI.xaml.cs">
       <DependentUpon>TitleGUI.xaml</DependentUpon>
@@ -48,7 +56,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\GameGUI.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\GameScreenMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\EntitySelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\SelectionItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

@@ -52,7 +52,7 @@ namespace Enemies.Controls
                         else
                         {
                             Model.State = ButtonState.Pressing;
-                            if(Model.ContinuousClick)
+                            if (Model.ContinuousClick)
                                 Model.FireClicked();
                         }
                     }
@@ -87,20 +87,21 @@ namespace Enemies.Controls
         Xamarin.Forms.Rectangle GetArea()
         {
             var pos = new Xamarin.Forms.Point();
-            var current = (Jv.Games.Xna.XForms.IRenderer)this;
+            var current = (Xamarin.Forms.VisualElement)Model;
             while (current != null)
             {
-                var visual = current as VisualElementRenderer;
-                if (visual != null)
-                {
-                    pos = new Xamarin.Forms.Point(
-                        pos.X + visual.Model.Bounds.X + visual.Model.TranslationX,
-                        pos.Y + visual.Model.Bounds.Y + visual.Model.TranslationY);
-                }
+                pos = new Xamarin.Forms.Point(
+                    pos.X + current.Bounds.X + current.TranslationX,
+                    pos.Y + current.Bounds.Y + current.TranslationY);
 
-                current = current.Parent;
+                current = current.ParentView;
             }
             return new Xamarin.Forms.Rectangle(pos, Model.Bounds.Size);
+        }
+
+        protected override float GetAlpha()
+        {
+            return 1;
         }
     }
 }

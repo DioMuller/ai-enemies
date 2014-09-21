@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Enemies.Controls;assembly=Enemies.MonoGame"
+             x:Class="Enemies.GUI.EntitySelection">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <controls:Style x:Key="Arrow">
+                <controls:Setter Property="HeightRequest" Value="32"/>
+                <controls:Setter Property="WidthRequest" Value="32"/>
+                <controls:Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            </controls:Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid VerticalOptions="Fill" HorizontalOptions="End" BackgroundColor="Yellow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout x:Name="Stack" BackgroundColor="Gray" HorizontalOptions="FillAndExpand"/>
+
+        <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Orientation="Horizontal" BackgroundColor="Green">
+            <controls:ImageButton OnClick="PageLeft" Image="GUI/button_normal" controls:Style.Style="{StaticResource Arrow}"/>
+            <controls:ImageButton OnClick="PageRight" Image="GUI/button_over" controls:Style.Style="{StaticResource Arrow}"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>
