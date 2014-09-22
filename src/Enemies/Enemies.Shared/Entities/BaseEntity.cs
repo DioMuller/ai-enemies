@@ -93,18 +93,22 @@ namespace Enemies.Entities
                     case TypeTag.Enemy:
                         EnemyTag = TypeTag.None;
                         TargetTag = TypeTag.Player;
+                        SetSpritesheet("Sprites/Zombie");
                         break;
                     case TypeTag.Player:
                         EnemyTag = TypeTag.Enemy;
                         TargetTag = TypeTag.Objective;
+                        SetSpritesheet("Sprites/Human");
                         break;
                     case TypeTag.Objective:
                         EnemyTag = TypeTag.Player;
                         TargetTag = TypeTag.None;
+                        SetSpritesheet("Sprites/Human");
                         break;
                     default:
                         EnemyTag = TypeTag.None;
                         TargetTag = TypeTag.None;
+                        SetSpritesheet("Sprites/Human");
                         break;
                 }
             }
@@ -233,6 +237,62 @@ namespace Enemies.Entities
             _entity.Sprite.PlayAnimation(name);
         }
 
+        /// <summary>
+        /// Loads spritesheet from an xml file definition.
+        /// </summary>
+        /// <param name="file">Spritesheet definition file name (without extension).</param>
+        private void SetSpritesheet(string file)
+        {
+            string path = Path.Combine(_content.RootDirectory, file.Replace('/', '\\') + ".xml");
+            XDocument doc = XDocument.Load(path);
+            XElement root = doc.Element("sprite");
+
+            #region Load Spritesheets
+            var sheets = root.Element("spritesheets");
+            int columns = Convert.ToInt32(sheets.Attribute("columns").Value);
+            int rows = Convert.ToInt32(sheets.Attribute("rows").Value);
+            List<string> files = new List<string>();
+
+            foreach (var sheet in sheets.Elements("spritesheet"))
+            {
+                files.Add(sheet.Attribute("file").Value);
+            }
+
+            if (files.Count > 0)
+            {
+                // Chooses an random spritesheet from the defined ones.
+                LoadSpritesheet(files[_random.Next(0, files.Count)], columns, rows);
+            }
+            #endregion Load Spritesheets
+
+            #region Load Animations
+            var animations = root.Element("animations");
+            _idleAnimation = animations.Attribute("idleAnimation").Value;
+            _movingAnimation = animations.Attribute("movingAnimation").Value;
+
+            foreach (var animation in animations.Elements("animation"))
+            {
+                string name = animation.Attribute("name").Value;
+                int line = Convert.ToInt32(animation.Attribute("line").Value);
+                int count = Convert.ToInt32(animation.Attribute("count").Value); ;
+                int time = Convert.ToInt32(animation.Attribute("time").Value); ;
+                bool repeat = Convert.ToBoolean(animation.Attribute("repeat").Value); ;
+                int skipFrames = Convert.ToInt32(animation.Attribute("skipFrames").Value); ;
+
+                AddAnimation(name, line, count, time, repeat, skipFrames);
+            }
+            #endregion Load Animations
+        }
+
+        /// <summary>
+        /// Changes the current character animation.
+        /// </summary>
+        /// <param name="name">Animation name.</param>
+        private void SetCurrentAnimation(string name)
+        {
+            _entity.Sprite.PlayAnimation(name);
+        }
+
         #endregion Sprite Methods
 
         #region Helper Methods
@@ -274,62 +334,6 @@ namespace Enemies.Entities
         #endregion Helper Methods
 
         #region Exposed Methods
-        /// <summary>
-        /// Loads spritesheet from an xml file definition.
-        /// </summary>
-        /// <param name="file">Spritesheet definition file name (without extension).</param>
-        public void SetSpritesheet(string file)
-        {
-            string path = Path.Combine(_content.RootDirectory, file.Replace('/','\\') + ".xml");
-            XDocument doc = XDocument.Load(path);
-            XElement root = doc.Element("sprite");
-
-            #region Load Spritesheets
-            var sheets = root.Element("spritesheets");
-            int columns = Convert.ToInt32(sheets.Attribute("columns").Value);
-            int rows = Convert.ToInt32(sheets.Attribute("rows").Value);
-            List<string> files = new List<string>();
-
-            foreach(var sheet in sheets.Elements("spritesheet"))
-            {
-                files.Add(sheet.Attribute("file").Value);
-            }
-
-            if( files.Count > 0)
-            {
-                // Chooses an random spritesheet from the defined ones.
-                LoadSpritesheet(files[_random.Next(0, files.Count)], columns, rows);
-            }   
-            #endregion Load Spritesheets
-
-            #region Load Animations
-            var animations = root.Element("animations");
-            _idleAnimation = animations.Attribute("idleAnimation").Value;
-            _movingAnimation = animations.Attribute("movingAnimation").Value;
-
-            foreach (var animation in animations.Elements("animation"))
-            {
-                string name = animation.Attribute("name").Value;
-                int line = Convert.ToInt32(animation.Attribute("line").Value);
-                int count = Convert.ToInt32(animation.Attribute("count").Value); ;
-                int time = Convert.ToInt32(animation.Attribute("time").Value); ;
-                bool repeat = Convert.ToBoolean(animation.Attribute("repeat").Value); ;
-                int skipFrames = Convert.ToInt32(animation.Attribute("skipFrames").Value); ;
-
-                AddAnimation(name, line, count, time, repeat, skipFrames);
-            }
-            #endregion Load Animations
-        }
-
-        /// <summary>
-        /// Changes the current character animation.
-        /// </summary>
-        /// <param name="name">Animation name.</param>
-        public void SetCurrentAnimation(string name)
-        {
-            _entity.Sprite.PlayAnimation(name);
-        }
-
         /// <summary>
         /// Moves entity.
         /// </summary>

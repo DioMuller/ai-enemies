@@ -38,7 +38,7 @@ namespace Enemies.GUI
 
         void EntitySelection_SizeChanged(object sender, EventArgs e)
         {
-            _itemsPerPage = 2; // (int)(Stack.Height / 32);
+            _itemsPerPage = (int)(Stack.Height / 32);
             Refresh();
         }
 
