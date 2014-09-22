@@ -21,6 +21,10 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\__init__" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_back.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_down.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_forward.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_up.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_normal.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_over.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_pressed.png" />
@@ -28,6 +32,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_closed.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_pointer.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\entity_type.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Lua.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Python.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\title.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\map01.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\human-01.png" />

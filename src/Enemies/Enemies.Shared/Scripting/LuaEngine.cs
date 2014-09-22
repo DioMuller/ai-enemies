@@ -49,7 +49,7 @@ namespace Enemies.Scripting
 
         public string Icon
         {
-            get { return "GUI/button_pressed"; }
+            get { return "GUI/Lua"; }
         }
     }
 }

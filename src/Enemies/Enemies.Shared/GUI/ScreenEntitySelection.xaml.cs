@@ -38,7 +38,7 @@ namespace Enemies.GUI
 
         void EntitySelection_SizeChanged(object sender, EventArgs e)
         {
-            _itemsPerPage = (int)(Stack.Height / 32);
+            _itemsPerPage = 2; // (int)(Stack.Height / 32);
             Refresh();
         }
 
@@ -80,14 +80,14 @@ namespace Enemies.GUI
 
         public void PageLeft(object sender, EventArgs e)
         {
-            _firstIndex -= _itemsPerPage;
+            _firstIndex -= 1;//_itemsPerPage;
             _firstIndex = Math.Max(0, _firstIndex);
             Refresh();
         }
 
         public void PageRight(object sender, EventArgs e)
         {
-            _firstIndex += _itemsPerPage;
+            _firstIndex += 1;//_itemsPerPage;
             _firstIndex = Math.Min(_items.Count - _itemsPerPage, _firstIndex);
             Refresh();
         }

@@ -80,7 +80,7 @@ namespace Enemies.Scripting
 
         public string Icon
         {
-            get { return "GUI/button_over"; }
+            get { return "GUI/Python"; }
         }
     }
 }

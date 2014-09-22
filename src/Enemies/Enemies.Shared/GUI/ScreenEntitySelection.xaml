@@ -17,7 +17,7 @@
 
         <!--Back button bar-->
         <StackLayout Orientation="Horizontal">
-            <controls:ImageButton Image="GUI/button_pressed" WidthRequest="32" HeightRequest="32" OnClick="BackClick" />
+            <controls:ImageButton Image="GUI/arrow_back" WidthRequest="32" HeightRequest="32" OnClick="BackClick" />
             <Label Text="Voltar" HorizontalOptions="FillAndExpand" />
         </StackLayout>
 
@@ -26,8 +26,8 @@
 
         <!--Pagination-->
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-            <controls:ImageButton x:Name="BtnPageLeft" OnClick="PageLeft" Image="GUI/button_normal" controls:Style.Style="{StaticResource Arrow}"/>
-            <controls:ImageButton x:Name="BtnPageRight" OnClick="PageRight" Image="GUI/button_over" controls:Style.Style="{StaticResource Arrow}"/>
+            <controls:ImageButton x:Name="BtnPageLeft" OnClick="PageLeft" Image="GUI/arrow_up" controls:Style.Style="{StaticResource Arrow}"/>
+            <controls:ImageButton x:Name="BtnPageRight" OnClick="PageRight" Image="GUI/arrow_down" controls:Style.Style="{StaticResource Arrow}"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>
