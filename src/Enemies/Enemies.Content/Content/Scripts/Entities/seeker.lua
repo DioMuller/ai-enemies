@@ -3,12 +3,6 @@
 function script.Initialize()
 	script.maxSpeed = 2
 	script.updateTime = 0
-
-	if entity.Tag == tags.player then
-		entity:SetSpritesheet("Sprites/Human")
-	else
-		entity:SetSpritesheet("Sprites/Zombie")
-	end
 end
 
 function script.DoUpdate(delta)

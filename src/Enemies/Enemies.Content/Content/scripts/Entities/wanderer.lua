@@ -9,12 +9,6 @@ function script.Initialize()
 	script.distance = 150
 	script.radius = 100
 	script.maxSpeed = 2
-
-	if entity.Tag == tags.player then
-		entity:SetSpritesheet("Sprites/Human")
-	else
-		entity:SetSpritesheet("Sprites/Zombie")
-	end
 end
 
 function script.DoUpdate(delta)
