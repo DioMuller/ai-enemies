@@ -1,20 +1,17 @@
 ﻿using Enemies.Entities;
+using Enemies.GUI;
 using Enemies.Maps;
+using Enemies.Parameters;
 using Enemies.Scripting;
-using Jv.Games.Xna.Sprites;
+using Jv.Games.Xna.Async;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Immutable;
-using System.Threading.Tasks;
-using Jv.Games.Xna.Async;
 using System;
-using System.Linq;
-using Enemies.Parameters;
-using Enemies.Controls;
-using Enemies.GUI;
 using System.Collections.Generic;
-using ButtonState = Microsoft.Xna.Framework.Input.ButtonState;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Enemies.Screens
 {
@@ -48,7 +45,7 @@ namespace Enemies.Screens
                         {
                             try
                             {
-                                return _scriptEntityFactory.LoadEntity(content, s, new Vector2(0,0));
+                                return _scriptEntityFactory.LoadEntity(content, s, new Vector2(0, 0));
                             }
                             catch (Exception ex)
                             {
@@ -105,17 +102,23 @@ namespace Enemies.Screens
 
         Xamarin.Forms.Page CreateGUI()
         {
-            var mainMenu = new GameScreenMenu();
-            mainMenu.AddPlayer_Clicked += delegate
-            {
-                var entityOptions = new List<EntitySelection.Item>
-                {
-                    new EntitySelection.Item { Name = "teste 1" },
-                    new EntitySelection.Item { Name = "teste 2" }
-                };
+            var mainMenu = new ScreenGameMenu();
+            var entities = _scriptEntityFactory.AvailableEntities(Content).ToImmutableList();
 
-                mainMenu.Navigation.PushAsync(new EntitySelection { Items = entityOptions });
+            Action<string> addEntity = async category =>
+            {
+                var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenEntitySelection { Items = entities }));
+                await mainMenu.Navigation.PushAsync(selectionScreen);
+                var selectedScript = await selectionScreen.SelectItemAsync();
+
+                PlaceEntity(selectedScript);
+
+                await selectionScreen.Navigation.PopAsync();
             };
+
+            mainMenu.AddPlayer_Clicked += () => addEntity("Player");
+            mainMenu.AddEnemy_Clicked += () => addEntity("Enemy");
+            mainMenu.AddObjective_Clicked += () => addEntity("Objective");
             return new Xamarin.Forms.NavigationPage(mainMenu);
         }
 
@@ -146,10 +149,25 @@ namespace Enemies.Screens
 
         #region Exposed Methods
 
-        public bool AddEntity(string entity, Vector2 position, TypeTag tag)
+        void PlaceEntity(ScriptEntityDescription entity)
         {
-            if (!_scriptEntityFactory.AvailableEntities(Content).Contains(entity)) return false;
+            Log.Debug(Tag, "Item Selected: " + entity.DisplayName);
+        }
 
+        public bool AddEntity(string entityFile, Vector2 position, TypeTag tag)
+        {
+            var entity = _scriptEntityFactory
+                .AvailableEntities(Content)
+                .FirstOrDefault(e => System.IO.Path.GetFileName(e.File) == entityFile);
+
+            if (entity == null)
+                return false;
+
+            return AddEntity(entity, position, tag);
+        }
+
+        public bool AddEntity(ScriptEntityDescription entity, Vector2 position, TypeTag tag)
+        {
             var e = _scriptEntityFactory.LoadEntity(Content, entity, position);
             e.Tag = tag;
             Entities = Entities.Add(e);
@@ -163,7 +181,7 @@ namespace Enemies.Screens
 
         protected override void Update(GameTime gameTime)
         {
-            if( _guiVisible ) GUI.Update(gameTime);
+            if (_guiVisible) GUI.Update(gameTime);
             Cursor.Update(gameTime);
 
             #region Cursor Actions

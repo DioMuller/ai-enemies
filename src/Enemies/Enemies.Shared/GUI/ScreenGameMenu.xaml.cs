@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Enemies.GUI
 {
-	public partial class GameScreenMenu
+	public partial class ScreenGameMenu
 	{
         public event OnButtonClickDelegate AddPlayer_Clicked;
         public event OnButtonClickDelegate AddEnemy_Clicked;
         public event OnButtonClickDelegate AddObjective_Clicked;
 
-        public GameScreenMenu()
+        public ScreenGameMenu()
         {
             InitializeComponent();
         }

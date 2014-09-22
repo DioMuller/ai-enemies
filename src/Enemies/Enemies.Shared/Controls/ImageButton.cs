@@ -3,7 +3,7 @@
     using System;
     using Xamarin.Forms;
 
-    public enum ButtonState
+    public enum ImageButtonState
     {
         Normal,
         Over,
@@ -13,13 +13,14 @@
 
     public class ImageButton : Label
     {
-        public static BindableProperty StateProperty = BindableProperty.Create<ImageButton, ButtonState>(p => p.State, defaultValue: ButtonState.Normal);
+        public static BindableProperty StateProperty = BindableProperty.Create<ImageButton, ImageButtonState>(p => p.State, defaultValue: ImageButtonState.Normal);
         public static BindableProperty ImageProperty = BindableProperty.Create<ImageButton, string>(p => p.Image, defaultValue: null);
         public static BindableProperty ContinuousClickProperty = BindableProperty.Create<ImageButton, bool>(p => p.ContinuousClick, defaultValue: false);
+        public static BindableProperty ImageOpacityProperty = BindableProperty.Create<ImageButton, float>(p => p.ImageOpacity, defaultValue: 1);
 
-        public ButtonState State
+        public ImageButtonState State
         {
-            get { return (ButtonState)GetValue(StateProperty); }
+            get { return (ImageButtonState)GetValue(StateProperty); }
             set { SetValue(StateProperty, value); }
         }
 
@@ -33,6 +34,12 @@
         {
             get { return (bool)GetValue(ContinuousClickProperty); }
             set { SetValue(ContinuousClickProperty, value); }
+        }
+
+        public float ImageOpacity
+        {
+            get { return (float)GetValue(ImageOpacityProperty); }
+            set { SetValue(ImageOpacityProperty, value); }
         }
 
         public ImageButton()

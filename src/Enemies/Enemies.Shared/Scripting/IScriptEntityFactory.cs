@@ -5,10 +5,12 @@ using System.Collections.Generic;
 
 namespace Enemies.Scripting
 {
-    interface IScriptEntityFactory
+    public interface IScriptEntityFactory
     {
-        BaseEntity LoadEntity(ContentManager content, string name, Vector2 position);
+        string Icon { get; }
 
-        IEnumerable<string> AvailableEntities(ContentManager content);
+        BaseEntity LoadEntity(ContentManager content, ScriptEntityDescription entity, Vector2 position);
+
+        IEnumerable<ScriptEntityDescription> AvailableEntities(ContentManager content);
     }
 }

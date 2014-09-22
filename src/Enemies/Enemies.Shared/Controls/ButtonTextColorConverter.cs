@@ -9,10 +9,10 @@ namespace Enemies.Controls
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            switch((ButtonState)value)
+            switch((ImageButtonState)value)
             {
-                case ButtonState.Pressed:
-                case ButtonState.Pressing: return Xamarin.Forms.Color.White;
+                case ImageButtonState.Pressed:
+                case ImageButtonState.Pressing: return Xamarin.Forms.Color.White;
                 default: return Xamarin.Forms.Color.Black;
             }
         }

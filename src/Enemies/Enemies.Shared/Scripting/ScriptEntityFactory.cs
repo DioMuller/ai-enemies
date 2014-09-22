@@ -23,21 +23,19 @@ namespace Enemies.Scripting
             };
         }
 
-        public BaseEntity LoadEntity(ContentManager content, string name, Vector2 position)
+        public BaseEntity LoadEntity(ContentManager content, ScriptEntityDescription entity, Vector2 position)
         {
-            var type = Path.GetExtension(name).ToLower().TrimStart('.');
-
-            IScriptEntityFactory factory;
-
-            if (!_runtimes.TryGetValue(type, out factory))
-                throw new InvalidOperationException("No factory registered for " + type);
-
-            return factory.LoadEntity(content, name, position);
+            return entity.Factory.LoadEntity(content, entity, position);
         }
 
-        public IEnumerable<string> AvailableEntities(ContentManager content)
+        public IEnumerable<ScriptEntityDescription> AvailableEntities(ContentManager content)
         {
             return _runtimes.SelectMany(r => r.Value.AvailableEntities(content));
+        }
+
+        public string Icon
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }

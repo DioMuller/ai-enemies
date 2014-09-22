@@ -2,13 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Enemies.Controls;assembly=Enemies.MonoGame"
-             x:Class="Enemies.GUI.GameScreenMenu">
+             x:Class="Enemies.GUI.ScreenGameMenu">
     <ContentPage.Resources>
         <ResourceDictionary>
             <controls:ButtonImageConverter x:Key="ButtonImageConverter" />
             <controls:ButtonTextColorConverter x:Key="ButtonTextColorConverter" />
             <controls:Style x:Key="buttonStyle">
-                <controls:Setter Property="Opacity" Value="0.9"/>
+                <controls:Setter Property="ImageOpacity" Value="0.8"/>
                 <controls:Setter Property="VerticalOptions" Value="Center"/>
                 <controls:Setter Property="Image" Value="{Binding State, Converter={StaticResource ButtonImageConverter}}"/>
                 <controls:Setter Property="TextColor" Value="{Binding State, Converter={StaticResource ButtonTextColorConverter}}"/>

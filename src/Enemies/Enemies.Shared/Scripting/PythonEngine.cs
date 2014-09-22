@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System;
 
 namespace Enemies.Scripting
 {
@@ -41,11 +42,12 @@ namespace Enemies.Scripting
 
         #region IScriptEntityFactory implementation
 
-        public BaseEntity LoadEntity(ContentManager content, string entityFileName, Vector2 position)
+        public BaseEntity LoadEntity(ContentManager content, ScriptEntityDescription entity, Vector2 position)
         {
-            var scriptFile = Path.Combine(content.RootDirectory, "Scripts/Entities", entityFileName);
+            if (entity.Factory != this)
+                throw new ArgumentException("Specified entity does not belong to this factory");
 
-            var script = Engine.CreateScriptSourceFromFile(scriptFile);
+            var script = Engine.CreateScriptSourceFromFile(entity.File);
             var scope = Engine.CreateScope();
             script.Execute(scope);
 
@@ -53,7 +55,7 @@ namespace Enemies.Scripting
             return entityClass(content, position);
         }
 
-        public IEnumerable<string> AvailableEntities(ContentManager content)
+        public IEnumerable<ScriptEntityDescription> AvailableEntities(ContentManager content)
         {
             var scriptsDir = Path.Combine(content.RootDirectory, "Scripts/Entities");
             foreach (var file in Directory.GetFiles(scriptsDir, "*.py"))
@@ -61,13 +63,25 @@ namespace Enemies.Scripting
                 var script = Engine.CreateScriptSourceFromFile(file);
                 var scope = Engine.CreateScope();
                 script.Execute(scope);
-    
-                if (scope.ContainsVariable("ScriptEntity"))
-                    yield return Path.GetFileName(file);
+
+                if (!scope.ContainsVariable("ScriptEntity"))
+                    continue;
+
+                yield return new ScriptEntityDescription
+                {
+                    Factory = this,
+                    DisplayName = Path.GetFileNameWithoutExtension(file),
+                    File = Path.Combine(scriptsDir, Path.GetFileName(file))
+                };
             }
         }
 
         #endregion
+
+        public string Icon
+        {
+            get { return "GUI/button_over"; }
+        }
     }
 }
 #endif

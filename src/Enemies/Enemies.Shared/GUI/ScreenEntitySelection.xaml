@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Enemies.Controls;assembly=Enemies.MonoGame"
+             x:Class="Enemies.GUI.ScreenEntitySelection">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <controls:Style x:Key="Arrow">
+                <controls:Setter Property="HeightRequest" Value="32"/>
+                <controls:Setter Property="WidthRequest" Value="32"/>
+                <controls:Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            </controls:Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout VerticalOptions="Fill" HorizontalOptions="End" WidthRequest="150" Orientation="Vertical" Spacing="16">
+
+        <!--Back button bar-->
+        <StackLayout Orientation="Horizontal">
+            <controls:ImageButton Image="GUI/button_pressed" WidthRequest="32" HeightRequest="32" OnClick="BackClick" />
+            <Label Text="Voltar" HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+
+        <!--Items List-->
+        <StackLayout x:Name="Stack" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+
+        <!--Pagination-->
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+            <controls:ImageButton x:Name="BtnPageLeft" OnClick="PageLeft" Image="GUI/button_normal" controls:Style.Style="{StaticResource Arrow}"/>
+            <controls:ImageButton x:Name="BtnPageRight" OnClick="PageRight" Image="GUI/button_over" controls:Style.Style="{StaticResource Arrow}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

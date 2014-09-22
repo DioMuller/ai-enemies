@@ -11,6 +11,9 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonTextColorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ButtonImageConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ClickableGridRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ClickableGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\IClickable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButtonRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Style.cs" />
@@ -20,16 +23,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\UIEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GUI\Cursor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GUI\Delegates.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GUI\EntitySelection.xaml.cs">
-      <DependentUpon>EntitySelection.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenEntitySelection.xaml.cs">
+      <DependentUpon>ScreenEntitySelection.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)GUI\GameScreenMenu.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenGameMenu.xaml.cs">
       <SubType>Code</SubType>
-      <DependentUpon>GameScreenMenu.xaml</DependentUpon>
+      <DependentUpon>ScreenGameMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)GUI\SelectionItem.xaml.cs">
-      <DependentUpon>SelectionItem.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\EntityDescription.xaml.cs">
+      <DependentUpon>EntityDescription.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)GUI\TitleGUI.xaml.cs">
@@ -45,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\IBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\IScriptEntityFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\PythonEngine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptEntityFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\LuaEngine.cs" />
   </ItemGroup>
@@ -56,19 +60,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\GameScreenMenu.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\ScreenGameMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\EntitySelection.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\ScreenEntitySelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\SelectionItem.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\EntityDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

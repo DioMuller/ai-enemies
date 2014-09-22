@@ -9,12 +9,12 @@ namespace Enemies.Controls
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            switch((ButtonState)value)
+            switch((ImageButtonState)value)
             {
-                case ButtonState.Normal: return "GUI/button_normal";
-                case ButtonState.Over: return "GUI/button_over";
-                case ButtonState.Pressed:
-                case ButtonState.Pressing: return "GUI/button_pressed";
+                case ImageButtonState.Normal: return "GUI/button_normal";
+                case ImageButtonState.Over: return "GUI/button_over";
+                case ImageButtonState.Pressed:
+                case ImageButtonState.Pressing: return "GUI/button_pressed";
             }
             throw new NotImplementedException();
         }
