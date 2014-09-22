@@ -75,8 +75,10 @@ namespace Enemies.Screens
         private bool _guiVisible = true;
         private bool _isPaused = false;
         private TypeTag _currentTag = TypeTag.Enemy;
+        private ScriptEntityDescription _currentEntity = null;
 
         private bool _tabPressed = false;
+        private bool _mousePressed = false;
         #endregion
 
         #region Properties
@@ -107,6 +109,8 @@ namespace Enemies.Screens
 
             Action<string> addEntity = async category =>
             {
+                _currentTag = GetTag(category);
+
                 var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenEntitySelection { Items = entities }));
                 await mainMenu.Navigation.PushAsync(selectionScreen);
                 var selectedScript = await selectionScreen.SelectItemAsync();
@@ -152,6 +156,17 @@ namespace Enemies.Screens
         void PlaceEntity(ScriptEntityDescription entity)
         {
             Log.Debug(Tag, "Item Selected: " + entity.DisplayName);
+
+            _currentEntity = entity;
+            Cursor.CurrentState = CursorState.AddEntity;
+        }
+
+        public TypeTag GetTag(string tag)
+        {
+            if(tag == "Player") return TypeTag.Player;
+            if(tag == "Enemy") return TypeTag.Enemy;
+            if(tag == "Objective") return TypeTag.Objective;
+            return TypeTag.None;
         }
 
         public bool AddEntity(string entityFile, Vector2 position, TypeTag tag)
@@ -194,6 +209,27 @@ namespace Enemies.Screens
                     {
                         var quad = GameParameters.CurrentMap.GetQuadrant(Cursor.Position);
                         GameParameters.CurrentMap.ChangeQuadrant(quad, mouse.LeftButton == ButtonState.Pressed ? Tile.Wall : Tile.Ground);
+                    }
+                    break;
+                case CursorState.AddEntity:
+                    if (mouse.LeftButton == ButtonState.Pressed)
+                    {
+                        Vector2 position = new Vector2(Cursor.Position.X, Cursor.Position.Y);
+                        if (_currentEntity != null && _currentTag != TypeTag.None 
+                            && !GameParameters.CurrentMap.CollidesWithMap(Cursor.CollisionRect) 
+                            && !_mousePressed)
+                        {
+                            AddEntity(_currentEntity, position, _currentTag);
+                            _mousePressed = true;
+                        }
+                    }
+                    else if (mouse.RightButton == ButtonState.Pressed)
+                    {
+                        _mousePressed = true;
+                    }
+                    else
+                    {
+                        _mousePressed = false;
                     }
                     break;
                 default:

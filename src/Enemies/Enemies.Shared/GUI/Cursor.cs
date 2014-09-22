@@ -34,6 +34,11 @@ namespace Enemies.GUI
                 return new Point(_position.X, _position.Y);
             }
         }
+
+        public Rectangle CollisionRect
+        {
+            get { return _position; }
+        }
         #endregion Properties
 
         #region Constructor
