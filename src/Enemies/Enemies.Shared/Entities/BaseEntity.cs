@@ -243,6 +243,8 @@ namespace Enemies.Entities
         /// <param name="file">Spritesheet definition file name (without extension).</param>
         private void SetSpritesheet(string file)
         {
+            _entity.Sprite.Clear();
+
             string path = Path.Combine(_content.RootDirectory, file.Replace('/', '\\') + ".xml");
             XDocument doc = XDocument.Load(path);
             XElement root = doc.Element("sprite");
