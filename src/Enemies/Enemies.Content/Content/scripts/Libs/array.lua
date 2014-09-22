@@ -9,4 +9,13 @@ function array.foreach(o)
    end
 end
 
+function array.first(o)
+	local e = o:GetEnumerator()
+	if e:MoveNext() then
+		return e.Current
+	else
+		return nil
+	end
+end
+
 return array

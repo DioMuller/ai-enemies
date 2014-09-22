@@ -9,7 +9,7 @@ end
 
 -- Flee Steering Behavior
 function steering.flee(agent, target, panicDistance, maxSpeed)
-	local desiredVelocity = vector.subtract(agent.position, target)
+	local desiredVelocity = vector.subtract(agent, target)
 	local distance = vector.size(desiredVelocity)
 
 	if( distance < panicDistance ) then
