@@ -45,6 +45,11 @@ namespace Enemies.Entities
         /// Current type tag.
         /// </summary>
         private TypeTag _tag = TypeTag.None;
+
+        /// <summary>
+        /// Entity has moved this update cycle?
+        /// </summary>
+        private bool _hasMoved = false;
         #endregion Entity Attributes
 
         #region Sprite Attributes
@@ -343,6 +348,8 @@ namespace Enemies.Entities
         /// <param name="y">Movement Y.</param>
         public void Move(float x, float y)
         {
+            if (_hasMoved) return;
+
             Vector2 normalized = new Vector2(x, y);
             Vector2 oldPos = Position;
 
@@ -367,7 +374,19 @@ namespace Enemies.Entities
                 _entity.Sprite.Position.Y = oldPos.Y;
             }
 
+            _hasMoved = _entity.Sprite.Position != oldPos;
+        }
 
+        /// <summary>
+        /// Moves entity to the specific direction.
+        /// </summary>
+        /// <param name="x">Objective X position.</param>
+        /// <param name="y">Objective Y position.</param>
+        public bool MoveTo(float x, float y)
+        {
+            Move(_entity.Sprite.Position.X - x, _entity.Sprite.Position.Y - y);
+
+            return _entity.Sprite.Position.X == x && _entity.Sprite.Position.Y == y;
         }
 
         /// <summary>
