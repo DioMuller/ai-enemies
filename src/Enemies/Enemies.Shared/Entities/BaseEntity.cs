@@ -174,7 +174,7 @@ namespace Enemies.Entities
         }
         #endregion Constructor
 
-        #region Game Loop Methods
+        #region Exposed Game Loop Methods
         /// <summary>
         /// Script initialization logic.
         /// </summary>
@@ -183,12 +183,18 @@ namespace Enemies.Entities
 
         }
 
+        /// <summary>
+        /// Executed on the Update Loop.
+        /// </summary>
+        /// <param name="delta"></param>
         public virtual void DoUpdate(float delta)
         {
 
         }
+        #endregion Exposed Game Loop Methods
 
-        
+        #region Game Loop Methods
+
         /// <summary>
         /// Entity update logic.
         /// </summary>
@@ -197,6 +203,8 @@ namespace Enemies.Entities
         {
             (_entity as IEntity).Update(gameTime);
             DoUpdate(gameTime.ElapsedGameTime.Milliseconds);
+
+            _hasMoved = false;
         }
 
         /// <summary>
@@ -382,9 +390,10 @@ namespace Enemies.Entities
         /// </summary>
         /// <param name="x">Objective X position.</param>
         /// <param name="y">Objective Y position.</param>
+        /// <rreturns>Has the entity arrived?</rreturns>
         public bool MoveTo(float x, float y)
         {
-            Move(_entity.Sprite.Position.X - x, _entity.Sprite.Position.Y - y);
+            Move(x - _entity.Sprite.Position.X,  y - _entity.Sprite.Position.Y);
 
             return _entity.Sprite.Position.X == x && _entity.Sprite.Position.Y == y;
         }
