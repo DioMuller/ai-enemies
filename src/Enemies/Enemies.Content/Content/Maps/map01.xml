@@ -20,12 +20,12 @@
   </map>
   <tiles wall="Tile/Wall" ground="Tile/Grass" empty="Tile/Empty"/>
   <entities>
-    <entity script="scaredcat.lua" x="100" y="130" tag="player"/>
+    <!--<entity script="scaredcat.lua" x="100" y="130" tag="player"/>
     <entity script="sample.lua" x="160" y="230" tag="enemy"/>
     <entity script="seeker.lua" x="205" y="430" tag="enemy"/>
     <entity script="seeker.lua" x="500" y="180" tag="enemy"/>
     <entity script="wanderer.lua" x="600" y="430" tag="enemy"/>
     <entity script="random.py" x="200" y="330" tag="enemy"/>
-    <entity script="sample.py" x="600" y="400" tag="objective"/>
+    <entity script="sample.py" x="600" y="400" tag="objective"/>-->
   </entities>
 </level>

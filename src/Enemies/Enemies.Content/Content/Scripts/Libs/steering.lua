@@ -24,8 +24,8 @@ end
 
 -- Wander Steering Behavior
 function steering.wander(agent, target, direction, radius, distance, jitter, deltaTime, maxSpeed)
-	local jitterTimeSlice = jitter * deltaTime * 9
-	local temp = vector.create( (math.random(-1000.0,1000.0) / 1000.0) * jitterTimeSlice, (math.random(-1000.0,1000.0) / 1000.0) * jitterTimeSlice  )
+	local jitterTimeSlice = jitter * deltaTime * 9.0
+	local temp = vector.create( math.random() * jitterTimeSlice, math.random() * jitterTimeSlice  )
 
 	local newTarget = vector.add(target, temp)
 	newTarget = vector.normalize(newTarget)

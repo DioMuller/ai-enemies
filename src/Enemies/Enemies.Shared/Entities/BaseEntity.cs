@@ -346,6 +346,11 @@ namespace Enemies.Entities
             Vector2 normalized = new Vector2(x, y);
             Vector2 oldPos = Position;
 
+            if (float.IsNaN(normalized.X) || float.IsNaN(normalized.Y))
+            {
+                //Log.Debug("Entity", "Entity " + this.GetType().Name + " tried to move to an NaN position.");
+                return;
+            }
             normalized.Normalize();
                 
             _entity.Sprite.Position.X += normalized.X;

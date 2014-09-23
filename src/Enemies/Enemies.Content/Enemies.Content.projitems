@@ -16,6 +16,7 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\scaredcat.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\seeker.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\wanderer.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\mathlib.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\tags.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\array.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\steering.lua" />

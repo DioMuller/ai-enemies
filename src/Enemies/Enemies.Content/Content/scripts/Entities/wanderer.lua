@@ -5,10 +5,10 @@ function script.Initialize()
 	script.direction = vector.create( 1, 1 )
 	script.movement = vector.create( 1, 1 )
 
-	script.jitter= 2.05
+	script.jitter= 1.05
 	script.distance = 150
 	script.radius = 100
-	script.maxSpeed = 2
+	script.maxSpeed = 1
 end
 
 function script.DoUpdate(delta)
