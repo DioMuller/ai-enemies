@@ -109,6 +109,7 @@ namespace Enemies.Screens
 
             Action<string> addEntity = async category =>
             {
+                _mousePressed = true;
                 _currentTag = GetTag(category);
 
                 var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenEntitySelection { Items = entities }));
@@ -157,6 +158,7 @@ namespace Enemies.Screens
         {
             Log.Debug(Tag, "Item Selected: " + entity.DisplayName);
 
+            _mousePressed = true;
             _currentEntity = entity;
             Cursor.CurrentState = CursorState.AddEntity;
         }
