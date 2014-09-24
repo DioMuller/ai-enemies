@@ -238,6 +238,14 @@ namespace Enemies.Entities
         private void AddAnimation(string name, int line, int count, int time, bool repeat, int skipFrames)
         {
             Animation animation = _spriteSheet.GetAnimation(name, line, count, TimeSpan.FromMilliseconds(time), repeat, skipFrames);
+
+            foreach (var frame in animation.Frames)
+            {
+                frame.Origin = new Vector2(
+                    frame.Rectangle.Width / 2,
+                    frame.Rectangle.Height / 2);
+            }
+
             _entity.Sprite.Add(animation);
             _entity.Sprite.PlayAnimation(name);
         }
@@ -362,6 +370,13 @@ namespace Enemies.Entities
                 
             _entity.Sprite.Position.X += normalized.X;
 
+            if( rotate )
+            {
+                var lookAtPos = normalized * 100;
+
+                LookAt(lookAtPos.X, lookAtPos.Y);
+            }
+
             if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
             {
                 _entity.Sprite.Position.X = oldPos.X;
@@ -393,7 +408,7 @@ namespace Enemies.Entities
         /// <param name="y">Position Y.</param>
         public void LookAt(float x, float y)
         {
-            SetRotation((float) Math.Atan2( -y, x));
+            SetRotation((float) Math.Atan2( x, -y));
         }
 
         /// <summary>
@@ -404,8 +419,7 @@ namespace Enemies.Entities
         /// <rreturns>Has the entity arrived?</rreturns>
         public bool MoveTo(float x, float y)
         {
-            LookAt(x, y);
-            Move(x - _entity.Sprite.Position.X,  y - _entity.Sprite.Position.Y);
+            Move(x - _entity.Sprite.Position.X,  y - _entity.Sprite.Position.Y, true);
 
             return _entity.Sprite.Position.X == x && _entity.Sprite.Position.Y == y;
         }

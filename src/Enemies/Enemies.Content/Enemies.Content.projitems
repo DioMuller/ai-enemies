@@ -32,8 +32,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_normal.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_over.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_pressed.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_open.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_closed.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_entity.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_build.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_pointer.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\entity_type.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Lua.png" />

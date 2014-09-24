@@ -48,8 +48,8 @@ namespace Enemies.GUI
 
             _textures = new Dictionary<CursorState, Texture2D>();
             _textures[CursorState.Normal] = content.Load<Texture2D>("GUI/cursor_pointer");
-            _textures[CursorState.Build] = content.Load<Texture2D>("GUI/cursor_closed");
-            _textures[CursorState.AddEntity] = content.Load<Texture2D>("GUI/cursor_open");
+            _textures[CursorState.Build] = content.Load<Texture2D>("GUI/cursor_build");
+            _textures[CursorState.AddEntity] = content.Load<Texture2D>("GUI/cursor_entity");
         }
         #endregion Constructor
 

@@ -3,7 +3,8 @@
 script.threshold = 1.0
 
 function script.Initialize()
-	script.points = { vector.create(200,200), entity.Position }
+	script.points = { vector.create(200,200), entity.Position, vector.create(400,200),
+					  entity.Position, vector.create(200,400), entity.Position, vector.create(400,400) }
 	script.current = 1
 end
 
