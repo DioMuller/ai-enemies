@@ -25,10 +25,6 @@ namespace Enemies.Entities
 
     public class BaseEntity : IEntity
     {
-        #region Static
-        private static Texture2D markerTexture = null;
-        #endregion Static
-
         #region Attributes
         #region Entity Attributes
         /// <summary>
@@ -116,6 +112,8 @@ namespace Enemies.Entities
                         SetSpritesheet("Sprites/Human");
                         break;
                 }
+
+                _entity.Sprite.Color = GetColor(_tag);
             }
         }
 
@@ -165,11 +163,6 @@ namespace Enemies.Entities
 
             _entity.Sprite.Position = position;
 
-            if(markerTexture == null)
-            {
-                markerTexture = content.Load<Texture2D>("GUI/entity_type");
-            }
-
             Initialize();
         }
         #endregion Constructor
@@ -215,7 +208,6 @@ namespace Enemies.Entities
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             Rectangle baseRect = BoundingBox; //new Rectangle(BoundingBox.X + BoundingBox.Width - 48, BoundingBox.Y + BoundingBox.Height - 24, 32, 32);
-            spriteBatch.Draw(markerTexture, baseRect, null, GetColor(Tag));
 
             (_entity as IEntity).Draw(spriteBatch, gameTime);
         }
