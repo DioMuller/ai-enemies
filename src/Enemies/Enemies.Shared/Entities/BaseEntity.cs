@@ -354,7 +354,7 @@ namespace Enemies.Entities
         /// </summary>
         /// <param name="x">Movement X.</param>
         /// <param name="y">Movement Y.</param>
-        public void Move(float x, float y)
+        public void Move(float x, float y, bool rotate = false)
         {
             if (_hasMoved) return;
 
@@ -386,6 +386,25 @@ namespace Enemies.Entities
         }
 
         /// <summary>
+        /// Sets the entity rotation.
+        /// </summary>
+        /// <param name="angle">Rotation angle.</param>
+        public void SetRotation(float angle)
+        {
+            _entity.Sprite.Rotation = angle;
+        }
+
+        /// <summary>
+        /// Makes the character look at the position.
+        /// </summary>
+        /// <param name="x">Position X.</param>
+        /// <param name="y">Position Y.</param>
+        public void LookAt(float x, float y)
+        {
+            SetRotation((float) Math.Atan2( -y, x));
+        }
+
+        /// <summary>
         /// Moves entity to the specific direction.
         /// </summary>
         /// <param name="x">Objective X position.</param>
@@ -393,6 +412,7 @@ namespace Enemies.Entities
         /// <rreturns>Has the entity arrived?</rreturns>
         public bool MoveTo(float x, float y)
         {
+            LookAt(x, y);
             Move(x - _entity.Sprite.Position.X,  y - _entity.Sprite.Position.Y);
 
             return _entity.Sprite.Position.X == x && _entity.Sprite.Position.Y == y;
