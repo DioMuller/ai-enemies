@@ -43,8 +43,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Map.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parameters\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\EntityInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\GameParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parameters\MessageManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\Screen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\TitleScreen.cs" />

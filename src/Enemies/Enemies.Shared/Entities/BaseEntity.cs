@@ -25,6 +25,10 @@ namespace Enemies.Entities
 
     public class BaseEntity : IEntity
     {
+        #region Static
+        private static int CurrentId = 0;
+        #endregion Static
+
         #region Attributes
         #region Entity Attributes
         /// <summary>
@@ -148,6 +152,11 @@ namespace Enemies.Entities
                 );
             }
         }
+
+        /// <summary>
+        /// Entity Id.
+        /// </summary>
+        public int Id { get; private set; }
         #endregion Properties
 
         #region Constructor
@@ -160,6 +169,8 @@ namespace Enemies.Entities
             _entity = new EntityCore();
             _content = content;
             _random = new Random();
+
+            Id = (CurrentId++);
 
             _entity.Sprite.Position = position;
 
@@ -181,6 +192,15 @@ namespace Enemies.Entities
         /// </summary>
         /// <param name="delta"></param>
         public virtual void DoUpdate(float delta)
+        {
+
+        }
+
+        /// <summary>
+        /// Called when the entity receives a message.
+        /// </summary>
+        /// <param name="message">Message received.</param>
+        public virtual void ReceiveMessage(Message message)
         {
 
         }
@@ -452,7 +472,7 @@ namespace Enemies.Entities
         /// <returns>The entity info.</returns>
         public EntityInfo GetInfo()
         {
-            return new EntityInfo(Tag, _entity.Sprite.Position);
+            return new EntityInfo(Id, Tag, _entity.Sprite.Position);
         }
 
         /// <summary>
@@ -463,6 +483,27 @@ namespace Enemies.Entities
         {
             return (Position.X - entity.Position.X)*(Position.X - entity.Position.X) +
                    (Position.Y - entity.Position.Y)*(Position.Y - entity.Position.Y);
+        }
+
+        /// <summary>
+        /// Sends a message to one entity (by id)
+        /// </summary>
+        /// <param name="receiver">Receiver entity id.</param>
+        /// <param name="message">Message to be sent.</param>
+        /// <param name="attachment">Attached object (optional).</param>
+        public void SendMessage(int receiver, string message, object attachment = null)
+        {
+            MessageManager.SendMessage(Id, receiver, message, attachment);
+        }
+
+        /// <summary>
+        /// Broadcasts message to all entities.
+        /// </summary>
+        /// <param name="message">Message to broadcast</param>
+        /// <param name="attachment">Attached object (optional).</param>
+        public void BroadcastMessage(string message, object attachment = null)
+        {
+            MessageManager.SendMessage(Id, -1, message, attachment);
         }
         #endregion Methods
     }

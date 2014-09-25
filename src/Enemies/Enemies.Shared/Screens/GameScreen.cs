@@ -96,6 +96,8 @@ namespace Enemies.Screens
             GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
 
             Cursor = new Cursor(Content);
+
+            MessageManager.ClearMessages();
         }
 
         #endregion
@@ -108,6 +110,7 @@ namespace Enemies.Screens
 
             mainMenu.AddEntity_Page += () =>
             {
+                Cursor.CurrentState = CursorState.Normal;
                 return CreateEntitySelectionGUI();
             };
 
@@ -133,6 +136,7 @@ namespace Enemies.Screens
             {
                 _mousePressed = true;
                 _currentTag = GetTag(category);
+                Cursor.CurrentState = CursorState.AddEntity;
 
                 var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenEntitySelection { Items = entities }));
                 await entityMenu.Navigation.PushAsync(selectionScreen);
@@ -146,7 +150,7 @@ namespace Enemies.Screens
             entityMenu.AddPlayer_Clicked += () => addEntity("Player");
             entityMenu.AddEnemy_Clicked += () => addEntity("Enemy");
             entityMenu.AddObjective_Clicked += () => addEntity("Objective");
-            return new Xamarin.Forms.NavigationPage(entityMenu);
+            return entityMenu;
         }
         #endregion GUI
 
@@ -299,6 +303,26 @@ namespace Enemies.Screens
                 GameParameters.UpdateEntities(Entities);
             }
             #endregion Parameter Update
+
+            #region Messages
+            MessageManager.ProcessMessages((message) =>
+                {
+                    if( message.Receiver == -1)
+                    {
+                        foreach (var entity in Entities.OfType<BaseEntity>())
+                            entity.ReceiveMessage(message);
+                    }
+                    else
+                    {
+                        var entity = Entities.OfType<BaseEntity>().FirstOrDefault(e => message.Receiver == e.Id);
+
+                        if( entity != null )
+                        {
+                            entity.ReceiveMessage(message);
+                        }
+                    }
+                });
+            #endregion Messages
 
             foreach (var entity in Entities)
                 TryUpdateEntity(gameTime, entity);

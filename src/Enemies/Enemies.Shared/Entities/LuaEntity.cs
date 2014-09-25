@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using NLua;
+using Enemies.Parameters;
 
 namespace Enemies.Entities
 {
@@ -52,6 +53,7 @@ namespace Enemies.Entities
 
         private LuaFunction InitializeFunc;
         private LuaFunction UpdateFunc;
+        private LuaFunction MessageFunc;
         #endregion Attributes
 
         #region Constructor
@@ -72,6 +74,7 @@ namespace Enemies.Entities
             // Obtains functions
             InitializeFunc = (_context["script"] as LuaTable)["Initialize"] as LuaFunction;
             UpdateFunc = (_context["script"] as LuaTable)["DoUpdate"] as LuaFunction;
+            MessageFunc = (_context["script"] as LuaTable)["ReceiveMessage"] as LuaFunction;
 
             InitializeFunc.Call();
         }
@@ -83,6 +86,18 @@ namespace Enemies.Entities
             base.DoUpdate(delta);
 
             UpdateFunc.Call(delta);
+        }
+
+        /// <summary>
+        /// Called when the entity receives a message.
+        /// </summary>
+        /// <param name="message">Message received.</param>
+        public override void ReceiveMessage(Message message)
+        {
+            if( MessageFunc != null )
+            {
+                MessageFunc.Call(message);
+            }
         }
         #endregion Game Loop
 
