@@ -27,16 +27,19 @@
       <DependentUpon>ScreenEntitySelection.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenGameMenu.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenGameMain.xaml.cs">
+      <DependentUpon>ScreenGameMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenEntityTag.xaml.cs">
       <SubType>Code</SubType>
-      <DependentUpon>ScreenGameMenu.xaml</DependentUpon>
+      <DependentUpon>ScreenEntityTag.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)GUI\EntityDescription.xaml.cs">
       <DependentUpon>EntityDescription.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)GUI\TitleGUI.xaml.cs">
-      <DependentUpon>TitleGUI.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenTitleMain.xaml.cs">
+      <DependentUpon>ScreenTitleMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Maps\Map.cs" />
@@ -56,11 +59,15 @@
     <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\TitleGUI.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\ScreenGameMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\ScreenGameMenu.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\ScreenTitleMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\ScreenEntityTag.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

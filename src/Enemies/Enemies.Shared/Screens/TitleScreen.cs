@@ -60,7 +60,7 @@ namespace Enemies.Screens
         public TitleScreen(MainGame game)
             : base(game)
         {
-            var title = new TitleGUI { BindingContext = this };
+            var title = new ScreenTitleMain { BindingContext = this };
 
             title.OnNewGame += new OnButtonClickDelegate(() =>
             {

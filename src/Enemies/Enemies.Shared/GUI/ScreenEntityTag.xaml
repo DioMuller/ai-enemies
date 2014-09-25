@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Enemies.Controls;assembly=Enemies.MonoGame"
+             x:Class="Enemies.GUI.ScreenEntityTag">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <controls:ButtonImageConverter x:Key="ButtonImageConverter" />
+            <controls:ButtonTextColorConverter x:Key="ButtonTextColorConverter" />
+            <controls:Style x:Key="buttonStyle">
+                <controls:Setter Property="ImageOpacity" Value="0.8"/>
+                <controls:Setter Property="VerticalOptions" Value="Center"/>
+                <controls:Setter Property="Image" Value="{Binding State, Converter={StaticResource ButtonImageConverter}}"/>
+                <controls:Setter Property="TextColor" Value="{Binding State, Converter={StaticResource ButtonTextColorConverter}}"/>
+            </controls:Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <controls:ImageButton OnClick="AddPlayer_Click" Grid.Row="0" Grid.Column="1" Text="Player" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="AddEnemy_Click" Grid.Row="1" Grid.Column="1" Text="Enemy" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="AddObjective_Click" Grid.Row="2" Grid.Column="1" Text="Objective" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="Back_Click" Grid.Row="4" Grid.Column="1" Text="Back" controls:Style.Style="{StaticResource buttonStyle}"/>
+    </Grid>
+</ContentPage>

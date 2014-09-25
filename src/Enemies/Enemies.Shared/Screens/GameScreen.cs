@@ -100,11 +100,33 @@ namespace Enemies.Screens
 
         #endregion
 
-        #region Life Cycle
-
+        #region GUI
         Xamarin.Forms.Page CreateGUI()
         {
-            var mainMenu = new ScreenGameMenu();
+            var mainMenu = new ScreenGameMain();
+            var entities = _scriptEntityFactory.AvailableEntities(Content).ToImmutableList();
+
+            mainMenu.AddEntity_Page += () =>
+            {
+                return CreateEntitySelectionGUI();
+            };
+
+            mainMenu.BuildMode_Clicked += () =>
+            {
+                Cursor.CurrentState = CursorState.Build;
+            };
+
+            mainMenu.PlayPause_Clicked += () =>
+            {
+                _isPaused = !_isPaused;
+            };
+
+            return new Xamarin.Forms.NavigationPage(mainMenu);
+        }
+
+        Xamarin.Forms.Page CreateEntitySelectionGUI()
+        {
+            var entityMenu = new ScreenEntityTag();
             var entities = _scriptEntityFactory.AvailableEntities(Content).ToImmutableList();
 
             Action<string> addEntity = async category =>
@@ -113,7 +135,7 @@ namespace Enemies.Screens
                 _currentTag = GetTag(category);
 
                 var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenEntitySelection { Items = entities }));
-                await mainMenu.Navigation.PushAsync(selectionScreen);
+                await entityMenu.Navigation.PushAsync(selectionScreen);
                 var selectedScript = await selectionScreen.SelectItemAsync();
 
                 PlaceEntity(selectedScript);
@@ -121,12 +143,14 @@ namespace Enemies.Screens
                 await selectionScreen.Navigation.PopAsync();
             };
 
-            mainMenu.AddPlayer_Clicked += () => addEntity("Player");
-            mainMenu.AddEnemy_Clicked += () => addEntity("Enemy");
-            mainMenu.AddObjective_Clicked += () => addEntity("Objective");
-            return new Xamarin.Forms.NavigationPage(mainMenu);
+            entityMenu.AddPlayer_Clicked += () => addEntity("Player");
+            entityMenu.AddEnemy_Clicked += () => addEntity("Enemy");
+            entityMenu.AddObjective_Clicked += () => addEntity("Objective");
+            return new Xamarin.Forms.NavigationPage(entityMenu);
         }
+        #endregion GUI
 
+        #region Life Cycle
         protected override async Task InitializeScreen()
         {
             FadeColor = Color.Black;

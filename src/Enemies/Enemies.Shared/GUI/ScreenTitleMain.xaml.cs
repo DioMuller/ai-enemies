@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Enemies.GUI
 {
-    public partial class TitleGUI
+    public partial class ScreenTitleMain
     {
         public OnButtonClickDelegate OnNewGame;
         public OnButtonClickDelegate OnLoadGame;
         public OnButtonClickDelegate OnQuitGame;
 
-        public TitleGUI()
+        public ScreenTitleMain()
         {
             InitializeComponent();
         }

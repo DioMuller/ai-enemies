@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Enemies.Controls;assembly=Enemies.MonoGame"
-             x:Class="Enemies.GUI.ScreenGameMenu">
+             x:Class="Enemies.GUI.ScreenGameMain">
     <ContentPage.Resources>
         <ResourceDictionary>
             <controls:ButtonImageConverter x:Key="ButtonImageConverter" />
@@ -17,17 +17,18 @@
     </ContentPage.Resources>
     <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
 
-        <controls:ImageButton OnClick="AddPlayer_Click" Grid.Row="0" Grid.Column="1" Text="Player" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton OnClick="AddEnemy_Click" Grid.Row="1" Grid.Column="1" Text="Enemy" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton OnClick="AddObjective_Click" Grid.Row="2" Grid.Column="1" Text="Objective" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="PlayPause_Click" Grid.Row="1" Grid.Column="0" Text="Play/Pause" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="AddEntity_Click" Grid.Row="1" Grid.Column="2" Text="Add Entity" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="BuildMode_Click" Grid.Row="1" Grid.Column="3" Text="Build Mode" controls:Style.Style="{StaticResource buttonStyle}"/>
     </Grid>
 </ContentPage>

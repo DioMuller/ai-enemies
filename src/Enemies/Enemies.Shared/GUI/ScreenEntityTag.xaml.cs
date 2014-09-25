@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Enemies.GUI
 {
-	public partial class ScreenGameMenu
+	public partial class ScreenEntityTag
 	{
         public event OnButtonClickDelegate AddPlayer_Clicked;
         public event OnButtonClickDelegate AddEnemy_Clicked;
         public event OnButtonClickDelegate AddObjective_Clicked;
 
-        public ScreenGameMenu()
+        public ScreenEntityTag()
         {
             InitializeComponent();
         }
@@ -33,6 +33,11 @@ namespace Enemies.GUI
         {
             if(AddObjective_Clicked != null)
                 AddObjective_Clicked();
+        }
+
+        public async void Back_Click(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
 	}
 }
