@@ -11,37 +11,37 @@ class ScriptEntity(BaseEntity):
 
 	# Enumerator
 	def circle(self):
-		self.change_time = 3000
+		self.change_time = 30000
 		self.next_command = "circles"
 		self.dialog = "Run in Circles!"
 
 	def rotate(self):
-		self.change_time = 1500
+		self.change_time = 15000
 		self.next_command = "rotate"
 		self.dialog = "I want to see you rotate!"
 
 	def lookleft(self):
-		self.change_time = 500
+		self.change_time = 5000
 		self.next_command = "look_left"
 		self.dialog = "Look left!"
 
 	def lookright(self):
-		self.change_time = 500
+		self.change_time = 5000
 		self.next_command = "look_right"
 		self.dialog = "Look right!"
 
 	def patrol(self):
-		self.change_time = 500
+		self.change_time = 5000
 		self.next_command = "patrol"
 		self.dialog = "Patrol your area!"
 
 	def origin(self):
-		self.change_time = 1500
+		self.change_time = 15000
 		self.next_command = "origin"
 		self.dialog = "Back to your positions!"
 
 	def star(self):
-		self.change_time = 1500
+		self.change_time = 35000
 		self.next_command = "star"
 		self.dialog = "Star Movement!"
 
@@ -68,7 +68,7 @@ class ScriptEntity(BaseEntity):
 			self.options[self.NextValue()](self)
 			self.BroadcastMessage(self.next_command)
 			#TODO: Talk: dialog
-			self.totaltime = 0
+			self.total_time = 0
 		
 		super(ScriptEntity, self).DoUpdate(game_time)
 

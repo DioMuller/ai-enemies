@@ -2,8 +2,8 @@
 
 script = {}
 
-current_action = "wait"
-commander = 0
+script.current_action = "wait"
+script.commander = 0
 
 function script.Initialize()
 
@@ -14,11 +14,11 @@ function script.DoUpdate(delta)
 	{
 		["wait"] =
 			function()
-				if commander == 0 then current_action = "search" end
+				if script.commander == 0 then script.current_action = "search" end
 			end,
 		["search"] = 
 			function()
-				entity:BroadcastMessage("commander")
+				entity:BroadcastMessage("commander", nil)
 			end,
 		["circles"] =
 			function()
@@ -30,11 +30,11 @@ function script.DoUpdate(delta)
 			end,
 		["look_left"] =
 			function()
-				print(current_action)
+				entity:LookAt(-80,0)
 			end,
 		["look_right"] =
 			function()
-				print(current_action)
+				entity:LookAt(80,0)
 			end,
 		["patrol"] =
 			function()
@@ -61,9 +61,9 @@ end
 
 function script.ReceiveMessage(message)
 	if message.Text == "commander" then
-		commander = message.Sender
+		script.commander = message.Sender
 	elseif message.Sender == commander then
-		current_action = message.Text
+		script.current_action = message.Text
 	end
 end
 
