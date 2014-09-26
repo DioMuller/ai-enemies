@@ -136,7 +136,7 @@ namespace Enemies.Screens
             {
                 _mousePressed = true;
                 _currentTag = GetTag(category);
-                Cursor.CurrentState = CursorState.AddEntity;
+                Cursor.CurrentState = CursorState.Normal;
 
                 var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenEntitySelection { Items = entities }));
                 await entityMenu.Navigation.PushAsync(selectionScreen);
