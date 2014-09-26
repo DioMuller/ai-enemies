@@ -3,7 +3,7 @@ from Enemies.Entities import TypeTag
 
 class ScriptEntity(BaseEntity):
 	# Attributes
-	current = 0
+	current = -1
 	total_time = 0
 	change_time = 1000
 	next_command = "wait"
@@ -59,7 +59,7 @@ class ScriptEntity(BaseEntity):
 
 	# Game Cycle
 	def Initialize(self):
-		self.BroadcastMessage("register commander")
+		self.BroadcastMessage("set commander")
 	
 	def DoUpdate(self, game_time):
 		self.total_time += game_time
@@ -78,4 +78,4 @@ class ScriptEntity(BaseEntity):
 
 	def ReceiveMessage(self, message):
 		if message.Text == "commander":
-			self.SendMessage(message.Sender, "commander")
+			self.SendMessage(message.Sender, "set commander")

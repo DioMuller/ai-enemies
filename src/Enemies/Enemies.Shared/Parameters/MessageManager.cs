@@ -10,6 +10,8 @@ namespace Enemies.Parameters
 
         public static void SendMessage(int sender, int receiver, string message, object attachment)
         {
+            if (sender == receiver) return;
+
             if(messages == null)
             {
                 messages = new List<Message>();

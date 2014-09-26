@@ -310,7 +310,9 @@ namespace Enemies.Screens
                     if( message.Receiver == -1)
                     {
                         foreach (var entity in Entities.OfType<BaseEntity>())
-                            entity.ReceiveMessage(message);
+                        {
+                            if( entity.Id != message.Sender ) entity.ReceiveMessage(message);
+                        }
                     }
                     else
                     {

@@ -14,7 +14,6 @@ function script.Initialize()
 	patrol.add(script.patrol,vector.create(400,400))
 
 	script.current = patrol.getnext(script.patrol)
-	print( script.current )
 end
 
 function script.DoUpdate(delta)

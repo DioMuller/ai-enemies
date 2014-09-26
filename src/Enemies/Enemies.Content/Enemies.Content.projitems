@@ -14,7 +14,7 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\patroller.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\receiver.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\commander.py" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\soldier.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\commanded.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sender.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sample.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sample.lua" />
