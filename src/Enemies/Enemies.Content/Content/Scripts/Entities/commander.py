@@ -11,37 +11,42 @@ class ScriptEntity(BaseEntity):
 
 	# Enumerator
 	def circle(self):
-		self.change_time = 30000
+		self.change_time = 10000
 		self.next_command = "circles"
 		self.dialog = "Run in Circles!"
 
 	def rotate(self):
-		self.change_time = 15000
+		self.change_time = 3000
 		self.next_command = "rotate"
 		self.dialog = "I want to see you rotate!"
 
 	def lookleft(self):
-		self.change_time = 5000
+		self.change_time = 1000
 		self.next_command = "look_left"
 		self.dialog = "Look left!"
 
 	def lookright(self):
-		self.change_time = 5000
+		self.change_time = 1000
 		self.next_command = "look_right"
 		self.dialog = "Look right!"
 
 	def patrol(self):
-		self.change_time = 5000
+		self.change_time = 10000
 		self.next_command = "patrol"
 		self.dialog = "Patrol your area!"
 
 	def origin(self):
-		self.change_time = 15000
+		self.change_time = 3000
 		self.next_command = "origin"
 		self.dialog = "Back to your positions!"
 
+	def polygon(self):
+		self.change_time = 15000
+		self.next_command = "polygon"
+		self.dialog = "Polygon Movement!"
+
 	def star(self):
-		self.change_time = 35000
+		self.change_time = 15000
 		self.next_command = "star"
 		self.dialog = "Star Movement!"
 
@@ -53,9 +58,10 @@ class ScriptEntity(BaseEntity):
         3 : lookright,
         4 : patrol,
         5 : origin,
-        6 : star
+		6 : polygon,
+        7 : star
 	}
-	option_count = 7
+	option_count = 8
 
 	# Game Cycle
 	def Initialize(self):

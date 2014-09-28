@@ -24,11 +24,11 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\patrol.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\mathlib.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\case.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\polygon.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\tags.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\array.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\steering.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\vector.lua" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\__init__" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_back.png" />
