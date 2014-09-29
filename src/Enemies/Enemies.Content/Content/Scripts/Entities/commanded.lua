@@ -20,13 +20,15 @@ script.patrol_path = patrol.create()
 script.patrol_distance = 100
 
 -- Polygon points
-script.polygon_count = 5
+script.polygon_count = 11
 -- Polygon path
 script.polygon_path = patrol.create()
 -- Star path
 script.star_path = patrol.create()
+-- Dance path
+script.dance_path = patrol.create()
 -- Polygon/Star radius
-script.poly_radius = 100
+script.poly_radius = 20
 -- Pentagon/Star points
 script.poly_points = {}
 
@@ -55,6 +57,12 @@ function script.Initialize()
 	end
 		for i = 2, script.polygon_count - 1, 2 do
 		patrol.add(script.star_path, script.poly_points[i])
+	end
+
+		-- Creates dance patrol points
+	for i = 1, script.polygon_count do
+		patrol.add(script.dance_path, script.poly_points[i])
+		patrol.add(script.dance_path, script.origin)
 	end
 end
 
@@ -88,6 +96,14 @@ function script.DoUpdate(delta)
 			function()
 				entity:LookAt(80,0)
 			end,
+		["move_left"] =
+			function()
+				entity:Move(-10,0)
+			end,
+		["move_right"] =
+			function()
+				entity:Move(10,0)
+			end,
 		["patrol"] =
 			function()
 				if not script.current_objective then script.current_objective = patrol.getnext(script.patrol_path) end
@@ -116,6 +132,14 @@ function script.DoUpdate(delta)
 		["star"] =
 			function()
 				if not script.current_objective then script.current_objective = patrol.getnext(script.star_path) end
+				entity:MoveTo(script.current_objective.X, script.current_objective.Y)
+				if script.HasArrived() then
+					script.current_objective = patrol.getnext(script.star_path)
+				end
+			end,
+		["dance"] =
+			function()
+				if not script.current_objective then script.current_objective = patrol.getnext(script.dance_path) end
 				entity:MoveTo(script.current_objective.X, script.current_objective.Y)
 				if script.HasArrived() then
 					script.current_objective = patrol.getnext(script.star_path)

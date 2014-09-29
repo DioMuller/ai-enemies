@@ -50,6 +50,21 @@ class ScriptEntity(BaseEntity):
 		self.next_command = "star"
 		self.dialog = "Star Movement!"
 
+	def dance(self):
+		self.change_time = 15000
+		self.next_command = "dance"
+		self.dialog = "Dance! Dance! Dance!"
+
+	def goright(self):
+		self.change_time = 1000
+		self.next_command = "move_right"
+		self.dialog = "Go Right!"
+
+	def goleft(self):
+		self.change_time = 1000
+		self.next_command = "move_left"
+		self.dialog = "Go Left!"
+
 	
 	options = { 
 		0 : circle,
@@ -59,9 +74,12 @@ class ScriptEntity(BaseEntity):
         4 : patrol,
         5 : origin,
 		6 : polygon,
-        7 : star
+        7 : star,
+        8 : dance,
+        9 : goright,
+        10 : goleft
 	}
-	option_count = 8
+	option_count = 11
 
 	# Game Cycle
 	def Initialize(self):
