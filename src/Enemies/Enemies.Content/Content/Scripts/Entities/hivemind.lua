@@ -25,7 +25,7 @@ function script.ReceiveMessage(message)
 		if newPos then
 			if not script.current_target then 
 				script.current_target = newPos
-			elseif vector.distance(entity:Position, script.current_target) > vector.distance(entity:Position, newPos) then
+			elseif vector.distance(entity.Position, script.ucrrent_target) > vector.distance(entity.Position, newPos) then
 				script.current_target = newPos
 			end
 		end

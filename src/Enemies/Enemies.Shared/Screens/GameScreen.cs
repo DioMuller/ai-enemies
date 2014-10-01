@@ -142,6 +142,7 @@ namespace Enemies.Screens
                 await entityMenu.Navigation.PushAsync(selectionScreen);
                 var selectedScript = await selectionScreen.SelectItemAsync();
 
+                _guiVisible = false;
                 PlaceEntity(selectedScript);
 
                 await selectionScreen.Navigation.PopAsync();
@@ -276,6 +277,7 @@ namespace Enemies.Screens
                 if (!_tabPressed)
                 {
                     _guiVisible = !_guiVisible;
+                    Cursor.CurrentState = CursorState.Normal;
                     _tabPressed = true;
                 }
             }
