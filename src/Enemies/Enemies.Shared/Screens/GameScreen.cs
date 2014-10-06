@@ -79,6 +79,7 @@ namespace Enemies.Screens
 
         private bool _tabPressed = false;
         private bool _mousePressed = false;
+		private bool _sandbox = true;
         #endregion
 
         #region Properties
@@ -89,13 +90,15 @@ namespace Enemies.Screens
 
         #region Constructors
 
-        public GameScreen(MainGame game)
+        public GameScreen(MainGame game, Boolean sandbox = true)
             : base(game)
         {
             GUI = CreateGUI().AsEntity();
             GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
 
             Cursor = new Cursor(Content);
+
+	        _sandbox = sandbox;
 
             MessageManager.ClearMessages();
         }
