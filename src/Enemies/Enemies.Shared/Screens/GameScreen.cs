@@ -331,8 +331,11 @@ namespace Enemies.Screens
                 });
             #endregion Messages
 
-            foreach (var entity in Entities)
-                TryUpdateEntity(gameTime, entity);
+            if (!_isPaused)
+            {
+                foreach (var entity in Entities)
+                    TryUpdateEntity(gameTime, entity);
+            }
 
             base.Update(gameTime);
         }
