@@ -80,6 +80,8 @@ namespace Enemies.Screens
         private bool _tabPressed = false;
         private bool _mousePressed = false;
 		private bool _sandbox = true;
+
+        private string _map = "";
         #endregion
 
         #region Properties
@@ -90,7 +92,7 @@ namespace Enemies.Screens
 
         #region Constructors
 
-        public GameScreen(MainGame game, Boolean sandbox = true)
+        public GameScreen(MainGame game, bool sandbox = true, string map = "new")
             : base(game)
         {
             GUI = CreateGUI().AsEntity();
@@ -99,6 +101,7 @@ namespace Enemies.Screens
             Cursor = new Cursor(Content);
 
 	        _sandbox = sandbox;
+            _map = "Maps/" + map;
 
             MessageManager.ClearMessages();
         }
@@ -171,8 +174,7 @@ namespace Enemies.Screens
                 Entities = Entities.Add(_scriptEntityFactory.LoadEntity(Content, entity, new Vector2(0,0)));//availableEntities[0]));
              */
 
-            // TODO: non-fixed map loading.
-            GameParameters.LoadMap(this, new Point(800, 600), Content, "Maps/map01");
+            GameParameters.LoadMap(this, new Point(800, 600), Content, _map);
 
             await FadeIn();
         }
