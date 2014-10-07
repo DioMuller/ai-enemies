@@ -70,7 +70,7 @@ namespace Enemies
 
                     if (titleSelection == TitleScreen.Result.StartGame)
                     {
-                        var gameResult = await baseScreen.Run(new GameScreen(this, false));
+                        var gameResult = await baseScreen.Run(new GameScreen(this, false, "level_01"));
                         Console.WriteLine("GameScreen result: " + gameResult);
                     }
 

@@ -46,7 +46,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Lua.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Python.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\title.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Maps\map01.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_01.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Maps\new.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\human-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\zombie-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Zombie.xml" />
