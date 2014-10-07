@@ -42,7 +42,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_entity.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_build.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_pointer.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\entity_type.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\background.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Lua.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Python.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\title.png" />

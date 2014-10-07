@@ -19,18 +19,23 @@
     <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+			<ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="350"/>
             <RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="100"/>
+
         </Grid.RowDefinitions>
 
-        <Image Source="GUI/title" RotationY="{Binding TitleAngleY}" RotationX="{Binding TitleAngleX}" Grid.ColumnSpan="3" HorizontalOptions="Center" VerticalOptions="Center" />
+        <Image Source="GUI/title" RotationY="{Binding TitleAngleY}" RotationX="{Binding TitleAngleX}" Grid.ColumnSpan="4" HorizontalOptions="Center" VerticalOptions="Center" />
 
-        <controls:ImageButton OnClick="NewGame_Click" Grid.Row="1" Grid.Column="0" Text="New Game" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton OnClick="LoadGame_Click" Grid.Row="1" Grid.Column="1" Text="Load Game" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton OnClick="QuitGame_Click" Grid.Row="1" Grid.Column="2" Text="Quit Game" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="NewGame_Click" Grid.Row="1" Grid.Column="1" Text="New Game" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="Sandbox_Click" Grid.Row="1" Grid.Column="2" Text="Sandbox" controls:Style.Style="{StaticResource buttonStyle}"/>
+		<controls:ImageButton OnClick="LoadGame_Click" Grid.Row="2" Grid.Column="1" Text="Load Map" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="QuitGame_Click" Grid.Row="2" Grid.Column="2" Text="Quit Game" controls:Style.Style="{StaticResource buttonStyle}"/>
     </Grid>
 </ContentPage>

@@ -17,14 +17,14 @@
     </ContentPage.Resources>
     <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="180"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
         <controls:ImageButton OnClick="PlayPause_Click" Grid.Row="1" Grid.Column="0" Text="Play/Pause" controls:Style.Style="{StaticResource buttonStyle}"/>

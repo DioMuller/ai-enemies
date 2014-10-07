@@ -24,10 +24,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-
         <controls:ImageButton OnClick="AddPlayer_Click" Grid.Row="0" Grid.Column="1" Text="Player" controls:Style.Style="{StaticResource buttonStyle}"/>
         <controls:ImageButton OnClick="AddEnemy_Click" Grid.Row="1" Grid.Column="1" Text="Enemy" controls:Style.Style="{StaticResource buttonStyle}"/>
         <controls:ImageButton OnClick="AddObjective_Click" Grid.Row="2" Grid.Column="1" Text="Objective" controls:Style.Style="{StaticResource buttonStyle}"/>
