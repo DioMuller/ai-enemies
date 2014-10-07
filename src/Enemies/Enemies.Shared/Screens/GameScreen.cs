@@ -277,7 +277,7 @@ namespace Enemies.Screens
 
             if (keys.IsKeyDown(Keys.Tab))
             {
-                if (!_tabPressed)
+                if (!_tabPressed && _sandbox)
                 {
                     _guiVisible = !_guiVisible;
                     Cursor.CurrentState = CursorState.Normal;

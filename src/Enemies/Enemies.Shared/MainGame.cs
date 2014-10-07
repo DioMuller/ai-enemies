@@ -68,8 +68,17 @@ namespace Enemies
                     if (titleSelection == TitleScreen.Result.Exit)
                         break;
 
-                    var gameResult = await baseScreen.Run(new GameScreen(this));
-                    Console.WriteLine("GameScreen result: " + gameResult);
+                    if (titleSelection == TitleScreen.Result.StartGame)
+                    {
+                        var gameResult = await baseScreen.Run(new GameScreen(this, false));
+                        Console.WriteLine("GameScreen result: " + gameResult);
+                    }
+
+                    if (titleSelection == TitleScreen.Result.StartSandbox)
+                    {
+                        var gameResult = await baseScreen.Run(new GameScreen(this, true));
+                        Console.WriteLine("GameScreen result: " + gameResult);
+                    }
                 }
                 catch (AggregateException ex)
                 {

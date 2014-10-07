@@ -17,6 +17,7 @@ namespace Enemies.Screens
         public enum Result
         {
             Exit,
+            StartSandbox,
             StartGame
         }
         #endregion
@@ -67,9 +68,14 @@ namespace Enemies.Screens
                 Exit(Result.StartGame);
             });
 
+            title.OnSandbox += new OnButtonClickDelegate(() =>
+            {
+                Exit(Result.StartSandbox);
+            });
+
             title.OnLoadGame += new OnButtonClickDelegate(() =>
             {
-                Exit(Result.StartGame);
+                //Exit(Result.StartGame);
             });
 
             title.OnQuitGame += new OnButtonClickDelegate(() =>
@@ -126,7 +132,6 @@ namespace Enemies.Screens
             if (State != RunState.Running)
                 return;
 
-            // TODO: Screen update logic!
             var keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Escape))
                 Exit(Result.Exit);
