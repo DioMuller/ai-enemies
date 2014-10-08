@@ -63,7 +63,9 @@ namespace Enemies.Screens
 
         public enum Result
         {
-            ReturnToTitle
+            ReturnToTitle,
+            LoadNext,
+            GameOver
         }
 
         #endregion
@@ -80,6 +82,8 @@ namespace Enemies.Screens
         private bool _tabPressed = false;
         private bool _mousePressed = false;
 		private bool _sandbox = true;
+
+        Stack<BaseEntity> _toRemove = new Stack<BaseEntity>();
 
         private string _map = "";
         #endregion
@@ -338,6 +342,41 @@ namespace Enemies.Screens
                 foreach (var entity in Entities)
                     TryUpdateEntity(gameTime, entity);
             }
+
+            #region Entities Check
+            var entities = Entities.OfType<BaseEntity>();
+
+            foreach(var entity in entities)
+            {
+                if (_toRemove.Contains(entity)) continue;
+
+                var bbox = entity.BoundingBox;
+
+                var intersect = entities.Where(e => e.BoundingBox.Intersects(bbox));
+
+                foreach(var intersection in intersect)
+                {
+                    if(entity.TargetTag == intersection.Tag)
+                    {
+                        _toRemove.Push(intersection);
+                    }
+                }
+            }
+
+            while(_toRemove.Count > 0)
+            {
+                Entities = Entities.Remove(_toRemove.Pop());
+            }
+            #endregion Entities Check
+
+            #region Endgame Check
+            if (!_sandbox)
+            {
+                if (entities.Where(e => e.Tag == TypeTag.Player).Count() == 0) Exit(Result.GameOver);
+                else if (entities.Where(e => e.Tag == TypeTag.Objective).Count() == 0) Exit(Result.LoadNext);
+            }
+
+            #endregion Endgame Check
 
             base.Update(gameTime);
         }
