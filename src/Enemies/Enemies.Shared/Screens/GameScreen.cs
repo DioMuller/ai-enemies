@@ -83,6 +83,7 @@ namespace Enemies.Screens
         private bool _mousePressed = false;
 		private bool _sandbox = true;
 
+        List<Vector2> _playerPositions = new List<Vector2>();
         Stack<BaseEntity> _toRemove = new Stack<BaseEntity>();
 
         private string _map = "";
@@ -180,12 +181,36 @@ namespace Enemies.Screens
 
             GameParameters.LoadMap(this, new Point(800, 600), Content, _map);
 
+            if( !_sandbox )
+            {
+                _isPaused = true;
+
+                foreach(var entity in Entities.OfType<BaseEntity>())
+                {
+                    if( entity.Tag == TypeTag.Player )
+                    {
+                        _playerPositions.Add(entity.Position);
+                        _toRemove.Push(entity);
+                    }
+                }
+
+                CleanEntities();
+            }
+
             await FadeIn();
         }
 
         protected override async Task FinalizeScreen()
         {
             await FadeOut();
+        }
+
+        protected void CleanEntities()
+        {
+            while (_toRemove.Count > 0)
+            {
+                Entities = Entities.Remove(_toRemove.Pop());
+            }
         }
 
         #endregion
@@ -341,42 +366,39 @@ namespace Enemies.Screens
             {
                 foreach (var entity in Entities)
                     TryUpdateEntity(gameTime, entity);
-            }
 
-            #region Entities Check
-            var entities = Entities.OfType<BaseEntity>();
+                #region Entities Check
+                var entities = Entities.OfType<BaseEntity>();
 
-            foreach(var entity in entities)
-            {
-                if (_toRemove.Contains(entity)) continue;
-
-                var bbox = entity.BoundingBox;
-
-                var intersect = entities.Where(e => e.BoundingBox.Intersects(bbox));
-
-                foreach(var intersection in intersect)
+                foreach(var entity in entities)
                 {
-                    if(entity.TargetTag == intersection.Tag)
+                    if (_toRemove.Contains(entity)) continue;
+
+                    var bbox = entity.BoundingBox;
+
+                    var intersect = entities.Where(e => e.BoundingBox.Intersects(bbox));
+
+                    foreach(var intersection in intersect)
                     {
-                        _toRemove.Push(intersection);
+                        if(entity.TargetTag == intersection.Tag)
+                        {
+                            _toRemove.Push(intersection);
+                        }
                     }
                 }
-            }
 
-            while(_toRemove.Count > 0)
-            {
-                Entities = Entities.Remove(_toRemove.Pop());
-            }
-            #endregion Entities Check
+                CleanEntities();
+                #endregion Entities Check
 
-            #region Endgame Check
-            if (!_sandbox)
-            {
-                if (entities.Where(e => e.Tag == TypeTag.Player).Count() == 0) Exit(Result.GameOver);
-                else if (entities.Where(e => e.Tag == TypeTag.Objective).Count() == 0) Exit(Result.LoadNext);
-            }
+                #region Endgame Check
+                if (!_sandbox)
+                {
+                    if (entities.Where(e => e.Tag == TypeTag.Player).Count() == 0) Exit(Result.GameOver);
+                    else if (entities.Where(e => e.Tag == TypeTag.Objective).Count() == 0) Exit(Result.LoadNext);
+                }
 
-            #endregion Endgame Check
+                #endregion Endgame Check
+            }
 
             base.Update(gameTime);
         }
