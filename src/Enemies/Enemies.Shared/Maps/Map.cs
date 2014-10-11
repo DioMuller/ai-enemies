@@ -29,6 +29,8 @@ namespace Enemies.Maps
         private Vector2 _tileSize;
         private List<Rectangle> _collisions;
 
+		public string Next { get; private set; }
+
         #region Textures
 
         private Texture2D _wallTexture = null;
@@ -41,6 +43,7 @@ namespace Enemies.Maps
         {
             _game = game;
             _screenSize = screenSize;
+	        Next = String.Empty;
 
             LoadFromFile(content, file);
         }
@@ -56,6 +59,7 @@ namespace Enemies.Maps
             string path = Path.Combine(content.RootDirectory, file );
             XDocument doc = XDocument.Load(path);
             XElement root = doc.Element("level");
+			
 
             _collisions = new List<Rectangle>();
 
@@ -140,7 +144,16 @@ namespace Enemies.Maps
 
             }
             #endregion Load Entities
-        }
+
+			#region Get Next Map Name
+			var next = root.Element("next");
+
+	        if (next != null)
+	        {
+		        this.Next = next.Value;
+	        }
+			#endregion  Get Next Map Name
+		}
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {

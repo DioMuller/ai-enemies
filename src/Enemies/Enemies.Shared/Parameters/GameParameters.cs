@@ -17,7 +17,15 @@ namespace Enemies.Parameters
         /// </summary>
         public static EntityInfo[] Entities { get; private set; }
 
+		/// <summary>
+		/// Current Map.
+		/// </summary>
         public static Map CurrentMap { get; private set; }
+
+		/// <summary>
+		/// Next Map Filename.
+		/// </summary>
+		public static string NextMap { get; private set; }
 
         #region Methods
         /// <summary>
@@ -35,8 +43,10 @@ namespace Enemies.Parameters
 
         public static void LoadMap(GameScreen game, Point size, ContentManager content, string file)
         {
-            //TODO: Change for different sizes?
+	        
             CurrentMap = new Map(game, size, content, file);
+			NextMap = CurrentMap.Next;
+			
         }
         #endregion Methods
     }
