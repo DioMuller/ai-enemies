@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Enemies.Parameters;
 using Enemies.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -70,14 +72,12 @@ namespace Enemies
 
                     if (titleSelection == TitleScreen.Result.StartGame)
                     {
-                        var gameResult = await baseScreen.Run(new GameScreen(this, false, "level_01"));
-                        Console.WriteLine("GameScreen result: " + gameResult);
+						await LoadGame(baseScreen, "level_00", false);
                     }
 
                     if (titleSelection == TitleScreen.Result.StartSandbox)
                     {
-                        var gameResult = await baseScreen.Run(new GameScreen(this, true));
-                        Console.WriteLine("GameScreen result: " + gameResult);
+	                    await LoadGame(baseScreen, "new", true);
                     }
                 }
                 catch (AggregateException ex)
@@ -97,5 +97,20 @@ namespace Enemies
 
             Exit();
         }
+
+	    public async Task LoadGame(Screen<bool> baseScreen, string level, bool sandbox)
+	    {
+			var gameResult = await baseScreen.Run(new GameScreen(this, sandbox, level));
+
+			Console.WriteLine("GameScreen result: " + gameResult);
+			if (gameResult == GameScreen.Result.LoadNext)
+			{
+				await LoadGame(baseScreen, GameParameters.NextMap, sandbox);
+			}
+			else if (gameResult == GameScreen.Result.GameOver)
+			{
+				// TODO: Game Over Screen
+			}
+	    }
     }
 }

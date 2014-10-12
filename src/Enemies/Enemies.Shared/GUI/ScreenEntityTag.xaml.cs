@@ -12,9 +12,12 @@ namespace Enemies.GUI
         public event OnButtonClickDelegate AddEnemy_Clicked;
         public event OnButtonClickDelegate AddObjective_Clicked;
 
-        public ScreenEntityTag()
+		private bool _isSandbox;
+
+        public ScreenEntityTag(bool isSandbox)
         {
             InitializeComponent();
+	        _isSandbox = isSandbox;
         }
 
         public void AddPlayer_Click(object sender, EventArgs e)
@@ -39,5 +42,13 @@ namespace Enemies.GUI
         {
             await Navigation.PopAsync();
         }
+
+		public async void CheckSandboxStatus()
+		{
+			if (!_isSandbox)
+			{
+				AddPlayer_Click(this, null);
+			}
+		}
 	}
 }

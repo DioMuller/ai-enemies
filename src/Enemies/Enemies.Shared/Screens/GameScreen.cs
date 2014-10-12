@@ -100,13 +100,14 @@ namespace Enemies.Screens
         public GameScreen(MainGame game, bool sandbox = true, string map = "new")
             : base(game)
         {
-            GUI = CreateGUI().AsEntity();
-            GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
-
-            Cursor = new Cursor(Content);
+	        Cursor = new Cursor(Content);
 
 	        _sandbox = sandbox;
             _map = "Maps/" + map;
+
+			GUI = CreateGUI().AsEntity();
+
+			GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
 
             MessageManager.ClearMessages();
         }
@@ -140,7 +141,7 @@ namespace Enemies.Screens
 
         Xamarin.Forms.Page CreateEntitySelectionGUI()
         {
-            var entityMenu = new ScreenEntityTag();
+            var entityMenu = new ScreenEntityTag(_sandbox);
             var entities = _scriptEntityFactory.AvailableEntities(Content).OrderBy(e => e.DisplayName).ToImmutableList();
 
             Action<string> addEntity = async category =>
@@ -162,6 +163,7 @@ namespace Enemies.Screens
             entityMenu.AddPlayer_Clicked += () => addEntity("Player");
             entityMenu.AddEnemy_Clicked += () => addEntity("Enemy");
             entityMenu.AddObjective_Clicked += () => addEntity("Objective");
+
             return entityMenu;
         }
         #endregion GUI
@@ -219,11 +221,23 @@ namespace Enemies.Screens
 
         void PlaceEntity(ScriptEntityDescription entity)
         {
-            Log.Debug(Tag, "Item Selected: " + entity.DisplayName);
+			Log.Debug(Tag, "Item Selected: " + entity.DisplayName);
 
-            _mousePressed = true;
-            _currentEntity = entity;
-            Cursor.CurrentState = CursorState.AddEntity;
+	        if (!_sandbox)
+	        {
+		        foreach (var location in _playerPositions)
+		        {
+			        AddEntity(entity, location, TypeTag.Player);
+		        }
+
+		        _isPaused = false;
+	        }
+	        else
+	        {
+				_mousePressed = true;
+				_currentEntity = entity;
+				Cursor.CurrentState = CursorState.AddEntity;
+	        }
         }
 
         public TypeTag GetTag(string tag)
@@ -261,8 +275,10 @@ namespace Enemies.Screens
 
         protected override void Update(GameTime gameTime)
         {
+			#region GUI
             if (_guiVisible) GUI.Update(gameTime);
             Cursor.Update(gameTime);
+			#endregion GUI
 
             #region Cursor Actions
             MouseState mouse = Mouse.GetState();
@@ -321,6 +337,7 @@ namespace Enemies.Screens
             }
             #endregion Keyboard Shortcuts
 
+			#region Lifetime
             if (State == RunState.Initializing)
                 return;
 
@@ -329,6 +346,7 @@ namespace Enemies.Screens
                 _parameterUpdateCounter = 0.0f;
                 return;
             }
+			#endregion Lifetime
 
             #region Parameter Update
             _parameterUpdateCounter += gameTime.ElapsedGameTime.Milliseconds;
@@ -362,6 +380,7 @@ namespace Enemies.Screens
                 });
             #endregion Messages
 
+			#region Entity Update
             if (!_isPaused)
             {
                 foreach (var entity in Entities)
@@ -399,6 +418,7 @@ namespace Enemies.Screens
 
                 #endregion Endgame Check
             }
+			#endregion Entity Update
 
             base.Update(gameTime);
         }
@@ -439,7 +459,8 @@ namespace Enemies.Screens
             SpriteBatch.Begin();
 
             if (GameParameters.CurrentMap != null) GameParameters.CurrentMap.Draw(SpriteBatch, gameTime);
-            foreach (var entity in Entities)
+            
+			foreach (var entity in Entities)
                 TryDrawEntity(gameTime, entity);
             SpriteBatch.End();
 
