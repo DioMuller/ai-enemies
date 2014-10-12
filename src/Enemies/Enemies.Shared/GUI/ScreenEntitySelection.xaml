@@ -16,9 +16,9 @@
     <StackLayout VerticalOptions="Fill" HorizontalOptions="End" WidthRequest="150" Orientation="Vertical" Spacing="16">
 
         <!--Back button bar-->
-        <StackLayout Orientation="Horizontal">
+        <StackLayout x:Name="BackPanel" Orientation="Horizontal">
             <controls:ImageButton Image="GUI/arrow_back" WidthRequest="32" HeightRequest="32" OnClick="BackClick" />
-            <Label Text="Voltar" HorizontalOptions="FillAndExpand" />
+            <Label Text="Back" HorizontalOptions="FillAndExpand" />
         </StackLayout>
 
         <!--Items List-->

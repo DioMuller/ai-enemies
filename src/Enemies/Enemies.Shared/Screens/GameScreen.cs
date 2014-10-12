@@ -113,6 +113,7 @@ namespace Enemies.Screens
 
 			GUI = CreateGUI().AsEntity();
 
+			// HACK
 	        if (!_sandbox)
 	        {
 		        _entityClick();
