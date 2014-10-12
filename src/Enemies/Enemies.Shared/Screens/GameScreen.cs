@@ -86,6 +86,12 @@ namespace Enemies.Screens
         List<Vector2> _playerPositions = new List<Vector2>();
         Stack<BaseEntity> _toRemove = new Stack<BaseEntity>();
 
+		#region Hack
+
+	    private OnButtonClickDelegate _entityClick = null;
+	    private OnButtonClickDelegate _playerClick = null;
+		#endregion Hack
+
         private string _map = "";
         #endregion
 
@@ -106,6 +112,12 @@ namespace Enemies.Screens
             _map = "Maps/" + map;
 
 			GUI = CreateGUI().AsEntity();
+
+	        if (!_sandbox)
+	        {
+		        _entityClick();
+		        _playerClick();
+	        }
 
 			GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
 
@@ -136,6 +148,10 @@ namespace Enemies.Screens
                 _isPaused = !_isPaused;
             };
 
+			// HACK
+			if( !_sandbox )
+		        _entityClick += () => mainMenu.AddEntity_Click(null, null);
+
             return new Xamarin.Forms.NavigationPage(mainMenu);
         }
 
@@ -163,6 +179,10 @@ namespace Enemies.Screens
             entityMenu.AddPlayer_Clicked += () => addEntity("Player");
             entityMenu.AddEnemy_Clicked += () => addEntity("Enemy");
             entityMenu.AddObjective_Clicked += () => addEntity("Objective");
+
+			// HACK
+			if (!_sandbox)
+				_playerClick += () => addEntity("Player");
 
             return entityMenu;
         }
