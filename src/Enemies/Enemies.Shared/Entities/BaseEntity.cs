@@ -20,6 +20,7 @@ namespace Enemies.Entities
         Enemy = 0,
         Player = 1,
         Objective = 2,
+        Bullet = 4,
         None = 3
     }
 
@@ -134,8 +135,8 @@ namespace Enemies.Entities
         /// <summary>
         /// Target Tag.
         /// </summary>
-        public TypeTag TargetTag { get; private set; }
-
+        public TypeTag TargetTag { get; protected set; }
+                
         /// <summary>
         /// Enemy Tag.
         /// </summary>
@@ -416,7 +417,10 @@ namespace Enemies.Entities
             Vector2 normalized = new Vector2(x, y);
             Vector2 oldPos = Position;
 
-            normalized.Normalize();
+            if (this.Tag != TypeTag.Bullet)
+            {
+                normalized.Normalize();
+            }
 
             if (float.IsNaN(normalized.X) || float.IsNaN(normalized.Y))
             {
@@ -433,14 +437,14 @@ namespace Enemies.Entities
                 LookAt(lookAtPos.X, lookAtPos.Y);
             }
 
-            if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
+            if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox) && Tag != TypeTag.Bullet )
             {
                 _entity.Sprite.Position.X = oldPos.X;
             }
 
             _entity.Sprite.Position.Y += normalized.Y;
 
-            if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox))
+            if (GameParameters.CurrentMap.CollidesWithMap(BoundingBox) && Tag != TypeTag.Bullet)
             {
                 _entity.Sprite.Position.Y = oldPos.Y;
             }
