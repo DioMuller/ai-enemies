@@ -27,6 +27,7 @@ namespace Enemies.Entities
     {
         #region Static
         private static int CurrentId = 0;
+	    private static SpriteFont _font = null;
         #endregion Static
 
         #region Attributes
@@ -78,6 +79,15 @@ namespace Enemies.Entities
         /// </summary>
         private string _movingAnimation = "";
 
+		/// <summary>
+		/// Current Entity dialog.
+		/// </summary>
+	    private string _currentDialog = String.Empty;
+
+		/// <summary>
+		/// Time since last dialog.
+		/// </summary>
+	    private float _timeSinceLastDialog = 0.0f;
         #endregion Sprite Attributes
         #endregion Attributes
 
@@ -174,6 +184,11 @@ namespace Enemies.Entities
 
             _entity.Sprite.Position = position;
 
+	        if (_font == null)
+	        {
+		        _font = content.Load<SpriteFont>("Fonts/DefaultFont");
+	        }
+
             Initialize();
         }
         #endregion Constructor
@@ -214,6 +229,15 @@ namespace Enemies.Entities
         /// <param name="gameTime">Current game time.</param>
         public void Update(GameTime gameTime)
         {
+	        if (_timeSinceLastDialog > 0.0f)
+	        {
+		        _timeSinceLastDialog -= gameTime.ElapsedGameTime.Milliseconds;
+	        }
+	        else
+	        {
+		        _currentDialog = String.Empty;
+	        }
+
             (_entity as IEntity).Update(gameTime);
             DoUpdate(gameTime.ElapsedGameTime.Milliseconds);
 
@@ -229,7 +253,18 @@ namespace Enemies.Entities
         {
             Rectangle baseRect = BoundingBox; //new Rectangle(BoundingBox.X + BoundingBox.Width - 48, BoundingBox.Y + BoundingBox.Height - 24, 32, 32);
 
-            (_entity as IEntity).Draw(spriteBatch, gameTime);
+
+	        if (_currentDialog != String.Empty)
+	        {
+		        var measurements = _font.MeasureString(_currentDialog) * 0.7f;
+		        Vector2 textpos = new Vector2(
+			        ((Position.X + BoundingBox.Width/2.0f) - measurements.X/2),
+			        ((Position.Y + BoundingBox.Height/2.0f) - (measurements.Y + 25)));
+
+		        spriteBatch.DrawString(_font, _currentDialog, textpos, Color.White, 0.0f, new Vector2(0,0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f  );
+	        }
+
+	        (_entity as IEntity).Draw(spriteBatch, gameTime);
         }
         #endregion Game Loop Methods
 
@@ -506,6 +541,16 @@ namespace Enemies.Entities
         {
             MessageManager.SendMessage(Id, -1, message, attachment);
         }
+
+		/// <summary>
+		/// Makes the entity talk.
+		/// </summary>
+		/// <param name="message">Message to talk.</param>
+	    public void Talk(string message)
+	    {
+		    _timeSinceLastDialog = 1000.0f;
+		    _currentDialog = message;
+	    }
         #endregion Methods
     }
 }

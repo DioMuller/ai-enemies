@@ -92,6 +92,7 @@ class ScriptEntity(BaseEntity):
 			self.options[self.NextValue()](self)
 			self.BroadcastMessage(self.next_command)
 			#TODO: Talk: dialog
+			self.Talk(self.dialog);
 			self.total_time = 0
 		
 		super(ScriptEntity, self).DoUpdate(game_time)
