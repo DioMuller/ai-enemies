@@ -28,21 +28,22 @@ namespace Enemies.Entities
             this.Tag = TypeTag.Bullet;
             this.TargetTag = targetTag;
 
+            this.SetSpriteColor(TargetTag == TypeTag.Player ? Color.DarkRed : TargetTag == TypeTag.Enemy ? Color.CornflowerBlue : Color.Gray);
+
             this._direction = direction;
             this._velocity = velocity;
         }
         #endregion Constructor
 
         #region Game Loop
+        /// <summary>
+        /// Moves the Bullet.
+        /// </summary>
+        /// <param name="delta"></param>
         public override void DoUpdate(float delta)
         {
             var newPos = (_direction * _velocity);
             Move(newPos.X, newPos.Y, true);
-
-            if( GameParameters.CurrentMap.CollidesWithMap(BoundingBox) )
-            {
-                //TODO: Remove Entity.
-            }
         }
 
         /// <summary>

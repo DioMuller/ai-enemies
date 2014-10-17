@@ -31,6 +31,21 @@ namespace Enemies.Screens
 
         static Task _contentLoad;
 
+        protected static Stack<BaseEntity> _toAdd = new Stack<BaseEntity>();
+
+        protected static GameScreen current = null;
+
+        protected static void AddEntity(BaseEntity entity)
+        {
+            _toAdd.Push(entity);
+        }
+
+        public static void CreateBullet(TypeTag targetTag, Vector2 position, Vector2 direction, float velocity)
+        {
+            direction.Normalize();
+            current.CreateBulletInstance(targetTag, position, direction, velocity);
+        }
+
         public static Task PreloadContent(ContentManager content)
         {
             if (_contentLoad != null)
@@ -107,6 +122,8 @@ namespace Enemies.Screens
             : base(game)
         {
 	        Cursor = new Cursor(Content);
+
+            current = this;
 
 	        _sandbox = sandbox;
             _map = "Maps/" + map;
@@ -234,6 +251,11 @@ namespace Enemies.Screens
             {
                 Entities = Entities.Remove(_toRemove.Pop());
             }
+
+            while (_toAdd.Count > 0)
+            {
+                Entities = Entities.Add(_toAdd.Pop());
+            }
         }
 
         #endregion
@@ -287,6 +309,11 @@ namespace Enemies.Screens
             e.Tag = tag;
             Entities = Entities.Add(e);
             return true;
+        }
+
+        public void CreateBulletInstance(TypeTag targetTag, Vector2 position, Vector2 direction, float velocity)
+        {
+            Entities = Entities.Add(new BulletEntity(Content, targetTag, position, direction, velocity));
         }
         #endregion Exposed Methods
 
@@ -416,6 +443,12 @@ namespace Enemies.Screens
 
                     var bbox = entity.BoundingBox;
 
+                    if(GameParameters.CurrentMap.CollidesWithMap(bbox))
+                    {
+                        _toRemove.Push(entity);
+                        continue;
+                    }
+
                     var intersect = entities.Where(e => e.BoundingBox.Intersects(bbox));
 
                     foreach(var intersection in intersect)
@@ -423,6 +456,7 @@ namespace Enemies.Screens
                         if(entity.TargetTag == intersection.Tag)
                         {
                             _toRemove.Push(intersection);
+                            if (entity.Tag == TypeTag.Bullet) _toRemove.Push(entity);
                         }
                     }
                 }

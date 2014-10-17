@@ -11,6 +11,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.IO;
 using Enemies.Parameters;
+using Enemies.Screens;
 
 
 namespace Enemies.Entities
@@ -119,12 +120,12 @@ namespace Enemies.Entities
                     case TypeTag.Objective:
                         EnemyTag = TypeTag.Player;
                         TargetTag = TypeTag.None;
-                        SetSpritesheet("Sprites/Human");
+                        SetSpritesheet("Sprites/Objective");
                         break;
                     default:
                         EnemyTag = TypeTag.None;
                         TargetTag = TypeTag.None;
-                        SetSpritesheet("Sprites/Human");
+                        SetSpritesheet("Sprites/Bullet");
                         break;
                 }
 
@@ -262,7 +263,7 @@ namespace Enemies.Entities
 			        ((Position.X + BoundingBox.Width/2.0f) - measurements.X/2),
 			        ((Position.Y + BoundingBox.Height/2.0f) - (measurements.Y + 25)));
 
-		        spriteBatch.DrawString(_font, _currentDialog, textpos, Color.White, 0.0f, new Vector2(0,0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f  );
+		        spriteBatch.DrawString(_font, _currentDialog, textpos, Color.Black, 0.0f, new Vector2(0,0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f  );
 	        }
 
 	        (_entity as IEntity).Draw(spriteBatch, gameTime);
@@ -388,7 +389,7 @@ namespace Enemies.Entities
         /// </summary>
         /// <param name="tag">Entity tag.</param>
         /// <returns></returns>
-        private Color GetColor(TypeTag tag)
+        protected Color GetColor(TypeTag tag)
         {
             switch(tag)
             {
@@ -401,6 +402,15 @@ namespace Enemies.Entities
                 default:
                     return Color.White;
             }
+        }
+
+        /// <summary>
+        /// Changes Sprite Color
+        /// </summary>
+        /// <param name="color">New Color.</param>
+        protected void SetSpriteColor(Color color)
+        {
+            _entity.Sprite.Color = color;
         }
         #endregion Helper Methods
 
@@ -507,6 +517,18 @@ namespace Enemies.Entities
         }
 
         /// <summary>
+        /// Get shootable entities.
+        /// </summary>
+        /// <returns>Entities this entity can shoot.</returns>
+        public EntityInfo[] GetShootableEntities()
+        {
+            if (Tag != TypeTag.Player && Tag != TypeTag.Enemy) return null;
+
+            TypeTag target = Tag == TypeTag.Player ? TypeTag.Enemy : TypeTag.Player;
+            return GetNeighbours(target).OrderBy(e => GetDistanceFrom(e)).ToArray();
+        }
+
+        /// <summary>
         /// Obtains entity info.
         /// </summary>
         /// <returns>The entity info.</returns>
@@ -555,6 +577,23 @@ namespace Enemies.Entities
 		    _timeSinceLastDialog = 1000.0f;
 		    _currentDialog = message;
 	    }
+
+        /// <summary>
+        /// Shoots at the direction.
+        /// </summary>
+        /// <param name="x">X coordinate of the position.</param>
+        /// <param name="y">Y coordinate of the position.</param>
+        public void ShootAt(int x, int y)
+        {
+            if(Tag != TypeTag.Player && Tag != TypeTag.Enemy) return;
+
+            TypeTag target = Tag == TypeTag.Player ? TypeTag.Enemy : TypeTag.Player;
+
+            Vector2 direction = new Vector2(x - Position.X, y - Position.Y);
+            LookAt(direction.X, direction.Y);
+
+            GameScreen.CreateBullet(target, Position, direction, 10.0f);
+        }
         #endregion Methods
     }
 }

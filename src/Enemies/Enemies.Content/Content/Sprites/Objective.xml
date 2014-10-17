@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sprite>
+  <spritesheets columns="1" rows="1">
+    <spritesheet file="Spritesheets/objective-01"/>
+  </spritesheets>
+  <animations idleAnimation="idle" movingAnimation="idle">
+    <animation name="idle" line="0" count="1" time="100" repeat="true" skipFrames="0"/>
+  </animations>
+</sprite>

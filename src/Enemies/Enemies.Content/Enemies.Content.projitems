@@ -16,6 +16,7 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\receiver.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\commander.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\commanded.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\shooter.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sender.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sample.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sample.lua" />
@@ -52,8 +53,12 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_02.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_01.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\new.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\bullet-01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\objective-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\human-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\zombie-01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Bullet.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Objective.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Zombie.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Human.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Empty.png" />
