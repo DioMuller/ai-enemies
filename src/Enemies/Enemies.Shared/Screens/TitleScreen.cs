@@ -18,7 +18,8 @@ namespace Enemies.Screens
         {
             Exit,
             StartSandbox,
-            StartGame
+            StartGame,
+            LoadGame
         }
         #endregion
 
@@ -75,7 +76,7 @@ namespace Enemies.Screens
 
             title.OnLoadGame += new OnButtonClickDelegate(() =>
             {
-                //Exit(Result.StartGame);
+                Exit(Result.LoadGame);
             });
 
             title.OnQuitGame += new OnButtonClickDelegate(() =>

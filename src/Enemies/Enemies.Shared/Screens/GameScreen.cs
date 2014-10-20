@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -166,6 +167,8 @@ namespace Enemies.Screens
                 _isPaused = !_isPaused;
             };
 
+            mainMenu.LoadMap_Clicked += () => GetLoadMapAction()();
+
 			// HACK
 			if( !_sandbox )
 		        _entityClick += () => mainMenu.AddEntity_Click(null, null);
@@ -203,6 +206,41 @@ namespace Enemies.Screens
 				_playerClick += () => addEntity("Player");
 
             return entityMenu;
+        }
+
+        // Map Selection
+        Action<string> GetLoadMapAction()
+        {
+            var maps = LoadMapNames(Content).OrderBy(e => e.DisplayName).ToImmutableList();
+
+            Action<string> loadMap = async category =>
+            {
+                _mousePressed = true;
+                Cursor.CurrentState = CursorState.Normal;
+
+                var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenMapSelection { Items = entities }));
+                await entityMenu.Navigation.PushAsync(selectionScreen);
+                var selectedScript = await selectionScreen.SelectItemAsync();
+
+                _guiVisible = false;
+                PlaceEntity(selectedScript);
+
+                await selectionScreen.Navigation.PopAsync();
+            };
+
+            return loadMap;
+        }
+
+        public List<string> LoadMapNames(ContentManager content)
+        {
+            var path = Path.Combine(content.RootDirectory, "");
+        }
+
+        public System.Collections.Generic.IEnumerable<string> LoadMapNames(ContentManager content)
+        {
+            var scriptsDir = Path.Combine(content.RootDirectory, "Maps");
+
+            return Directory.GetFiles(scriptsDir, "*.xml");
         }
         #endregion GUI
 

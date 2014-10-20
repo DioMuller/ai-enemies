@@ -18,6 +18,7 @@
     <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="180"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="150"/>
@@ -28,7 +29,8 @@
         </Grid.RowDefinitions>
 
         <controls:ImageButton OnClick="PlayPause_Click" Grid.Row="1" Grid.Column="0" Text="Play/Pause" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton OnClick="AddEntity_Click" Grid.Row="1" Grid.Column="2" Text="Add Entity" controls:Style.Style="{StaticResource buttonStyle}"/>
-        <controls:ImageButton OnClick="BuildMode_Click" Grid.Row="1" Grid.Column="3" Text="Build Mode" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="LoadMap_Click" Grid.Row="1" Grid.Column="1" Text="Load Map" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="AddEntity_Click" Grid.Row="1" Grid.Column="3" Text="Add Entity" controls:Style.Style="{StaticResource buttonStyle}"/>
+        <controls:ImageButton OnClick="BuildMode_Click" Grid.Row="1" Grid.Column="4" Text="Build Mode" controls:Style.Style="{StaticResource buttonStyle}"/>
     </Grid>
 </ContentPage>

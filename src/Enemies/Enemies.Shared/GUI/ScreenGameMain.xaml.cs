@@ -11,6 +11,7 @@ namespace Enemies.GUI
         public event OnButtonClickDelegate PlayPause_Clicked;
         public event GeneratePageDelegate AddEntity_Page;
         public event OnButtonClickDelegate BuildMode_Clicked;
+        public event OnButtonClickDelegate LoadMap_Clicked;
 
         public ScreenGameMain()
         {
@@ -36,6 +37,14 @@ namespace Enemies.GUI
         {
             if (BuildMode_Clicked != null)
                 BuildMode_Clicked();
+        }
+
+        public void LoadMap_Click(object sender, EventArgs e)
+        {
+            if(LoadMap_Clicked != null)
+            {
+                LoadMap_Clicked();
+            }
         }
 	}
 }
