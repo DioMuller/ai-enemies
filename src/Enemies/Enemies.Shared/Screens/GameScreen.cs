@@ -167,7 +167,12 @@ namespace Enemies.Screens
                 _isPaused = !_isPaused;
             };
 
-            mainMenu.LoadMap_Clicked += () => GetLoadMapAction()();
+            mainMenu.LoadMap_Clicked += () =>
+            {
+                var loadMap = GetLoadMapAction(mainMenu);
+
+                loadMap();
+            };
 
 			// HACK
 			if( !_sandbox )
@@ -209,38 +214,28 @@ namespace Enemies.Screens
         }
 
         // Map Selection
-        Action<string> GetLoadMapAction()
+        Action GetLoadMapAction(ScreenGameMain mainMenu)
         {
-            var maps = LoadMapNames(Content).OrderBy(e => e.DisplayName).ToImmutableList();
+            var engine = new MapEngine(Content);
+            var maps = engine.AvailableEntities(Content).OrderBy(e => e.DisplayName).ToImmutableList();
+            
 
-            Action<string> loadMap = async category =>
+            Action loadMap = async () =>
             {
                 _mousePressed = true;
                 Cursor.CurrentState = CursorState.Normal;
 
-                var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenMapSelection { Items = entities }));
-                await entityMenu.Navigation.PushAsync(selectionScreen);
-                var selectedScript = await selectionScreen.SelectItemAsync();
+                var selectionScreen = await UpdateContext.Wait(Task.Factory.StartNew(() => new ScreenEntitySelection { Items = maps }));
+                await mainMenu.Navigation.PushAsync(selectionScreen);
+                var map = await selectionScreen.SelectItemAsync();
 
                 _guiVisible = false;
-                PlaceEntity(selectedScript);
 
-                await selectionScreen.Navigation.PopAsync();
+                GameParameters.SetNextMap(map.DisplayName);
+                Exit(Result.LoadNext);
             };
 
             return loadMap;
-        }
-
-        public List<string> LoadMapNames(ContentManager content)
-        {
-            var path = Path.Combine(content.RootDirectory, "");
-        }
-
-        public System.Collections.Generic.IEnumerable<string> LoadMapNames(ContentManager content)
-        {
-            var scriptsDir = Path.Combine(content.RootDirectory, "Maps");
-
-            return Directory.GetFiles(scriptsDir, "*.xml");
         }
         #endregion GUI
 

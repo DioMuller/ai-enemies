@@ -48,6 +48,14 @@ namespace Enemies.Parameters
 			NextMap = CurrentMap.Next;
 			
         }
+
+        public static void SetNextMap(string next)
+        {
+            if(NextMap == null || NextMap == String.Empty)
+            {
+                NextMap = next;
+            }
+        }
         #endregion Methods
     }
 }

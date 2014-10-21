@@ -24,9 +24,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\UIEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GUI\Cursor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GUI\Delegates.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GUI\MapDescription.xaml.cs">
-      <DependentUpon>MapDescription.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenEntitySelection.xaml.cs">
       <DependentUpon>ScreenEntitySelection.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -42,9 +39,6 @@
       <DependentUpon>EntityDescription.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenMapSelection.xaml.cs">
-      <DependentUpon>ScreenMapSelection.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)GUI\ScreenTitleMain.xaml.cs">
       <DependentUpon>ScreenTitleMain.xaml</DependentUpon>
     </Compile>
@@ -59,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\TitleScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\IBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\IScriptEntityFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scripting\MapEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\PythonEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scripting\ScriptEntityFactory.cs" />
@@ -68,10 +63,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\ScreenMapSelection.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)GUI\ScreenGameMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,11 +87,5 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)GUI\MapDescription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 </Project>
