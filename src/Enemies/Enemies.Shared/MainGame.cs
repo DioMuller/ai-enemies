@@ -79,6 +79,10 @@ namespace Enemies
                     {
 	                    await LoadGame(baseScreen, "new", true);
                     }
+                    if( titleSelection == TitleScreen.Result.LoadGame )
+                    {
+                        await LoadGame(baseScreen, "new", true, true);
+                    }
                 }
                 catch (AggregateException ex)
                 {
@@ -98,9 +102,9 @@ namespace Enemies
             Exit();
         }
 
-	    public async Task LoadGame(Screen<bool> baseScreen, string level, bool sandbox)
+	    public async Task LoadGame(Screen<bool> baseScreen, string level, bool sandbox, bool loadmap = false)
 	    {
-			var gameResult = await baseScreen.Run(new GameScreen(this, sandbox, level));
+			var gameResult = await baseScreen.Run(new GameScreen(this, sandbox, level, loadmap));
 
 			Console.WriteLine("GameScreen result: " + gameResult);
 			if (gameResult == GameScreen.Result.LoadNext)

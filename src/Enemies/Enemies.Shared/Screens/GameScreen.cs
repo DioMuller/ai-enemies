@@ -106,6 +106,7 @@ namespace Enemies.Screens
 
 	    private OnButtonClickDelegate _entityClick = null;
 	    private OnButtonClickDelegate _playerClick = null;
+        private OnButtonClickDelegate _mapClick = null;
 		#endregion Hack
 
         private string _map = "";
@@ -119,7 +120,7 @@ namespace Enemies.Screens
 
         #region Constructors
 
-        public GameScreen(MainGame game, bool sandbox = true, string map = "new")
+        public GameScreen(MainGame game, bool sandbox = true, string map = "new", bool loadmap = false)
             : base(game)
         {
 	        Cursor = new Cursor(Content);
@@ -137,6 +138,10 @@ namespace Enemies.Screens
 		        _entityClick();
 		        _playerClick();
 	        }
+            else if (loadmap)
+            {
+                _mapClick();
+            }
 
 			GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
 
@@ -167,7 +172,16 @@ namespace Enemies.Screens
                 _isPaused = !_isPaused;
             };
 
+            
             mainMenu.LoadMap_Clicked += () =>
+            {
+                var loadMap = GetLoadMapAction(mainMenu);
+
+                loadMap();
+            };
+
+            // HACK 2
+            _mapClick += () =>
             {
                 var loadMap = GetLoadMapAction(mainMenu);
 
