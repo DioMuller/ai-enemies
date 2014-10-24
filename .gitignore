@@ -1,3 +1,7 @@
 /src/Enemies/.nuget/NuGet.Config
 /src/Enemies/.nuget/NuGet.exe
 /src/Enemies/.nuget/NuGet.targets
+
+/src/Enemies/Enemies.MonoGame/lib
+
+/src/Enemies/Enemies.MonoGame/*.ss

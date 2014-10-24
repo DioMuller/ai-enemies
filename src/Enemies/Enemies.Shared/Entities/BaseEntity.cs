@@ -415,6 +415,8 @@ namespace Enemies.Entities
         #endregion Helper Methods
 
         #region Exposed Methods
+
+        #region Movement
         /// <summary>
         /// Moves entity.
         /// </summary>
@@ -495,6 +497,22 @@ namespace Enemies.Entities
         }
 
         /// <summary>
+        /// Can the entity move to this point?
+        /// </summary>
+        /// <param name="x">X position.</param>
+        /// <param name="y">Y position.</param>
+        /// <param name="width">Grid point width.</param>
+        /// <param name="height">Grid point height.</param>
+        /// <returns>Can the entity move to this space?</returns>
+        public bool CanMoveTo(float x, float y, float width, float height)
+        {
+            return GameParameters.CurrentMap.CollidesWithMap(new Rectangle(x, y, width, height));
+        }
+        #endregion Movement
+
+
+        #region Information
+        /// <summary>
         /// Obtains the nearest target.
         /// </summary>
         /// <returns>Nearest target info.</returns>
@@ -546,7 +564,9 @@ namespace Enemies.Entities
             return (Position.X - entity.Position.X)*(Position.X - entity.Position.X) +
                    (Position.Y - entity.Position.Y)*(Position.Y - entity.Position.Y);
         }
+        #endregion Information
 
+        #region Interaction
         /// <summary>
         /// Sends a message to one entity (by id)
         /// </summary>
@@ -568,7 +588,8 @@ namespace Enemies.Entities
             MessageManager.SendMessage(Id, -1, message, attachment);
         }
 
-		/// <summary>
+        
+        /// <summary>
 		/// Makes the entity talk.
 		/// </summary>
 		/// <param name="message">Message to talk.</param>
@@ -577,7 +598,9 @@ namespace Enemies.Entities
 		    _timeSinceLastDialog = 1000.0f;
 		    _currentDialog = message;
 	    }
+        #endregion Interaction
 
+        #region Shooting
         /// <summary>
         /// Shoots at the direction.
         /// </summary>
@@ -594,6 +617,9 @@ namespace Enemies.Entities
 
             GameScreen.CreateBullet(target, Position, direction, 10.0f);
         }
+        #endregion Shooting
+
+
         #endregion Methods
     }
 }
