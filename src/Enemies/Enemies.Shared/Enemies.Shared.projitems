@@ -48,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\EntityInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\GameParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parameters\MessageManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\Screen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\TitleScreen.cs" />
