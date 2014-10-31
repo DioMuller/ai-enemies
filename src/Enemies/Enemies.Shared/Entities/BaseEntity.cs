@@ -280,6 +280,16 @@ namespace Enemies.Entities
 	        }
 
 	        (_entity as IEntity).Draw(spriteBatch, gameTime);
+
+            // Status
+            var statsize = _font.MeasureString("H: " + Health + " A: " + Ammo);
+            var desl = Math.Max(_font.MeasureString("H: " + Health).X, _font.MeasureString(" A: " + Ammo).X) / 2;
+
+            Vector2 texpos = new Vector2(
+                ((Position.X + BoundingBox.Width / 2.0f) - statsize.X / 2),
+                ((Position.Y + BoundingBox.Height / 2.0f) + (statsize.Y - 25)));
+            spriteBatch.DrawString(_font, "H: " + Health, texpos + new Vector2(0.0f, 0.0f), Color.Red, 0.0f, new Vector2(0, 0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f);
+            spriteBatch.DrawString(_font, " A: " + Ammo, texpos + new Vector2(desl, 0.0f), Color.DarkGray, 0.0f, new Vector2(0, 0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f);
         }
         #endregion Game Loop Methods
 
