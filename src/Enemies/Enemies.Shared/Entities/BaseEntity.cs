@@ -169,6 +169,16 @@ namespace Enemies.Entities
         /// Entity Id.
         /// </summary>
         public int Id { get; private set; }
+
+        /// <summary>
+        /// Entity Health.
+        /// </summary>
+        public int Health { get; private set; }
+
+        /// <summary>
+        /// Entity Ammo.
+        /// </summary>
+        public int Ammo { get; private set; }
         #endregion Properties
 
         #region Constructor
@@ -181,6 +191,9 @@ namespace Enemies.Entities
             _entity = new EntityCore();
             _content = content;
             _random = new Random();
+
+            Health = 1;
+            Ammo = 5;
 
             Id = (CurrentId++);
 
@@ -608,14 +621,19 @@ namespace Enemies.Entities
         /// <param name="y">Y coordinate of the position.</param>
         public void ShootAt(int x, int y)
         {
-            if(Tag != TypeTag.Player && Tag != TypeTag.Enemy) return;
 
-            TypeTag target = Tag == TypeTag.Player ? TypeTag.Enemy : TypeTag.Player;
+            if (Ammo > 0)
+            {
+                if (Tag != TypeTag.Player && Tag != TypeTag.Enemy) return;
 
-            Vector2 direction = new Vector2(x - Position.X, y - Position.Y);
-            LookAt(direction.X, direction.Y);
+                TypeTag target = Tag == TypeTag.Player ? TypeTag.Enemy : TypeTag.Player;
 
-            GameScreen.CreateBullet(target, Position, direction, 10.0f);
+                Vector2 direction = new Vector2(x - Position.X, y - Position.Y);
+                LookAt(direction.X, direction.Y);
+
+                GameScreen.CreateBullet(target, Position, direction, 10.0f);
+                Ammo--;
+            }
         }
         #endregion Shooting
 
