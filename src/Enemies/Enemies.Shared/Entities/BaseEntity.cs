@@ -192,8 +192,8 @@ namespace Enemies.Entities
             _content = content;
             _random = new Random();
 
-            Health = 1;
-            Ammo = 5;
+            Health = 3;
+            Ammo = 15;
 
             Id = (CurrentId++);
 
@@ -637,7 +637,13 @@ namespace Enemies.Entities
         }
         #endregion Shooting
 
+        #endregion Exposed Methods
 
-        #endregion Methods
+        #region Internal Methods
+        internal void GetHit()
+        {
+            Health--;
+        }
+        #endregion Internal Methods
     }
 }

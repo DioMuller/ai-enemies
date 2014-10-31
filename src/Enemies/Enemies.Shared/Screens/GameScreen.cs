@@ -503,7 +503,9 @@ namespace Enemies.Screens
                     {
                         if(entity.TargetTag == intersection.Tag)
                         {
-                            _toRemove.Push(intersection);
+                            intersection.GetHit();
+
+                            if( intersection.Health <= 0) _toRemove.Push(intersection);
                             if (entity.Tag == TypeTag.Bullet) _toRemove.Push(entity);
                         }
                     }
