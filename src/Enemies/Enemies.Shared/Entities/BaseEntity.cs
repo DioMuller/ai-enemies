@@ -504,7 +504,7 @@ namespace Enemies.Entities
         /// <param name="width">Grid point width.</param>
         /// <param name="height">Grid point height.</param>
         /// <returns>Can the entity move to this space?</returns>
-        public bool CanMoveTo(float x, float y, float width, float height)
+        public bool CanMoveTo(int x, int y, int width, int height)
         {
             return GameParameters.CurrentMap.CollidesWithMap(new Rectangle(x, y, width, height));
         }

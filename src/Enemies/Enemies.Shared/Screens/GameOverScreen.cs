@@ -18,10 +18,12 @@ namespace Enemies.Screens
 
         #region Attributes
         private static SpriteFont _titleFont = null;
-        private static Vector2 _center = null;
-        private static Vector2 _descriptionPosition = null;
+        private static Vector2 _center;
+        private static Vector2 _descriptionPosition;
         private static string _text;
         private static Color _titleColor;
+        private Vector2 _titleSize;
+        private Vector2 _textSize;
         #endregion Attributes
 
         #region Constructor
@@ -31,12 +33,12 @@ namespace Enemies.Screens
             _text = text;
             _titleColor = color;
 
-            _titleFont = Content.Load<SpriteFont>("Fonts/DefaultFont.xnb");
-            _center = Game.Window.ClientBounds.Center;
+            _titleFont = Content.Load<SpriteFont>("Fonts/DefaultFont");
+            _center = new Vector2(Game.Window.ClientBounds.Center.X, Game.Window.ClientBounds.Center.Y);
             _descriptionPosition = _center + new Vector2(0.0f, 200.0f);
 
-            var textSize = _titleFont.MeasureString("Press Enter to go to the Title Screen");
-            var titleSize = _titleFont.MeasureString(text) * 3;
+            _textSize = _titleFont.MeasureString("Press Enter to go to the Title Screen");
+            _titleSize = _titleFont.MeasureString(text);
         }
         #endregion Constructor
 
@@ -47,10 +49,10 @@ namespace Enemies.Screens
 
             SpriteBatch.Begin();
             SpriteBatch.DrawString(_titleFont, _text, _center, _titleColor, 0.0f, 
-                titleSize / 2.0f, new Vector2(3.0f, 3.0f), SpriteEffects.None, 1.0f);
+                _titleSize / 2.0f, new Vector2(3.0f, 3.0f), SpriteEffects.None, 1.0f);
 
             SpriteBatch.DrawString(_titleFont, "Press Enter to go to the Title Screen", _descriptionPosition, Color.White, 0.0f,
-                titleSize / 2.0f, new Vector2(1.0f, 1.0f), SpriteEffects.None, 1.0f);
+                _textSize / 2.0f, new Vector2(1.0f, 1.0f), SpriteEffects.None, 1.0f);
             SpriteBatch.End();
         }
 

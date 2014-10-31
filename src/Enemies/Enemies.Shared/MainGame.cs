@@ -113,8 +113,12 @@ namespace Enemies
 			}
 			else if (gameResult == GameScreen.Result.GameOver)
 			{
-				// TODO: Game Over Screen
+                await baseScreen.Run(new GameOverScreen(this, "Game Over", Color.Red) );
 			}
+            else if (gameResult == GameScreen.Result.Win)
+            {
+                await baseScreen.Run(new GameOverScreen(this, "You Win!", Color.Yellow));
+            }
 	    }
     }
 }

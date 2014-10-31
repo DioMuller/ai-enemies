@@ -81,7 +81,8 @@ namespace Enemies.Screens
         {
             ReturnToTitle,
             LoadNext,
-            GameOver
+            GameOver,
+            Win
         }
 
         #endregion
