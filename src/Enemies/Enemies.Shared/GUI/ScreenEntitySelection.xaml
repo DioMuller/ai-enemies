@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout VerticalOptions="Fill" HorizontalOptions="End" WidthRequest="150" Orientation="Vertical" Spacing="16">
+    <StackLayout VerticalOptions="Fill" HorizontalOptions="End" WidthRequest="230" Orientation="Vertical" Spacing="16">
 
         <!--Back button bar-->
         <StackLayout x:Name="BackPanel" Orientation="Horizontal">

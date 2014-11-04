@@ -266,7 +266,7 @@ namespace Enemies.Entities
         /// <param name="gameTime">Current game time.</param>
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            Rectangle baseRect = BoundingBox; //new Rectangle(BoundingBox.X + BoundingBox.Width - 48, BoundingBox.Y + BoundingBox.Height - 24, 32, 32);
+            Rectangle baseRect = BoundingBox;
 
 
 	        if (_currentDialog != String.Empty)

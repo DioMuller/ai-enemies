@@ -50,16 +50,23 @@ namespace Enemies.GUI
 
         void RefreshItems()
         {
-            Stack.Children.Clear();
-            if (_items == null)
-                return;
-            int i = 0;
-            foreach (var item in _items.Skip(_firstIndex))
+            try
             {
-                if (i >= _itemsPerPage)
-                    break;
-                Stack.Children.Add(item);
-                i++;
+                Stack.Children.Clear();
+                if (_items == null)
+                    return;
+                int i = 0;
+                foreach (var item in _items.Skip(_firstIndex))
+                {
+                    if (i >= _itemsPerPage)
+                        break;
+                    Stack.Children.Add(item);
+                    i++;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Entity Loading", ex);
             }
         }
 
