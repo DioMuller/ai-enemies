@@ -53,6 +53,11 @@ namespace Enemies.Entities
         /// Entity has moved this update cycle?
         /// </summary>
         private bool _hasMoved = false;
+
+        /// <summary>
+        /// Show Entity Stats? (Health and Ammo)
+        /// </summary>
+        protected bool _showStats = true;
         #endregion Entity Attributes
 
         #region Sprite Attributes
@@ -282,14 +287,17 @@ namespace Enemies.Entities
 	        (_entity as IEntity).Draw(spriteBatch, gameTime);
 
             // Status
-            var statsize = _font.MeasureString("H: " + Health + " A: " + Ammo);
-            var desl = Math.Max(_font.MeasureString("H: " + Health).X, _font.MeasureString(" A: " + Ammo).X) / 2;
+            if (_showStats)
+            {
+                var statsize = _font.MeasureString("H: " + Health + " A: " + Ammo);
+                var desl = Math.Max(_font.MeasureString("H: " + Health).X, _font.MeasureString(" A: " + Ammo).X) / 2;
 
-            Vector2 texpos = new Vector2(
-                ((Position.X + BoundingBox.Width / 2.0f) - statsize.X / 2),
-                ((Position.Y + BoundingBox.Height / 2.0f) + (statsize.Y - 25)));
-            spriteBatch.DrawString(_font, "H: " + Health, texpos + new Vector2(0.0f, 0.0f), Color.Red, 0.0f, new Vector2(0, 0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f);
-            spriteBatch.DrawString(_font, " A: " + Ammo, texpos + new Vector2(desl, 0.0f), Color.DarkGray, 0.0f, new Vector2(0, 0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f);
+                Vector2 texpos = new Vector2(
+                    ((Position.X + BoundingBox.Width / 2.0f) - statsize.X / 2),
+                    ((Position.Y + BoundingBox.Height / 2.0f) + (statsize.Y - 25)));
+                spriteBatch.DrawString(_font, "H: " + Health, texpos + new Vector2(0.0f, 0.0f), Color.Red, 0.0f, new Vector2(0, 0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f);
+                spriteBatch.DrawString(_font, " A: " + Ammo, texpos + new Vector2(desl, 0.0f), Color.DarkGray, 0.0f, new Vector2(0, 0), new Vector2(0.7f, 0.7f), SpriteEffects.None, 1.0f);
+            }
         }
         #endregion Game Loop Methods
 
@@ -644,6 +652,11 @@ namespace Enemies.Entities
                 GameScreen.CreateBullet(target, Position, direction, 10.0f);
                 Ammo--;
             }
+        }
+
+        public void CanReach(int x, int y)
+        {
+
         }
         #endregion Shooting
 

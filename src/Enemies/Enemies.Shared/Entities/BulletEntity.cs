@@ -32,6 +32,8 @@ namespace Enemies.Entities
 
             this._direction = direction;
             this._velocity = velocity;
+
+            this._showStats = false;
         }
         #endregion Constructor
 
