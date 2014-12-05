@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -61,8 +61,6 @@ namespace Enemies.Entities
         {
             _context = new Lua();
             _context.LoadCLRPackage();
-
-            Tag = TypeTag.Enemy;
 
             LoadLibs(content);
 

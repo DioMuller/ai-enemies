@@ -1,4 +1,4 @@
-﻿using Enemies.Behaviors;
+using Enemies.Behaviors;
 using Jv.Games.Xna.Context;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
@@ -17,7 +17,8 @@ namespace Enemies.Entities
     {
         #region Attributes
         public readonly Context UpdateContext, DrawContext;
-        public readonly Sprite Sprite;
+	    public readonly Sprite Sprite;
+
         public IImmutableList<IBehavior> Behaviors = ImmutableList<IBehavior>.Empty;
         #endregion
 

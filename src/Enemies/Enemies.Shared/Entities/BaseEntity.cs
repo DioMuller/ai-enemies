@@ -1,4 +1,4 @@
-﻿using System.Dynamic;
+using System.Dynamic;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
