@@ -54,6 +54,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_02.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_01.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\new.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\EnemyDie.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\PlayerHurt.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Shot.wav" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\bullet-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\objective-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\human-01.png" />

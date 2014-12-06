@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Enemies.Media;
 using Enemies.Parameters;
 using Enemies.Screens;
 using Microsoft.Xna.Framework;
@@ -45,6 +46,7 @@ namespace Enemies
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+			AudioPlayer.Initialize(Content);
 
             // TODO: use this.Content to load your game content here
         }

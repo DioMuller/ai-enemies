@@ -1,4 +1,5 @@
 using System.Dynamic;
+using Enemies.Media;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -651,6 +652,7 @@ namespace Enemies.Entities
 
                 GameScreen.CreateBullet(target, Position, direction, 10.0f);
                 Ammo--;
+				AudioPlayer.PlaySound("Shot");
             }
         }
 

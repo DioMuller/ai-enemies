@@ -1,4 +1,4 @@
-﻿using Enemies.Entities;
+using Enemies.Entities;
 using Enemies.GUI;
 using Enemies.Maps;
 using Enemies.Parameters;
