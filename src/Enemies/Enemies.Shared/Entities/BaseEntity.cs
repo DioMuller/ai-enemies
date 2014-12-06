@@ -668,6 +668,15 @@ namespace Enemies.Entities
         internal void GetHit()
         {
             Health--;
+
+	        if (Tag == TypeTag.Player)
+	        {
+		        AudioPlayer.PlaySound("PlayerHurt");
+	        }
+			else if (Tag == TypeTag.Enemy)
+			{
+				AudioPlayer.PlaySound("EnemyHurt");
+			}
         }
         #endregion Internal Methods
     }
