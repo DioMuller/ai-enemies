@@ -116,7 +116,7 @@ namespace Enemies.Entities
                     case TypeTag.Enemy:
                         EnemyTag = TypeTag.None;
                         TargetTag = TypeTag.Player;
-                        SetSpritesheet("Sprites/Zombie");
+                        SetSpritesheet("Sprites/Enemy");
                         break;
                     case TypeTag.Player:
                         EnemyTag = TypeTag.Enemy;
@@ -426,9 +426,9 @@ namespace Enemies.Entities
             switch(tag)
             {
                 case TypeTag.Enemy:
-                    return Color.Red;
+                    return Color.IndianRed;
                 case TypeTag.Player:
-                    return Color.Green;
+                    return Color.CornflowerBlue;
                 case TypeTag.Objective:
                     return Color.Yellow;
                 default:

@@ -58,12 +58,13 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\PlayerHurt.wav" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Shot.wav" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\bullet-01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\enemy-01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\License.txt" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\objective-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\human-01.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Spritesheets\zombie-01.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Bullet.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Objective.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Zombie.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Enemy.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sprites\Human.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Empty.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Tile\Grass.png" />

@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <sprite>
   <spritesheets columns="1" rows="1">
-    <spritesheet file="Spritesheets/zombie-01"/>
+    <spritesheet file="Spritesheets/enemy-01"/>
   </spritesheets>
   <animations idleAnimation="idle" movingAnimation="idle">
     <animation name="idle" line="0" count="1" time="100" repeat="true" skipFrames="0"/>
