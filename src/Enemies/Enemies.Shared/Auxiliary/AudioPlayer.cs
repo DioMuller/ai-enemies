@@ -5,7 +5,7 @@ using IronPython.Modules;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 
-namespace Enemies.Media
+namespace Enemies.Auxiliary
 {
     public class AudioPlayer
     {

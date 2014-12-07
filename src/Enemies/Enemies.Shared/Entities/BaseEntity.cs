@@ -1,5 +1,5 @@
 using System.Dynamic;
-using Enemies.Media;
+using Enemies.Auxiliary;
 using Jv.Games.Xna.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

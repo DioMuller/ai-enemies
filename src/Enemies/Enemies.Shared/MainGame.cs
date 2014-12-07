@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Enemies.Media;
+using Enemies.Auxiliary;
 using Enemies.Parameters;
 using Enemies.Screens;
 using Microsoft.Xna.Framework;
