@@ -23,12 +23,14 @@ namespace Enemies.Maps
     class Map
     {
         private Tile[,] _tiles;
-        private Point _screenSize;
+        
         private GameScreen _game;
-
-        private Vector2 _tileSize;
+        
         private List<Rectangle> _collisions;
 
+        public Point ScreenSize { get; private set; }
+        public Vector2 TileSize { get; private set; }
+        public Point TileCount { get; private set; }
 		public string Next { get; private set; }
 
         #region Textures
@@ -42,7 +44,7 @@ namespace Enemies.Maps
         public Map(GameScreen game, Point screenSize, ContentManager content, string file)
         {
             _game = game;
-            _screenSize = screenSize;
+            ScreenSize = screenSize;
 	        Next = String.Empty;
 
             LoadFromFile(content, file);
@@ -67,7 +69,7 @@ namespace Enemies.Maps
             var map = root.Element("map");
             int height = Convert.ToInt32(map.Attribute("height").Value);
             int width = Convert.ToInt32(map.Attribute("width").Value);
-            _tileSize = new Vector2(_screenSize.X/width, _screenSize.Y/height);
+            TileSize = new Vector2(ScreenSize.X / width, ScreenSize.Y / height);
             _tiles = new Tile[height,width];
             var mapValues = map.Value.Split('\n').Select(s => s.Trim()).Where(s => !String.IsNullOrEmpty(s) ).ToArray();
 
@@ -85,9 +87,9 @@ namespace Enemies.Maps
 
                         if( _tiles[i,j] == Tile.Wall || _tiles[i,j] == Tile.Empty)
                         {
-                            _collisions.Add(new Rectangle(Convert.ToInt32(j * _tileSize.X), 
-                                Convert.ToInt32(i * _tileSize.Y), 
-                                Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y)));
+                            _collisions.Add(new Rectangle(Convert.ToInt32(j * TileSize.X),
+                                Convert.ToInt32(i * TileSize.Y),
+                                Convert.ToInt32(TileSize.X), Convert.ToInt32(TileSize.Y)));
                         }
                     }
                 }
@@ -96,9 +98,9 @@ namespace Enemies.Maps
                     for (int j = 0; j < width; j++)
                     {
                         _tiles[i, j] = Tile.Empty;
-                        _collisions.Add(new Rectangle(Convert.ToInt32(j * _tileSize.X),
-                                Convert.ToInt32(i * _tileSize.Y),
-                                Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y)));
+                        _collisions.Add(new Rectangle(Convert.ToInt32(j * TileSize.X),
+                                Convert.ToInt32(i * TileSize.Y),
+                                Convert.ToInt32(TileSize.X), Convert.ToInt32(TileSize.Y)));
                     }
                 }
             }
@@ -161,10 +163,10 @@ namespace Enemies.Maps
             {
                 for (int j = 0; j < _tiles.GetLength(0); j++)
                 {
-                    Rectangle destRectangle = new Rectangle(Convert.ToInt32(i * _tileSize.X), 
-                        Convert.ToInt32(j * _tileSize.Y), 
-                        Convert.ToInt32(_tileSize.X), 
-                        Convert.ToInt32(_tileSize.Y));
+                    Rectangle destRectangle = new Rectangle(Convert.ToInt32(i * TileSize.X),
+                        Convert.ToInt32(j * TileSize.Y),
+                        Convert.ToInt32(TileSize.X),
+                        Convert.ToInt32(TileSize.Y));
                     switch (_tiles[j,i])
                     {
                         case Tile.Ground:
@@ -191,8 +193,8 @@ namespace Enemies.Maps
 
         public Point GetQuadrant(Point position)
         {
-            return new Point(Convert.ToInt32(position.X / _tileSize.X),
-                Convert.ToInt32(position.Y / _tileSize.Y));
+            return new Point(Convert.ToInt32(position.X / TileSize.X),
+                Convert.ToInt32(position.Y / TileSize.Y));
         }
 
         public void ChangeQuadrant(Point quadrant, Tile tile)
@@ -209,9 +211,9 @@ namespace Enemies.Maps
 
         public Rectangle GetRectanglePosition(Vector2 position)
         {
-            return new Rectangle(Convert.ToInt32(position.X * _tileSize.X),
-                                Convert.ToInt32(position.Y * _tileSize.Y),
-                                Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y));
+            return new Rectangle(Convert.ToInt32(position.X * TileSize.X),
+                                Convert.ToInt32(position.Y * TileSize.Y),
+                                Convert.ToInt32(TileSize.X), Convert.ToInt32(TileSize.Y));
         }
 
         public void UpdateCollisions()
@@ -224,9 +226,9 @@ namespace Enemies.Maps
                 {
                     if (_tiles[i, j] == Tile.Wall || _tiles[i, j] == Tile.Empty)
                     {
-                        _collisions.Add(new Rectangle(Convert.ToInt32(j*_tileSize.X),
-                            Convert.ToInt32(i*_tileSize.Y),
-                            Convert.ToInt32(_tileSize.X), Convert.ToInt32(_tileSize.Y)));
+                        _collisions.Add(new Rectangle(Convert.ToInt32(j * TileSize.X),
+                            Convert.ToInt32(i * TileSize.Y),
+                            Convert.ToInt32(TileSize.X), Convert.ToInt32(TileSize.Y)));
                     }
                 }
             }
