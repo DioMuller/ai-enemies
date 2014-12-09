@@ -20,6 +20,14 @@ namespace Enemies.Maps
         Empty = ' '
     }
 
+    struct MapDimensions
+    {
+
+        public Point ScreenSize;
+        public Vector2 TileSize;
+        public Point TileCount;
+    }
+
     class Map
     {
         private Tile[,] _tiles;
@@ -28,9 +36,9 @@ namespace Enemies.Maps
         
         private List<Rectangle> _collisions;
 
-        public Point ScreenSize { get; private set; }
-        public Vector2 TileSize { get; private set; }
-        public Point TileCount { get; private set; }
+        private Point ScreenSize { get; set; }
+        private Vector2 TileSize { get; set; }
+        private Point TileCount { get; set; }
 		public string Next { get; private set; }
 
         #region Textures
@@ -232,6 +240,16 @@ namespace Enemies.Maps
                     }
                 }
             }
+        }
+
+        public MapDimensions GetDimensions()
+        {
+            return new MapDimensions
+            {
+                ScreenSize = new Point(this.ScreenSize.X, this.ScreenSize.Y),
+                TileCount = new Point(this.TileCount.X, this.TileCount.Y),
+                TileSize = new Vector2(this.TileSize.X, this.TileSize.Y)
+            };
         }
     }
 }
