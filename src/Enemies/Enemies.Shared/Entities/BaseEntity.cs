@@ -596,6 +596,11 @@ namespace Enemies.Entities
             return (Position.X - entity.Position.X)*(Position.X - entity.Position.X) +
                    (Position.Y - entity.Position.Y)*(Position.Y - entity.Position.Y);
         }
+
+	    public float GetMapLayout()
+	    {
+		    return GameParameters.CurrentMap.GetDimensions();
+	    }
         #endregion Information
 
         #region Interaction

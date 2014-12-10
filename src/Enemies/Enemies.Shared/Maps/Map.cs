@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,12 +20,20 @@ namespace Enemies.Maps
         Empty = ' '
     }
 
-    struct MapDimensions
+	public class MapInfo
     {
 
         public Point ScreenSize;
         public Vector2 TileSize;
         public Point TileCount;
+		public bool[] Map;
+
+		public bool CanGo(int x, int y)
+		{
+			if (x < 0 || x > TileCount.X || y < 0 || y > TileCount.Y) return false;
+
+			return Map[x + y*TileCount.X];
+		}
     }
 
     class Map
@@ -242,13 +250,26 @@ namespace Enemies.Maps
             }
         }
 
-        public MapDimensions GetDimensions()
+		public MapInfo GetDimensions()
         {
-            return new MapDimensions
+	        int w = _tiles.GetLength(0);
+	        int h = _tiles.GetLength(1);
+			bool[] mapTiles = new bool[w * h];
+
+	        for (int i = 0; i < w; i++)
+	        {
+		        for (int j = 0; j < h; j++)
+		        {
+			        mapTiles[i + w * j] = (_tiles[i, j] == Tile.Ground);
+		        }
+	        }
+			
+            return new MapInfo
             {
                 ScreenSize = new Point(this.ScreenSize.X, this.ScreenSize.Y),
                 TileCount = new Point(this.TileCount.X, this.TileCount.Y),
-                TileSize = new Vector2(this.TileSize.X, this.TileSize.Y)
+                TileSize = new Vector2(this.TileSize.X, this.TileSize.Y),
+				Map = mapTiles
             };
         }
     }
