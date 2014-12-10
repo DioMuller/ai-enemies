@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.IO;
 using Enemies.Parameters;
 using Enemies.Screens;
+using Enemies.Maps;
 
 
 namespace Enemies.Entities
@@ -542,7 +543,6 @@ namespace Enemies.Entities
         }
         #endregion Movement
 
-
         #region Information
         /// <summary>
         /// Obtains the nearest target.
@@ -597,7 +597,7 @@ namespace Enemies.Entities
                    (Position.Y - entity.Position.Y)*(Position.Y - entity.Position.Y);
         }
 
-	    public float GetMapLayout()
+	    public MapInfo GetMapLayout()
 	    {
 		    return GameParameters.CurrentMap.GetDimensions();
 	    }
@@ -661,9 +661,50 @@ namespace Enemies.Entities
             }
         }
 
-        public void CanReach(int x, int y)
+        public bool CanReach(int x, int y, int precision)
         {
+            if (precision <= 0) return false;
 
+            // Entity Size
+            var width = _entity.Sprite.CurrentAnimation.Frames[0].Width;
+            var height = _entity.Sprite.CurrentAnimation.Frames[0].Height;
+
+            // Distances
+            var dx = x - Position.X;
+            var dy = y - Position.Y;
+            // Normalized by Size
+            var nx = dx / GameParameters.CurrentMap.TileSize.X;
+            var ny = dy / GameParameters.CurrentMap.TileSize.Y;
+            // Movement amount each cycle
+            var mx = nx * precision;
+            var my = ny * precision;
+
+            //Direction
+            bool ix = dx < 0;
+            bool iy = dy < 0;
+
+            // Current position
+            var px = Position.X;
+            var py = Position.Y;
+
+            var points = 0;
+
+            while( (ix ? px > x : px < x ) && (iy ? py > y : py < y) )
+            {
+                px += mx;
+                py += my;
+                points++;
+
+                if (GameParameters.CurrentMap.CollidesWithMap(new Rectangle((int)px, (int) py, width, height)))
+                {
+                    Console.WriteLine("CanNotReach - Points checked: " + points);
+                    return false;
+                }
+            }
+
+            Console.WriteLine("CanReach - Points checked: " + points);
+
+            return true;
         }
         #endregion Shooting
 

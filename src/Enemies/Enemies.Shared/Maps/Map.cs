@@ -44,9 +44,10 @@ namespace Enemies.Maps
         
         private List<Rectangle> _collisions;
 
-        private Point ScreenSize { get; set; }
-        private Vector2 TileSize { get; set; }
-        private Point TileCount { get; set; }
+        // TODO: Readonly?
+        public Point ScreenSize { get; private set; }
+        public Vector2 TileSize { get; private set; }
+        public Point TileCount { get; private set; }
 		public string Next { get; private set; }
 
         #region Textures

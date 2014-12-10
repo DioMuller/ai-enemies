@@ -17,8 +17,11 @@ function script.DoUpdate(delta)
 
 		if enemies then
 			local targetEntity = array.first(enemies)
+
 			if targetEntity then
-				script.target = vector.create(targetEntity.Position.X, targetEntity.Position.Y) 
+				if entity:CanReach(targetEntity.Position.X, targetEntity.Position.Y, 1) then				
+					script.target = vector.create(targetEntity.Position.X, targetEntity.Position.Y) 
+				end
 			end
 		end
 
