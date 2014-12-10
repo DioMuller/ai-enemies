@@ -13,7 +13,9 @@ function script.DoUpdate(delta)
 		if shootingTargets then
 			local targetShoot = array.first(shootingTargets)
 			if targetShoot then
-				script.shootingTarget = vector.create(targetShoot.Position.X, targetShoot.Position.Y) 
+				if entity:CanReach(targetShoot.Position.X, targetShoot.Position.Y) then		
+					script.shootingTarget = vector.create(targetShoot.Position.X, targetShoot.Position.Y) 
+				end
 			end
 		end
 

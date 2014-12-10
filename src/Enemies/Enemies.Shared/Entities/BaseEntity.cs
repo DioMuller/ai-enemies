@@ -661,27 +661,18 @@ namespace Enemies.Entities
             }
         }
 
-        public bool CanReach(int x, int y, int precision)
+        public bool CanReach(int x, int y)
         {
-            if (precision <= 0) return false;
-
             // Entity Size
             var width = _entity.Sprite.CurrentAnimation.Frames[0].Width;
             var height = _entity.Sprite.CurrentAnimation.Frames[0].Height;
 
             // Distances
-            var dx = x - Position.X;
-            var dy = y - Position.Y;
+            var dx = Position.X - x;
+            var dy = Position.Y - y;
             // Normalized by Size
             var nx = dx / GameParameters.CurrentMap.TileSize.X;
             var ny = dy / GameParameters.CurrentMap.TileSize.Y;
-            // Movement amount each cycle
-            var mx = nx * precision;
-            var my = ny * precision;
-
-            //Direction
-            bool ix = dx < 0;
-            bool iy = dy < 0;
 
             // Current position
             var px = Position.X;
@@ -689,20 +680,17 @@ namespace Enemies.Entities
 
             var points = 0;
 
-            while( (ix ? px > x : px < x ) && (iy ? py > y : py < y) )
+            while( px != x && py != y)
             {
-                px += mx;
-                py += my;
+                px -= nx;
+                py -= ny;
                 points++;
 
                 if (GameParameters.CurrentMap.CollidesWithMap(new Rectangle((int)px, (int) py, width, height)))
                 {
-                    Console.WriteLine("CanNotReach - Points checked: " + points);
                     return false;
                 }
             }
-
-            Console.WriteLine("CanReach - Points checked: " + points);
 
             return true;
         }
