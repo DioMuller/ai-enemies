@@ -599,6 +599,7 @@ namespace Enemies.Entities
 
 	    public MapInfo GetMapLayout()
 	    {
+		    if (GameParameters.CurrentMap == null) return null;
 		    return GameParameters.CurrentMap.GetDimensions();
 	    }
         #endregion Information

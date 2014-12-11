@@ -1,20 +1,23 @@
-﻿script = {}
+script = {}
 
 function script.Initialize()
 	script.mapData = entity:GetMapLayout()
 	script.objective = entity:GetNearestTarget()
 
-	script.path = astar.findPath(mapData, entity.Position, objective.Position)
+	if script.objective and script.mapData then
+		script.path = astar.findPath(script.mapData, entity.Position, script.objective.Position)
+	end
 end
 
 function script.DoUpdate(delta)
 	entities = entity:GetNearbyEnemies()
 
-	for value in array.foreach(entities) do
-		-- Do Something
+	if script.objective and script.mapData and not script.path then
+		script.path = astar.findPath(script.mapData, entity.Position, script.objective.Position)
+		for value in array.foreach(script.path) do
+			print("X = ", value.X, "Y = ", value.Y)
+		end
 	end
-
-	entity:Move(1,1)
 end
 
 return script
