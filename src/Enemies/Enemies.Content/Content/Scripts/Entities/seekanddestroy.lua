@@ -1,7 +1,7 @@
 ﻿script = {}
 
 function script.Initialize()
-	script.maxSpeed = 2
+	script.maxSpeed = 100
 	script.updateTime = 0
 	script.shootTime = 0
 	script.panicDistance = 100
@@ -10,6 +10,8 @@ end
 function script.DoUpdate(delta)
 	script.updateTime = script.updateTime - delta
 	script.shootTime = script.shootTime - delta
+
+	script.target = nil;
 
 	if script.updateTime <= 0 then
 		local enemies = entity:GetNearbyEnemies()
@@ -40,6 +42,7 @@ function script.DoUpdate(delta)
 			script.shootTime = 500
 			entity:ShootAt(script.target.X, script.target.Y)
 		end
+
 		entity:Move(movement.X, movement.Y)
 	end
 end
