@@ -663,36 +663,12 @@ namespace Enemies.Entities
 
         public bool CanReach(int x, int y)
         {
-            // Entity Size
-            var width = _entity.Sprite.CurrentAnimation.Frames[0].Width;
-            var height = _entity.Sprite.CurrentAnimation.Frames[0].Height;
-
-            // Distances
-            var dx = Position.X - x;
-            var dy = Position.Y - y;
-            // Normalized by Size
-            var nx = dx / GameParameters.CurrentMap.TileSize.X;
-            var ny = dy / GameParameters.CurrentMap.TileSize.Y;
-
-            // Current position
-            var px = Position.X;
-            var py = Position.Y;
-
-            var points = 0;
-
-            while( px != x && py != y)
-            {
-                px -= nx;
-                py -= ny;
-                points++;
-
-                if (GameParameters.CurrentMap.CollidesWithMap(new Rectangle((int)px, (int) py, width, height)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            var distance = new Vector2(x, y) - _entity.Sprite.Position;
+            var direction = distance;
+            direction.Normalize();
+            var ray = new Ray(new Vector3(_entity.Sprite.Position, 0), new Vector3(direction, 0));
+            var collisionDist = GameParameters.CurrentMap.CollisionDist(ray);
+            return collisionDist == null || collisionDist.Value >= distance.Length();
         }
         #endregion Shooting
 

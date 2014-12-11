@@ -208,6 +208,17 @@ namespace Enemies.Maps
             return collisions.Count() > 0;
         }
 
+        public float? CollisionDist(Ray ray)
+        {
+            return _collisions
+                .Select(r => ray.Intersects(new BoundingBox(
+                    new Vector3(r.Location.X, r.Location.Y, 0),
+                    new Vector3(r.Location.X + r.Width, r.Location.Y + r.Height, 0))))
+                .Where(c => c != null)
+                .OrderBy(c => c.Value)
+                .FirstOrDefault();
+        }
+
         public Point GetQuadrant(Point position)
         {
             return new Point(Convert.ToInt32(position.X / TileSize.X),
