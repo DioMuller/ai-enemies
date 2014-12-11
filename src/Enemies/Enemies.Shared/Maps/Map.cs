@@ -23,8 +23,8 @@ namespace Enemies.Maps
 	public class MapInfo
     {
 
-        public Point ScreenSize { get; private set; }
-        public Vector2 TileSize { get; private set; }
+        public Point ScreenSize { get; internal set; }
+		public Vector2 TileSize { get; internal set; }
         public Vector2 TileCenter
         {
             get
@@ -32,8 +32,8 @@ namespace Enemies.Maps
                 return TileSize / 2;
             }
         }
-        public Point TileCount { get; private set; }
-		private bool[] Map;
+		public Point TileCount { get; internal set; }
+		internal bool[] Map;
 
         public Point GetQuadrantOf(int x, int y)
         {
@@ -49,6 +49,7 @@ namespace Enemies.Maps
 
         public Vector2 GetPositionQuad(int x, int y)
         {
+	        var center = TileCenter;
             return new Vector2(x * TileSize.X + center.X, y * TileSize.Y + center.Y);
         }
     }
