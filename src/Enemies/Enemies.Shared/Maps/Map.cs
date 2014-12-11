@@ -23,10 +23,22 @@ namespace Enemies.Maps
 	public class MapInfo
     {
 
-        public Point ScreenSize;
-        public Vector2 TileSize;
-        public Point TileCount;
-		public bool[] Map;
+        public Point ScreenSize { get; private set; }
+        public Vector2 TileSize { get; private set; }
+        public Vector2 TileCenter
+        {
+            get
+            {
+                return TileSize / 2;
+            }
+        }
+        public Point TileCount { get; private set; }
+		private bool[] Map;
+
+        public Point GetQuadrantOf(int x, int y)
+        {
+            return new Point((int)(x / TileSize.X), (int)(y / TileSize.Y));
+        }
 
 		public bool CanGo(int x, int y)
 		{
@@ -34,6 +46,11 @@ namespace Enemies.Maps
 
 			return Map[x + y*TileCount.X];
 		}
+
+        public Vector2 GetPositionQuad(int x, int y)
+        {
+            return new Vector2(x * TileSize.X + center.X, y * TileSize.Y + center.Y);
+        }
     }
 
     class Map
