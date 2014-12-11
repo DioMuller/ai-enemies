@@ -11,10 +11,10 @@ namespace Enemies.Controls
         {
             switch((ImageButtonState)value)
             {
-                case ImageButtonState.Normal: return "GUI/button_normal";
-                case ImageButtonState.Over: return "GUI/button_over";
+                case ImageButtonState.Normal: return "GUI/button_normal.9";
+                case ImageButtonState.Over: return "GUI/button_over.9";
                 case ImageButtonState.Pressed:
-                case ImageButtonState.Pressing: return "GUI/button_pressed";
+                case ImageButtonState.Pressing: return "GUI/button_pressed.9";
             }
             throw new NotImplementedException();
         }
