@@ -10,6 +10,7 @@ namespace Enemies.Controls
     public class ImageButtonRenderer : LabelRenderer, IClickableRenderer
     {
         Texture2D _image;
+        NinePatch _image9;
         bool? _mouseState;
 
         public new ImageButton Model { get { return (ImageButton)base.Model; } }
@@ -21,15 +22,30 @@ namespace Enemies.Controls
 
         void HandleImage(Xamarin.Forms.BindableProperty prop)
         {
-            _image = Model.Image == null ? null : Forms.Game.Content.Load<Texture2D>(Model.Image);
+            if (Model.Image == null)
+            {
+                _image = null;
+                _image9 = null;
+            }
+            else
+            {
+                _image = Forms.Game.Content.Load<Texture2D>(Model.Image);
+                if (Model.Image.EndsWith(".9"))
+                    _image9 = new NinePatch(_image);
+            }
+
             InvalidateMeasure();
         }
 
         public override Xamarin.Forms.SizeRequest Measure(Xamarin.Forms.Size availableSize)
         {
             var lblSize = base.Measure(availableSize);
+            if (_image9 != null)
+                return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(_image9.Width, _image9.Height), new Xamarin.Forms.Size(_image9.Stretch.Horizontal.Margin, _image9.Stretch.Vertical.Margin));
+
             if (_image != null)
                 return new Xamarin.Forms.SizeRequest(new Xamarin.Forms.Size(_image.Width, _image.Height), default(Xamarin.Forms.Size));
+
             return lblSize;
         }
 
@@ -82,7 +98,10 @@ namespace Enemies.Controls
                 return;
 
             var drawArea = new Rectangle(0, 0, (int)Model.Bounds.Width, (int)Model.Bounds.Height);
-            SpriteBatch.Draw(_image, drawArea, new Color(Color.White, Model.ImageOpacity));
+            if(_image9 != null)
+                _image9.Draw(SpriteBatch, drawArea, new Color(Color.White, Model.ImageOpacity));
+            else if (_image != null)
+                SpriteBatch.Draw(_image, drawArea, new Color(Color.White, Model.ImageOpacity));
             base.LocalDraw(gameTime);
         }
 

@@ -39,9 +39,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_down.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_forward.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_up.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_normal.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_over.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_pressed.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_normal.9.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_over.9.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\button_pressed.9.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_entity.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_build.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_pointer.png" />

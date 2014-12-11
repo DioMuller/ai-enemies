@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\IClickable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ImageButtonRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\NinePatch.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Style.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\EntityCore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\BaseEntity.cs" />
