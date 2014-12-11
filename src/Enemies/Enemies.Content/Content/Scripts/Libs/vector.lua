@@ -13,10 +13,12 @@ function vector.create(x,y)
 end
 
 function vector.size(v)
+	if not v then return 0 end
 	return math.sqrt(v.X * v.X + v.Y * v.Y)
 end
 
 function vector.normalize(v)
+	if not v then return nil end
 	result = {}
 	siz = vector.size(v)
 	result.X = v.X / siz
@@ -26,6 +28,8 @@ function vector.normalize(v)
 end
 
 function vector.add(v1, v2)
+	if not v1 or not v2 then return nil end
+
 	result = { } 
 	result.X = v1.X - v2.X
 	result.Y = v1.Y - v2.Y
@@ -34,6 +38,8 @@ function vector.add(v1, v2)
 end
 
 function vector.subtract(v1, v2)
+	if not v1 or not v2 then return nil end
+
 	result = { } 
 	result.X = v1.X - v2.X
 	result.Y = v1.Y - v2.Y
@@ -42,6 +48,7 @@ function vector.subtract(v1, v2)
 end
 
 function vector.multiply(v, c)
+	if not v or not c then return nil end
 	result = { } 
 	result.X = v.X * c
 	result.Y = v.Y * c
@@ -50,10 +57,12 @@ function vector.multiply(v, c)
 end
 
 function vector.square_distance(v1, v2)
+	if not v1 or not v2 then return 0 end
 	return ((v1.X - v2.X) * (v1.X - v2.X)) + ((v1.Y - v2.Y) * (v1.Y - v2.Y))
 end
 
 function vector.distance(v1, v2)
+	if not v1 or not v2 then return 0 end
 	return math.sqrt( vector.square_distance(v1, v2) )
 end
 

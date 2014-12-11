@@ -31,10 +31,13 @@ function script.DoUpdate(delta)
 	if script.objective then
 		local movement = steering.flee(entity.Position, script.target, script.panicDistance, script.maxSpeed)
 		
-		if movement.X == 0 and movement.Y == 0  then
+		if not movement or (movement.X == 0 and movement.Y == 0)  then
 			movement = steering.seek(entity.Position, script.objective, script.maxSpeed)
 		end
-		entity:Move(movement.X, movement.Y)
+
+		if movement then
+			entity:Move(movement.X, movement.Y)
+		end
 	end
 end
 

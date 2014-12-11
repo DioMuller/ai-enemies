@@ -16,6 +16,7 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\receiver.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\commander.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\commanded.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\static.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\seekanddestroy.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\shooter.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\sender.py" />
@@ -49,7 +50,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Python.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\title.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_00.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_final.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_06.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_05.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_04.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_03.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_02.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Maps\level_01.xml" />

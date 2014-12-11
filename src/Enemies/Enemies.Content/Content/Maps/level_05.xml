@@ -1,0 +1,29 @@
+﻿<level>
+  <map height="15" width="20">
+    <![CDATA[
+      11111111111111111111
+      10000000000000000001
+      11111011111111001111
+      10000000000010000001
+      10000011111110000001
+      10000010000000000001
+      11100111000011111111
+      10000001000000000001
+      10000001000000000001
+      10000001111100111111
+      11110111000000000001
+      10000001000100000001
+      10000001000100000001
+      10000000000100000001
+      11111111111111111111
+    ]]>
+  </map>
+  <tiles wall="Tile/Wall" ground="Tile/Grass" empty="Tile/Empty"/>
+  <entities>
+    <entity script="scaredcat.lua" x="100" y="60" tag="player"/>
+    <entity script="shooter.lua" x="540" y="210" tag="enemy"/>
+    <entity script="shooter.lua" x="130" y="320" tag="enemy"/>
+    <entity script="sample.py" x="650" y="480" tag="objective"/>
+  </entities>
+  <next>level_06</next>
+</level>
