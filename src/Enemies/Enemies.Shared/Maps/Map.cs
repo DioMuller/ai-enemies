@@ -105,6 +105,7 @@ namespace Enemies.Maps
             int height = Convert.ToInt32(map.Attribute("height").Value);
             int width = Convert.ToInt32(map.Attribute("width").Value);
             TileSize = new Vector2(ScreenSize.X / width, ScreenSize.Y / height);
+            TileCount = new Point(width, height);
             _tiles = new Tile[height,width];
             var mapValues = map.Value.Split('\n').Select(s => s.Trim()).Where(s => !String.IsNullOrEmpty(s) ).ToArray();
 
@@ -221,9 +222,7 @@ namespace Enemies.Maps
 
         public bool CollidesWithMap(Rectangle rect)
         {
-            var collisions = _collisions.Where(r => r.Intersects(rect));
-
-            return collisions.Count() > 0;
+            return _collisions.Any(r => r.Intersects(rect));
         }
 
         public float? CollisionDist(Ray ray)
@@ -282,15 +281,15 @@ namespace Enemies.Maps
 
 		public MapInfo GetDimensions()
         {
-	        int w = _tiles.GetLength(0);
-	        int h = _tiles.GetLength(1);
+	        int h = _tiles.GetLength(0);
+	        int w = _tiles.GetLength(1);
 			bool[] mapTiles = new bool[w * h];
 
 	        for (int i = 0; i < w; i++)
 	        {
 		        for (int j = 0; j < h; j++)
 		        {
-			        mapTiles[i + w * j] = (_tiles[i, j] == Tile.Ground);
+			        mapTiles[i + w * j] = (_tiles[j, i] == Tile.Ground);
 		        }
 	        }
 			
