@@ -7,6 +7,7 @@ using Enemies.Scripting;
 using Jv.Games.Xna.Async;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -104,6 +105,11 @@ namespace Enemies.Screens
         List<Vector2> _playerPositions = new List<Vector2>();
         Stack<BaseEntity> _toRemove = new Stack<BaseEntity>();
 
+        private SpriteFont _font;
+        private Vector2 _textPosition;
+        private string _text;
+        private Vector2 _origin;
+
 		#region Hack
 
 	    private OnButtonClickDelegate _entityClick = null;
@@ -156,6 +162,11 @@ namespace Enemies.Screens
 	        {
 		        AudioPlayer.PlayBGM("Take the Lead");
 	        }
+
+            _font = Content.Load<SpriteFont>("Fonts/DefaultFont");
+            _textPosition = new Vector2(400, 20);
+            _text = "Press TAB to go back";
+            _origin = _font.MeasureString(_text) / 2;
 
 	        MessageManager.ClearMessages();
         }
@@ -442,6 +453,11 @@ namespace Enemies.Screens
             {
                 _tabPressed = false;
             }
+
+            if(keys.IsKeyDown(Keys.Escape))
+            {
+                Exit(Result.ReturnToTitle);
+            }
             #endregion Keyboard Shortcuts
 
 			#region Lifetime
@@ -578,6 +594,12 @@ namespace Enemies.Screens
             
 			foreach (var entity in Entities)
                 TryDrawEntity(gameTime, entity);
+
+            if (!_guiVisible)
+            {
+                SpriteBatch.DrawString(_font, _text, _textPosition, Color.Yellow, 0.0f, _origin, 1.0f, SpriteEffects.None, 1);
+            }
+
             SpriteBatch.End();
 
             if (_guiVisible) GUI.Draw(SpriteBatch, gameTime);
