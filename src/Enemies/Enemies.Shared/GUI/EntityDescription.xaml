@@ -8,5 +8,5 @@
         <ColumnDefinition Width="*"/>
     </controls:ClickableGrid.ColumnDefinitions>
     <Image HeightRequest="32" HorizontalOptions="Start" VerticalOptions="Center" Source="{Binding Factory.Icon}"/>
-    <Label Text="{Binding DisplayName}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Grid.Column="1" />
+    <Label Text="{Binding DisplayName}" TextColor="Yellow" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Grid.Column="1" />
 </controls:ClickableGrid>

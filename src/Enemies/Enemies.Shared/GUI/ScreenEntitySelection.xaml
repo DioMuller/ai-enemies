@@ -18,7 +18,7 @@
         <!--Back button bar-->
         <StackLayout x:Name="BackPanel" Orientation="Horizontal">
             <controls:ImageButton Image="GUI/arrow_back" WidthRequest="32" HeightRequest="32" OnClick="BackClick" />
-            <Label Text="Back" HorizontalOptions="FillAndExpand" />
+            <Label Text="Back" TextColor="Yellow" HorizontalOptions="FillAndExpand" />
         </StackLayout>
 
         <!--Items List-->
