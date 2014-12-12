@@ -1,3 +1,4 @@
+using Enemies.Auxiliary;
 using Enemies.Entities;
 using Enemies.GUI;
 using Enemies.Maps;
@@ -146,7 +147,17 @@ namespace Enemies.Screens
 
 			GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
 
-            MessageManager.ClearMessages();
+			//Load Music
+	        if (_sandbox)
+	        {
+		        AudioPlayer.PlayBGM("Wah Game Loop");
+	        }
+	        else
+	        {
+		        AudioPlayer.PlayBGM("Take the Lead");
+	        }
+
+	        MessageManager.ClearMessages();
         }
 
         #endregion

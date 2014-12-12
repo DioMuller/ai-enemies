@@ -1,4 +1,5 @@
 using System;
+using Enemies.Auxiliary;
 using Enemies.Entities;
 using Enemies.GUI;
 using Jv.Games.Xna.Async;
@@ -90,6 +91,8 @@ namespace Enemies.Screens
 
 	        background = Content.Load<Texture2D>("GUI/title_background");
             Cursor = new Cursor(Content);
+
+			AudioPlayer.PlayBGM("Exhilarate");
         }
         #endregion
 

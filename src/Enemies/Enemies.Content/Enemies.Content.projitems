@@ -37,6 +37,9 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\vector.lua" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\BGM\Exhilarate.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BGM\Take the Lead.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BGM\Wah Game Loop.wav" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_back.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_down.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\arrow_forward.png" />
