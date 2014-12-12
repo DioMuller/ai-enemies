@@ -20,7 +20,7 @@
   </map>
   <tiles wall="Tile/Wall" ground="Tile/Grass" empty="Tile/Empty"/>
   <entities>
-    <entity script="scaredcat.lua" x="100" y="60" tag="player"/>
+    <entity script="pathfinder.py" x="100" y="60" tag="player"/>
     <entity script="sample.py" x="600" y="480" tag="objective"/>
   </entities>
   <next>level_05</next>
