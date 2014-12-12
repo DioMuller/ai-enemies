@@ -3,25 +3,30 @@
     <![CDATA[
       11111111111111111111
       10000000000000000001
-      11111011111111001111
-      10000000000010000001
-      10000011111110000001
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      11111110000000000001
       10000010000000000001
-      11100111000011111111
-      10000001000000000001
-      10000001000000000001
-      10000001111100111111
-      11110111000000000001
-      10000001000100000001
-      10000001000100000001
-      10000000000100000001
+      10000010000000000001
+      10000010000000000001
       11111111111111111111
     ]]>
   </map>
   <tiles wall="Tile/Wall" ground="Tile/Grass" empty="Tile/Empty"/>
   <entities>
-    <entity script="pathfinder.py" x="100" y="60" tag="player"/>
-    <entity script="sample.py" x="600" y="480" tag="objective"/>
+    <entity script="scaredcat.lua" x="100" y="130" tag="player"/>
+    <entity script="commanded.lua" x ="200" y ="250" tag="enemy"/>
+    <entity script="commanded.lua" x ="100" y ="300" tag="enemy"/>
+    <entity script="commanded.lua" x ="600" y ="250" tag="enemy"/>
+    <entity script="commanded.lua" x ="400" y ="500" tag="enemy"/>
+    <entity script="commander.py" x ="100" y ="480" tag="enemy"/>
+    <entity script="static.py" x="600" y="400" tag="objective"/>
   </entities>
   <next>level_05</next>
 </level>

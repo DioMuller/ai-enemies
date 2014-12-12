@@ -20,8 +20,10 @@
   </map>
   <tiles wall="Tile/Wall" ground="Tile/Grass" empty="Tile/Empty"/>
   <entities>
-    <entity script="pathfinder.py" x="100" y="60" tag="player"/>
-    <entity script="sample.py" x="600" y="480" tag="objective"/>
+    <entity script="scaredcat.lua" x="100" y="60" tag="player"/>
+    <entity script="shooter.lua" x="540" y="210" tag="enemy"/>
+    <entity script="shooter.lua" x="130" y="320" tag="enemy"/>
+    <entity script="sample.py" x="650" y="480" tag="objective"/>
   </entities>
-  <next>level_07</next>
+  <next>level_08</next>
 </level>
