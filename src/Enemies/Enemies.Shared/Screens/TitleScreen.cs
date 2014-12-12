@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Enemies.Entities;
 using Enemies.GUI;
 using Jv.Games.Xna.Async;
@@ -28,6 +28,7 @@ namespace Enemies.Screens
         Rectangle _positionRect;
         public readonly UIEntity GUI;
         public readonly Cursor Cursor;
+	    private Texture2D background;
         float _titleAngleY, _titleAngleX;
         #endregion
 
@@ -87,6 +88,7 @@ namespace Enemies.Screens
             GUI = title.AsEntity();
             GUI.Size = new Xamarin.Forms.Size(Viewport.Width, Viewport.Height);
 
+	        background = Content.Load<Texture2D>("GUI/title_background");
             Cursor = new Cursor(Content);
         }
         #endregion
@@ -153,6 +155,11 @@ namespace Enemies.Screens
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
+			// TODO: Didn't do that on WPF, tried but was a pain to order the image.
+			SpriteBatch.Begin();
+			SpriteBatch.Draw(background, new Rectangle(0, 0, 800, 600), null, Color.White);
+			SpriteBatch.End();
 
             GUI.Draw(SpriteBatch, gameTime);
 

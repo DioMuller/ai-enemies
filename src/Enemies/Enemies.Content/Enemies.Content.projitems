@@ -26,6 +26,7 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\scaredcat.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\seeker.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\wanderer.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\astar.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\patrol.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\mathlib.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Libs\case.lua" />
@@ -47,6 +48,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_build.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\cursor_pointer.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\background.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GUI\title_background.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Lua.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\Python.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\GUI\title.png" />

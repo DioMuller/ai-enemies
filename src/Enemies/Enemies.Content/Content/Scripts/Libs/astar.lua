@@ -1,4 +1,4 @@
-﻿-- Aux: Table.Contains
+-- Aux: Table.Contains
 function table.contains(table, element)
   for _, value in pairs(table) do
     if value == element then
@@ -22,26 +22,26 @@ astar.NodeType =
 }
 
 function astar.createNode(position, f, g, h)
-	return
-	{
-		position = position,
-		f = function()
+	node = {}
+	node.position = position
+	node.f = function()
 			return g() + h
-		end,
-		g = function()
-			if type == astar.NodeType.Start then return 0 end
-			if not parent then return 0 end
+		end
+	node.g = function()
+		if type == astar.NodeType.Start then return 0 end
+		if not parent then return 0 end
 
-			if position.X == parent.Position.X or position.Y == parent.Position.Y then
-				return parent.g() + astar.directWeight
-			else
-				return parent.g() + astar.diagonalWeight
-			end
-		end,
-		h = 0,
-		parent = nil,
-		type = astar.NodeType.Path
-	}
+		if position.X == parent.Position.X or position.Y == parent.Position.Y then
+			return parent.g() + astar.directWeight
+		else
+			return parent.g() + astar.diagonalWeight
+		end
+	end
+	node.h = 0
+	node.parent = nil
+	node.type = astar.NodeType.Path
+
+	return node
 end
 
 function astar.createGrid(mapData)
@@ -49,6 +49,8 @@ function astar.createGrid(mapData)
 
 	grid.width = mapData.TileCount.X
 	grid.height = mapData.TileCount.Y
+
+	print("G S = ", grid.width, grid.height )
 
 	for i=1, mapData.TileCount.X do
 		grid[i] = {}
@@ -64,18 +66,21 @@ function astar.createGrid(mapData)
 		end
 	end
 
+	
+
 	return grid
 end
 
 function astar.findPath(mapData, position, objective, heuristic)
 	-- Position and Objective Quad Calculation
-	local startPos = astar.createNode(mapData:GetQuadrantOf(position.X, position.Y))
+	local startPos = mapData:GetQuadrantOf(position.X, position.Y)
 	local targetPos = mapData:GetQuadrantOf(objective.X, objective.Y)
 
 	-- 0 - Initialization
-	nodes = astar.createGrid(mapData)
-	start = nodes[startPos.X][startPos.Y]
-	target = nodes[targetPos.X][targetPos.Y]
+	print("Starting Pos = ", startPos.X, startPos.Y )
+	local nodes = astar.createGrid(mapData)
+	local start = nodes[startPos.X][startPos.Y]
+	local target = nodes[targetPos.X][targetPos.Y]
 
 	start.type = astar.NodeType.Start
 	target.type = astar.NodeType.End
@@ -86,6 +91,8 @@ function astar.findPath(mapData, position, objective, heuristic)
 
 	-- 1 - Add Start Node to the OPEN List.
 	table.insert(open, start)
+	print("Starting AStar")
+
 	-- 2 - Repeat:
 	while running do
 		-- 2.a - Search Node with the lowest F cost on the OPEN list.
@@ -106,6 +113,9 @@ function astar.findPath(mapData, position, objective, heuristic)
 
 			currentIndex = currentIndex + 1
 		end
+
+		print("Current Node is X = ", currentNode.position.X, "Y = ", currentNode.position.Y)
+
 		-- 2.b - Move this node to the CLOSE list.
 		table.insert(close, start)
 		table.remove(open, indexNode)
