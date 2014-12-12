@@ -11,7 +11,7 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\Fonts\DefaultFont.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\circle.py" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\pathfinder.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\astarbot.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\patroller.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\hivemind.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\receiver.lua" />
