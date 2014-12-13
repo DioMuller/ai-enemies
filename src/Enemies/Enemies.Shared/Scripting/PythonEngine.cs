@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 #if !__ANDROID__
 using Enemies.Entities;
 using IronPython.Hosting;
@@ -35,6 +35,7 @@ namespace Enemies.Scripting
 
             Engine = runtime.GetEngine("py");
             var paths = Engine.GetSearchPaths();
+			paths.Add("PlayerScripts");
             paths.Add(Path.Combine(content.RootDirectory, "Scripts"));
             paths.Add(Path.Combine(content.RootDirectory, "Scripts/Entities"));
             Engine.SetSearchPaths(paths);

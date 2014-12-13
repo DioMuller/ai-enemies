@@ -6,7 +6,7 @@
     <ProjectGuid>{3502560B-1F62-4443-96D7-36D818B36699}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Enemies.MonoGame</RootNamespace>
-    <AssemblyName>Enemies.MonoGame</AssemblyName>
+    <AssemblyName>ScriptDeathmatch</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <ContentRoot>Content\</ContentRoot>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Jv.Games.Xna">
