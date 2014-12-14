@@ -32,12 +32,12 @@ function table.to_string (tt, indent, done)
   end
 end
 
-astar = {}
+pathfinding = {}
 
-astar.directWeight = 10
-astar.diagonalWeight = 14
+pathfinding.directWeight = 10
+pathfinding.diagonalWeight = 14
 
-astar.NodeType =
+pathfinding.NodeType =
 {
 	Start = 'X',
     Path = '-',
@@ -45,12 +45,12 @@ astar.NodeType =
 	End = 'O'
 }
 
-function astar.createNode(position)
+function pathfinding.createNode(position)
 	node = {}
 	
 	node.h = 0
 	node.parent = nil
-	node.type = astar.NodeType.Path
+	node.type = pathfinding.NodeType.Path
 	node.position = position
 	node.g = 0
 	node.f = 0
@@ -58,7 +58,7 @@ function astar.createNode(position)
 	return node
 end
 
-function astar.createGrid(mapData)
+function pathfinding.createGrid(mapData)
 	grid = {}
 
 	grid.width = mapData.TileCount.X
@@ -70,12 +70,12 @@ function astar.createGrid(mapData)
 		grid[i] = {}
 		for j=1, mapData.TileCount.Y do
 			-- Create node base
-			grid[i][j] = astar.createNode({X = i - 1, Y = j - 1})
+			grid[i][j] = pathfinding.createNode({X = i - 1, Y = j - 1})
 			
 			if mapData:CanGo(i - 1, j - 1) then
-				grid[i][j].type = astar.NodeType.Path
+				grid[i][j].type = pathfinding.NodeType.Path
 			else
-				grid[i][j].type = astar.NodeType.Obstacle
+				grid[i][j].type = pathfinding.NodeType.Obstacle
 			end
 		end
 	end
@@ -85,19 +85,19 @@ function astar.createGrid(mapData)
 	return grid
 end
 
-function astar.findPath(mapData, position, objective, heuristic)
+function pathfinding.findPath(mapData, position, objective, heuristic)
 	-- Position and Objective Quad Calculation
 	local startPos = mapData:GetQuadrantOf(position.X, position.Y)
 	local targetPos = mapData:GetQuadrantOf(objective.X, objective.Y)
 
 	-- 0 - Initialization
 	print("Starting Pos = ", startPos.X, startPos.Y )
-	local nodes = astar.createGrid(mapData)
+	local nodes = pathfinding.createGrid(mapData)
 	local start = nodes[startPos.X][startPos.Y]
 	local target = nodes[targetPos.X][targetPos.Y]
 
-	start.type = astar.NodeType.Start
-	target.type = astar.NodeType.End
+	start.type = pathfinding.NodeType.Start
+	target.type = pathfinding.NodeType.End
 
 	local close = {}
 	local open = {}
@@ -153,9 +153,9 @@ function astar.findPath(mapData, position, objective, heuristic)
 								local f = 0
 
 								if nbNode.position.X == currentNode.position.X or nbNode.position.Y == currentNode.position.Y then
-									g = currentNode.g + astar.directWeight
+									g = currentNode.g + pathfinding.directWeight
 								else
-									g = currentNode.g + astar.diagonalWeight
+									g = currentNode.g + pathfinding.diagonalWeight
 								end
 
 								f = g + nbNode.h
@@ -163,7 +163,7 @@ function astar.findPath(mapData, position, objective, heuristic)
 								local pass = false
 						 
 								-- 2.c.i - Ignore if it's an obstacle or if it's already on the CLOSE list.
-								if nbNode.type == astar.NodeType.Obstacle or table.contains(close, nbNode) then
+								if nbNode.type == pathfinding.NodeType.Obstacle or table.contains(close, nbNode) then
 									pass = true
 									--print("Node ", nbNode.position.X, ",", nbNode.position.Y, " already on CLOSE")
 								end
@@ -195,7 +195,7 @@ function astar.findPath(mapData, position, objective, heuristic)
 		-- 2.d - Stop the process when:
 		if running then
 			-- 2.d.i - Found! Target Node is on CLOSE.
-			if currentNode.type == astar.NodeType.Target then running = false end
+			if currentNode.type == pathfinding.NodeType.Target then running = false end
 			-- 2.d.ii - Not Found! OPEN is empty.
 			if #open == 0 then running = false end
 		end
@@ -205,7 +205,7 @@ function astar.findPath(mapData, position, objective, heuristic)
 	-- 3 - Generate a path using the PARENT nodes.
 	result = {}
 
-	while currentNode and not currentNode.type == astar.NodeType.Start do
+	while currentNode and not currentNode.type == pathfinding.NodeType.Start do
 		table.insert(result, currentNode)
 		currentNode = currentNode.parent
 	end
@@ -214,4 +214,4 @@ function astar.findPath(mapData, position, objective, heuristic)
 	return result
 end
 
-return astar
+return pathfinding
