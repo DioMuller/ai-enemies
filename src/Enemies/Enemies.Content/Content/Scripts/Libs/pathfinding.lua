@@ -83,9 +83,13 @@ function pathfinding.createGrid(mapData)
 	
 
 	return grid
+ends
+
+function pathfinding.findPathDepth(mapData, position, objective)
+	
 end
 
-function pathfinding.findPath(mapData, position, objective, heuristic)
+function pathfinding.findPathAstar(mapData, position, objective, heuristic)
 	-- Position and Objective Quad Calculation
 	local startPos = mapData:GetQuadrantOf(position.X, position.Y)
 	local targetPos = mapData:GetQuadrantOf(objective.X, objective.Y)

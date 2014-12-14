@@ -5,7 +5,7 @@ function script.Initialize()
 	script.objective = entity:GetNearestTarget()
 
 	if script.objective and script.mapData then
-		script.path = pathfinding.findPath(script.mapData, entity.Position, script.objective.Position, 
+		script.path = pathfinding.findPathAstar(script.mapData, entity.Position, script.objective.Position, 
 		function(node, start, target)
 			local dx = target.position.X - node.position.X;
             local dy = target.position.Y - node.position.Y;
@@ -19,7 +19,7 @@ function script.DoUpdate(delta)
 	entities = entity:GetNearbyEnemies()
 
 	if script.objective and script.mapData and not script.path then
-		script.path = pathfinding.findPath(script.mapData, entity.Position, script.objective.Position, 
+		script.path = pathfinding.findPathAstar(script.mapData, entity.Position, script.objective.Position, 
 		function(node, start, target)
 			local dx = target.position.X - node.position.X;
             local dy = target.position.Y - node.position.Y;
