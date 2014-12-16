@@ -662,6 +662,12 @@ namespace Enemies.Entities
             }
         }
 
+        /// <summary>
+        /// Can the player reach/see what is at the position?
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate.</param>
+        /// <returns></returns>
         public bool CanReach(int x, int y)
         {
             var distance = new Vector2(x, y) - _entity.Sprite.Position;
