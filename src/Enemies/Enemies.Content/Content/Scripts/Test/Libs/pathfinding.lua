@@ -1,37 +1,3 @@
--- Aux: Table.Contains
-function table.contains(table, element)
-  for _, value in pairs(table) do
-    if value == element then
-      return true
-    end
-  end
-  return false
-end
-
-function table.to_string (tt, indent, done)
-  done = done or {}
-  indent = indent or 0
-  if type(tt) == "table" then
-    for key, value in pairs (tt) do
-      io.write(string.rep (" ", indent)) -- indent it
-      if type (value) == "table" and not done [value] then
-        done [value] = true
-        io.write(string.format("[%s] => table\n", tostring (key)));
-        io.write(string.rep (" ", indent+4)) -- indent it
-        io.write("(\n");
-        table.to_string (value, indent + 7, done)
-        io.write(string.rep (" ", indent+4)) -- indent it
-        io.write(")\n");
-      else
-        io.write(string.format("[%s] => %s\n",
-            tostring (key), tostring(value)))
-      end
-    end
-  else
-    io.write(tt .. "\n")
-  end
-end
-
 pathfinding = {}
 
 pathfinding.directWeight = 10
@@ -83,10 +49,59 @@ function pathfinding.createGrid(mapData)
 	
 
 	return grid
-ends
+end
 
 function pathfinding.findPathDepth(mapData, position, objective)
-	
+	-- Position and Objective Quad Calculation
+	local startPos = mapData:GetQuadrantOf(position.X, position.Y)
+	local targetPos = mapData:GetQuadrantOf(objective.X, objective.Y)
+
+	local nodes = nil
+
+	-- Initialization
+	print("Starting Pos = ", startPos.X, startPos.Y )
+	nodes = pathfinding.createGrid(mapData)
+
+	local start = nodes[startPos.X][startPos.Y]
+	local target = nodes[targetPos.X][targetPos.Y]
+
+	visited = {}
+
+	return pathfinding.searchDepth(nodes, position, objective, visited)
+end
+
+function pathfinding.searchDepth(nodes, position, objective, visited)
+	local i = 0
+	local j = 0
+	local iPos = 0
+	local jPos = 0
+
+
+	for i = -1, 1 do
+		iPos = i + currentNode.position.X
+		if iPos >= 1 and iPos <= grid.width then
+			for j = -1, 1 do
+				jPos = j + currentNode.position.Y
+				if jPos >= 1 and jPos <= grid.height then
+					current = nodes[iPos][jPos]
+					if not current.type == pathfinding.NodeType.Obstacle and not table.contains(visited, current) then 
+						table.insert(visited, current)
+						if current == target then
+							return {current}
+						else
+							local result = pathfinding.searchDepth(nodes, position, objective, visited)
+							if result then
+								table.insert(result, current)
+								return result
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	return nil
 end
 
 function pathfinding.findPathAstar(mapData, position, objective, heuristic)
