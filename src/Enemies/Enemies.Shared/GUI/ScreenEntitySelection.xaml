@@ -13,16 +13,16 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout VerticalOptions="Fill" HorizontalOptions="End" WidthRequest="230" Orientation="Vertical" Spacing="16">
+    <StackLayout VerticalOptions="Fill" HorizontalOptions="End" WidthRequest="250" BackgroundColor="#FFBBBBBB"  Orientation="Vertical" Spacing="16">
 
         <!--Back button bar-->
         <StackLayout x:Name="BackPanel" Orientation="Horizontal">
             <controls:ImageButton Image="GUI/arrow_back" WidthRequest="32" HeightRequest="32" OnClick="BackClick" />
-            <Label Text="Back" TextColor="Yellow" HorizontalOptions="FillAndExpand" />
+            <Label Text="Back" TextColor="Black" HorizontalOptions="FillAndExpand" />
         </StackLayout>
 
         <!--Items List-->
-        <StackLayout x:Name="Stack" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        <StackLayout x:Name="Stack" HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="FillAndExpand"/>
 
         <!--Pagination-->
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">

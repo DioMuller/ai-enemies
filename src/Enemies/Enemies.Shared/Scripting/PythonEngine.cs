@@ -58,22 +58,39 @@ namespace Enemies.Scripting
 
         public IEnumerable<ScriptEntityDescription> AvailableEntities(ContentManager content)
         {
-            var scriptsDir = Path.Combine(content.RootDirectory, "Scripts/Entities");
-            foreach (var file in Directory.GetFiles(scriptsDir, "*.py"))
+            //var scriptsDir = Path.Combine(content.RootDirectory, "Scripts/Entities");
+
+            foreach (var scriptsDir in Engine.GetSearchPaths())
             {
-                var script = Engine.CreateScriptSourceFromFile(file);
-                var scope = Engine.CreateScope();
-                script.Execute(scope);
+                string[] files;
 
-                if (!scope.ContainsVariable("ScriptEntity"))
-                    continue;
-
-                yield return new ScriptEntityDescription
+                try
                 {
-                    Factory = this,
-                    DisplayName = Path.GetFileNameWithoutExtension(file),
-                    File = Path.Combine(scriptsDir, Path.GetFileName(file))
-                };
+                    files = Directory.GetFiles(scriptsDir, "*.py");
+                }
+                catch (DirectoryNotFoundException dnfex)
+                {
+                    Console.WriteLine("Directory '" + scriptsDir + "' does not exist.");
+                    continue;
+                }
+
+                foreach (var file in files)
+                {
+                    var script = Engine.CreateScriptSourceFromFile(file);
+                    var scope = Engine.CreateScope();
+                    script.Execute(scope);
+
+                    if (!scope.ContainsVariable("ScriptEntity"))
+                        continue;
+
+                    yield return new ScriptEntityDescription
+                    {
+                        Factory = this,
+                        DisplayName = Path.GetFileNameWithoutExtension(file),
+                        File = Path.Combine(scriptsDir, Path.GetFileName(file)),
+                        IsPlayerCreated = (scriptsDir == "PlayerScripts")
+                    };
+                }
             }
         }
 

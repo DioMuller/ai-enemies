@@ -2,11 +2,13 @@
 <controls:ClickableGrid xmlns="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       xmlns:controls="clr-namespace:Enemies.Controls;assembly=ScriptDeathmatch"
-      x:Class="Enemies.GUI.EntityDescription">
+      x:Class="Enemies.GUI.EntityDescription"
+      BackgroundColor="#CC000000">
     <controls:ClickableGrid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
     </controls:ClickableGrid.ColumnDefinitions>
     <Image HeightRequest="32" HorizontalOptions="Start" VerticalOptions="Center" Source="{Binding Factory.Icon}"/>
-    <Label Text="{Binding DisplayName}" TextColor="Yellow" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Grid.Column="1" />
+    <Label Text="{Binding DisplayName}" TextColor="{Binding HighlightColor}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Grid.Column="1" />
+    
 </controls:ClickableGrid>

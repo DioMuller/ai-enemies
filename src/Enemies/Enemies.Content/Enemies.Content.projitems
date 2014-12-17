@@ -11,7 +11,6 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\Fonts\DefaultFont.xnb" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\circle.py" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\hunter.py" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\patroller.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\hivemind.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\Scripts\Entities\receiver.lua" />
@@ -38,6 +37,7 @@
     <None Include="$(MSBuildThisFileDirectory)Content\ScriptTests\Entities\searchbot.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\ScriptTests\Entities\wanderer.lua" />
     <None Include="$(MSBuildThisFileDirectory)Content\ScriptTests\Libs\pathfinding.lua" />
+    <None Include="$(MSBuildThisFileDirectory)PlayerScripts\hunter.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\BGM\Exhilarate.wav" />

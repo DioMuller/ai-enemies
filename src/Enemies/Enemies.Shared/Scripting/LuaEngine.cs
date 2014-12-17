@@ -50,7 +50,8 @@ namespace Enemies.Scripting
 					{
 						Factory = this,
 						DisplayName = Path.GetFileNameWithoutExtension(file),
-						File = Path.Combine(dir, Path.GetFileName(file))
+						File = Path.Combine(dir, Path.GetFileName(file)),
+                        IsPlayerCreated = (dir == "PlayerScripts")
 					};
 				}		
 	        }
