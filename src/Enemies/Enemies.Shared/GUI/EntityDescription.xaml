@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       xmlns:controls="clr-namespace:Enemies.Controls;assembly=ScriptDeathmatch"
       x:Class="Enemies.GUI.EntityDescription"
-      BackgroundColor="#CC000000">
+      BackgroundColor="#22000000">
     <controls:ClickableGrid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>

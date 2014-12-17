@@ -221,7 +221,10 @@ namespace Enemies.Screens
         Xamarin.Forms.Page CreateEntitySelectionGUI()
         {
             var entityMenu = new ScreenEntityTag(_sandbox);
-            var entities = _scriptEntityFactory.AvailableEntities(Content).OrderBy(e => e.DisplayName).ToImmutableList();
+            var entities = _scriptEntityFactory.AvailableEntities(Content)
+                .OrderBy(e => e.DisplayName)
+                .OrderByDescending(e=> e.IsPlayerCreated)
+                .ToImmutableList();
 
             Action<string> addEntity = async category =>
             {
