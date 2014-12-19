@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.Xna.Framework;
 #if !__ANDROID__
 using Enemies.Entities;
@@ -56,11 +57,11 @@ namespace Enemies.Scripting
             return entityClass(content, position);
         }
 
-        public IEnumerable<ScriptEntityDescription> AvailableEntities(ContentManager content)
-        {
-            //var scriptsDir = Path.Combine(content.RootDirectory, "Scripts/Entities");
+	    public IEnumerable<ScriptEntityDescription> AvailableEntities(ContentManager content)
+	    {
+		    string[] scriptsDirs = {Path.Combine(content.RootDirectory, "Scripts/Entities"),"PlayerScripts"};
 
-            foreach (var scriptsDir in Engine.GetSearchPaths())
+			foreach (var scriptsDir in scriptsDirs)
             {
                 string[] files;
 

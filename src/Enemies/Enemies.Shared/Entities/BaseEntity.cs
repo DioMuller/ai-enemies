@@ -674,10 +674,25 @@ namespace Enemies.Entities
             var distance = new Vector2(x, y) - _entity.Sprite.Position;
             var direction = distance;
             direction.Normalize();
-            var ray = new Ray(new Vector3(_entity.Sprite.Position, 0), new Vector3(direction, 0));
 
-            var collisionDist = GameParameters.CurrentMap.CollisionDist(ray);
-	        return (collisionDist == null || collisionDist.Value >= distance.Length());
+            var halfSize = new Vector2(
+				_entity.Sprite.CurrentAnimation.CurrentFrame.Width / 2,
+				_entity.Sprite.CurrentAnimation.CurrentFrame.Height / 2);
+
+	        var p1 = new Vector2(halfSize.X, -halfSize.Y);
+	        var p2 = new Vector2(-halfSize.X, halfSize.Y);
+
+			var r1 = new Ray(new Vector3(_entity.Sprite.Position, 0), new Vector3(direction, 0));
+			var r2 = new Ray(new Vector3(_entity.Sprite.Position - p1, 0), new Vector3(direction, 0));
+			var r3 = new Ray(new Vector3(_entity.Sprite.Position + p2, 0), new Vector3(direction, 0)); 
+
+            var dist1 = GameParameters.CurrentMap.CollisionDist(r1);
+			var dist2 = GameParameters.CurrentMap.CollisionDist(r2);
+			var dist3 = GameParameters.CurrentMap.CollisionDist(r3);
+
+			return (dist1 == null || dist1.Value >= distance.Length()) &&
+				   (dist2 == null || dist2.Value >= distance.Length()) &&
+				   (dist3 == null || dist3.Value >= distance.Length());
         }
         #endregion Shooting
 
