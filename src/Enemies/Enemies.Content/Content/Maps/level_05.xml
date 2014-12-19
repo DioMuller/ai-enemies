@@ -1,4 +1,4 @@
-﻿<level>
+<level>
   <map height="15" width="20">
     <![CDATA[
       11111111111111111111
@@ -22,7 +22,6 @@
   <entities>
     <entity script="scaredcat.lua" x="100" y="130" tag="player"/>
     <entity script="scaredcat.lua" x="100" y="530" tag="player"/>
-    <entity script="shooter.lua" x ="650" y ="150" tag="enemy"/>
     <entity script="circle.py" x ="550" y ="120" tag="enemy"/>
     <entity script="static.py" x="700" y="100" tag="objective"/>
     <entity script="static.py" x="700" y="500" tag="objective"/>

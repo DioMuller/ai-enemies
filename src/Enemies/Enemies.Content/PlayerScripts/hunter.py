@@ -1,4 +1,4 @@
-﻿from math import pow
+from math import pow
 from math import sqrt
 from Enemies.Entities import BaseEntity
 from Enemies.Entities import TypeTag
@@ -48,7 +48,7 @@ class ScriptEntity(BaseEntity):
             self.target = self.GetNearestTarget()
 
 
-            if enemies.Length > 0 and self.CanReach(enemies[0].Position.X, enemies[0].Position.Y):
+            if enemies.Length > 0 and self.CanReach(enemies[0].Position.X, enemies[0].Position.Y) and self.Ammo > 0:
                 self.state = self.state_attacking
                 self.enemy = enemies[0]
             else:

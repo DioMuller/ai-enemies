@@ -670,12 +670,14 @@ namespace Enemies.Entities
         /// <returns></returns>
         public bool CanReach(int x, int y)
         {
+	        var openingAngle = 15.0f;
             var distance = new Vector2(x, y) - _entity.Sprite.Position;
             var direction = distance;
             direction.Normalize();
             var ray = new Ray(new Vector3(_entity.Sprite.Position, 0), new Vector3(direction, 0));
+
             var collisionDist = GameParameters.CurrentMap.CollisionDist(ray);
-            return collisionDist == null || collisionDist.Value >= distance.Length();
+	        return (collisionDist == null || collisionDist.Value >= distance.Length());
         }
         #endregion Shooting
 
