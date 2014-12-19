@@ -52,6 +52,14 @@ namespace Enemies.Maps
 	        var center = TileCenter;
             return new Vector2(x * TileSize.X + center.X, y * TileSize.Y + center.Y);
         }
+
+		public BoundingBox GetBoundingBoxOfQuadrant(int x, int y)
+		{
+			var pquad = GetPositionQuad(x, y);
+
+			return new BoundingBox( new Vector3(pquad.X, pquad.Y, 0), 
+				   new Vector3(pquad.X + TileSize.X, pquad.Y + TileSize.Y, 0) );
+		}
     }
 
     class Map

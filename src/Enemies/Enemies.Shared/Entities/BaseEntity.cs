@@ -670,29 +670,41 @@ namespace Enemies.Entities
         /// <returns></returns>
         public bool CanReach(int x, int y)
         {
-	        var openingAngle = 15.0f;
             var distance = new Vector2(x, y) - _entity.Sprite.Position;
             var direction = distance;
             direction.Normalize();
 
-            var halfSize = new Vector2(
-				_entity.Sprite.CurrentAnimation.CurrentFrame.Width / 2,
-				_entity.Sprite.CurrentAnimation.CurrentFrame.Height / 2);
+			var ray = new Ray(new Vector3(_entity.Sprite.Position, 0), new Vector3(direction, 0));
+			
+            var collisionDist = GameParameters.CurrentMap.CollisionDist(ray);
 
-	        var p1 = new Vector2(halfSize.X, -halfSize.Y);
-	        var p2 = new Vector2(-halfSize.X, halfSize.Y);
+	        if (collisionDist == null || collisionDist.Value >= distance.Length())
+	        {
+		        var map = GetMapLayout();
+				var p1 = map.GetQuadrantOf((int) this.Position.X, (int) this.Position.Y);
+		        var p2 = map.GetQuadrantOf(x, y);
 
-			var r1 = new Ray(new Vector3(_entity.Sprite.Position, 0), new Vector3(direction, 0));
-			var r2 = new Ray(new Vector3(_entity.Sprite.Position - p1, 0), new Vector3(direction, 0));
-			var r3 = new Ray(new Vector3(_entity.Sprite.Position + p2, 0), new Vector3(direction, 0)); 
+		        var init_qx = Math.Min(p1.X, p2.X);
+				var end_qx = Math.Max(p1.X, p2.X);
 
-            var dist1 = GameParameters.CurrentMap.CollisionDist(r1);
-			var dist2 = GameParameters.CurrentMap.CollisionDist(r2);
-			var dist3 = GameParameters.CurrentMap.CollisionDist(r3);
+				var init_qy = Math.Min(p1.Y, p2.Y);
+				var end_qy = Math.Max(p1.Y, p2.Y);
 
-			return (dist1 == null || dist1.Value >= distance.Length()) &&
-				   (dist2 == null || dist2.Value >= distance.Length()) &&
-				   (dist3 == null || dist3.Value >= distance.Length());
+		        for (int i = init_qx; i < end_qx; i++)
+		        {
+			        for (int j = init_qy; j < end_qy; j++)
+			        {
+				        if ( ray.Intersects(map.GetBoundingBoxOfQuadrant(i, j)) != null )
+				        {
+					        if (!map.CanGo(i, j)) return false;
+				        }
+			        }
+		        }
+
+		        return true;
+	        }
+
+	        return false;
         }
         #endregion Shooting
 
