@@ -598,7 +598,7 @@ namespace Enemies.Screens
 			foreach (var entity in Entities)
                 TryDrawEntity(gameTime, entity);
 
-            if (!_guiVisible)
+            if (!_guiVisible && _sandbox)
             {
                 SpriteBatch.DrawString(_font, _text, _textPosition, Color.Yellow, 0.0f, _origin, 1.0f, SpriteEffects.None, 1);
             }

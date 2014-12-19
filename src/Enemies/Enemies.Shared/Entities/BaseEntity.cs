@@ -136,6 +136,7 @@ namespace Enemies.Entities
                         break;
                 }
 
+	            _showStats = (_tag == TypeTag.Player || _tag == TypeTag.Enemy);
                 _entity.Sprite.Color = GetColor(_tag);
             }
         }
