@@ -1,4 +1,4 @@
-﻿using Enemies.Scripting;
+using Enemies.Scripting;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
@@ -66,7 +66,7 @@ namespace Enemies.GUI
             }
             catch (Exception ex)
             {
-                Log.Error("Entity Loading", ex);
+                //Log.Error("Entity Loading", ex);
             }
         }
 

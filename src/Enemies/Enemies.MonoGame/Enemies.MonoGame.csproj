@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{3502560B-1F62-4443-96D7-36D818B36699}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Enemies.MonoGame</RootNamespace>
     <AssemblyName>ScriptDeathmatch</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>

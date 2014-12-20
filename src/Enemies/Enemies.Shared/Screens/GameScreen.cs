@@ -56,22 +56,25 @@ namespace Enemies.Screens
 
             return _contentLoad = Task.Factory.StartNew(delegate
             {
-                _scriptEntityFactory = new ScriptEntityFactory(content);
+	            if (_scriptEntityFactory == null)
+	            {
+		            _scriptEntityFactory = new ScriptEntityFactory(content);
 
-                var preloadEntities = _scriptEntityFactory.AvailableEntities(content)
-                        .Select(s =>
-                        {
-                            try
-                            {
-                                return _scriptEntityFactory.LoadEntity(content, s, new Vector2(0, 0));
-                            }
-                            catch (Exception ex)
-                            {
-                                Log.Error(Tag, ex);
-                                return null;
-                            }
-                        })
-                        .ToList();
+		            var preloadEntities = _scriptEntityFactory.AvailableEntities(content)
+			            .Select(s =>
+			            {
+				            try
+				            {
+					            return _scriptEntityFactory.LoadEntity(content, s, new Vector2(0, 0));
+				            }
+				            catch (Exception ex)
+				            {
+					            Log.Error(Tag, ex);
+					            return null;
+				            }
+			            })
+			            .ToList();
+	            }
             });
         }
 
@@ -284,7 +287,7 @@ namespace Enemies.Screens
         {
             FadeColor = Color.Black;
             await PreloadContent(Content);
-            var availableEntities = _scriptEntityFactory.AvailableEntities(Content).ToList();
+            //var availableEntities = _scriptEntityFactory.AvailableEntities(Content).ToList();
 
             /*
             if (availableEntities.Count > 0)

@@ -22,7 +22,6 @@
   <entities>
     <entity script="scaredcat.lua" x="100" y="130" tag="player"/>
     <entity script="scaredcat.lua" x="600" y="130" tag="player"/>
-    <entity script="scaredcat.lua" x="100" y="500" tag="player"/>
     <entity script="shooter.lua" x ="200" y ="250" tag="enemy"/>
     <entity script="circle.lua" x ="400" y ="200" tag="enemy"/>
     <entity script="shooter.lua" x ="500" y ="150" tag="enemy"/>

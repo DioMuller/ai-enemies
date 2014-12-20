@@ -22,6 +22,7 @@
   <entities>
     <entity script="scaredcat.lua" x="100" y="130" tag="player"/>
     <entity script="scaredcat.lua" x="150" y="150" tag="player"/>
+    <entity script="scaredcat.lua" x="100" y="500" tag="player"/>
     <entity script="sample.lua" x="160" y="230" tag="enemy"/>
     <entity script="commanded.lua" x="205" y="500" tag="enemy"/>
     <entity script="commanded.lua" x="500" y="180" tag="enemy"/>

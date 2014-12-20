@@ -52,7 +52,7 @@ class ScriptEntity(BaseEntity):
                 self.state = self.state_attacking
                 self.enemy = enemies[0]
             else:
-                if self.CanReach(self.target.Position.X, self.target.Position.Y):
+                if self.target != None and self.CanReach(self.target.Position.X, self.target.Position.Y):
                     self.state = self.state_reaching
                 else:
                     self.state = self.state_searching
