@@ -1,0 +1,360 @@
+Script Deathmatch
+
+Alunos:
+Diogo Muller de Miranda
+João Vitor Pietsiaki Moraes
+
+====================================
+Download
+====================================
+
+Fonte: http://diogomuller.com.br/files/games/Script%20Deathmatch%20-%20Source.zip
+
+Binarios: http://diogomuller.com.br/files/games/Script%20Deathmatch%20-%20Binaries.zip
+
+Repositório: https://github.com/DiogoMuller/ai-enemies
+
+====================================
+Videos de Gameplay
+====================================
+
+Single Player - http://youtu.be/r0YKKVp0ruA
+Sandbox - http://youtu.be/b4JAnwrf-Pk 
+
+
+====================================
+Como Jogar
+====================================
+
+Neste jogo, seu script deve atravessar diversos labirintos com inimigos, e chegar até o objetivo.
+
+Os objetivos de jogo são:
+
+* Para o jogador, chegar no objetivo.
+* Para o inimigo, matar o jogador.
+
+Para jogar:
+
+* Coloque seu script de jogador na pasta PlayerScripts.
+* Selecione New Game ou Sandbox para testá-lo.
+
+As entidades de jogador e inimigo podem atirar nas outras entidades:
+
+* Jogadores podem atirar nos inimigos.
+* Inimigos podem atirar nos jogadores.
+
+Tanto jogadores quando inimigos tem 3 pontos de energia e 15 tiros disponíveis.
+
+Para checar alguns exemplos de Scripts, pode-se checar a pasta 'Content/Scripts/Entities'.
+
+====================================
+Scripts
+====================================
+
+O jogo aceita scripts feitos em Lua ou Python. 
+
+* Para o Python, foi utilizado o IronPython, e por isso os scripts tem acesso a funcionalidades do .NET. 
+* Para o Lua, não existe esta facilidade, porém ele pode-se utilizar alguns scripts prontos, que estão em 'Content/Scripts/Libs'.
+* Python infelizmente não pode utilizar os scripts da pasta Libs.
+
+====================================
+Scripts - Implementação
+====================================
+
+Existem três métodos básicos que podem ser implementados pelos scripts:
+
+* Initialize()
+ - Método chamado na inicialização do Script.
+
+* DoUpdate(delta : Float)
+ - Método chamado a cada ciclo de jogo. Delta representa o tempo passado desde a última atualização.
+
+* ReceiveMessage(message : Message)
+ - Método chamado quando a entidade recebe uma mensagem. A implementação do protocolo de mensagem e quem pode ou não receber mensagens deve ser implementada pelo próprio script, todas as entidades podem receber. 
+ 
+====================================
+Scripts - Métodos Disponiveis
+====================================
+
+Existem alguns métodos internos disponíveis para o script, para que ele possa executar ações e interagir com o mapa e outras entidades do jogo:
+
+------------------------------
+Movimentação e Posição
+------------------------------
+
+* Move( x : Float, y : Float, [Optional] rotate : Bool )
+	Movimenta o jogador em x e y, limitado pela velocidade máxima da entidade. Caso rotate seja verdadeiro, entidade olha para a posição onde andou.
+	
+* SetRotation( angle : Float )
+	Altera a rotação da entidade para valor definido em angle.
+	
+* LootAt( x : Float, y : Float )
+	Faz a entidade olhar para a direção de (x,y) no mapa.
+	
+* MoveTo( x : Float, y : Float ) : Bool
+	Movimenta a entidade em direção a x e y. Caso não consiga se mover, retorna "falso".
+
+* CanMoveTo( x : Int, y: Int, width: Int, height: Int ) : Bool
+	Checa se jogador pode movimentar-se para uma certa posição, considerando o tamanho passado por (width, height).
+
+------------------------------
+Informações
+------------------------------
+* GetNearestTarget() : EntityInfo
+	Obtém alvo mais próximo. Para jogadores, retornará o Objetivo mais próximo. Para inimigos, o jogador mais próximo. Não retorna nada para outros tipos.
+	
+* GetNearbyEnemies() : EntityInfo[]
+	Obtém inimigos próximos. Para jogadores, retorna inimigo. Para Objetivo, retorna jogador. Não retorna nada para outros tipos.
+	
+* GetShootableEntities() : EntityInfo[]
+	Obtém alvos que podem ser atacados. Retorna inimigos para jogador, e jogador para inimigos. Não retorna nada para outros tipos.
+
+* GetInfo() : EntityInfo
+	Obtém informação da própria entidade.
+	
+* GetDistanceFrom(entity : EntityInfo) : Float
+	Obtém a distância entre esta entidade e outra.
+
+* GetMapLayout() : MapInfo
+	Obtém layout do mapa.
+
+------------------------------
+Interações
+------------------------------
+* SendMessage( receiver : Int, message : String, [Optional] attachment : Object )
+	Envia mensagem para uma entidade (que tenha Id = receiver), independente de tag.
+	
+* BroadcastMessage( message: String, [Optional] attachment : Object )
+	Envia mensagem para todas as entidades, independente de Tag.
+
+* Talk ( message: String)
+	Faz a entidade mostrar uma mensagem na tela.
+
+------------------------------
+Ataque
+------------------------------
+* ShootAt( x : Float, y : Float )
+	Atira na direção de (x,y), se tiver munição.
+	
+* CanReach( x : Float, y : Float ) : Bool
+	Checa se jogador pode enxergar posição (x,y). Retorna falso se houverem paredes no meio do caminho. Não leva em consideração tamanho da bala ou da entidade.
+	Este é um método relativamente pesado, e caso seja muito utilizado, pode resultar em crash.
+	
+====================================
+Scripts - Estruturas
+====================================
+
+EntityInfo
+{
+	- Attributes
+		* Id : Int
+			Id da entidade
+		* Tag : TypeTag
+			Tag da entidade (inimigo, jogador, objetivo...)
+		* Position : Vector
+			Posição atual da entidade.
+}
+
+MapInfo
+{
+	- Attributes
+		* ScreenSize : Vector
+			Tamanho total da tela.
+		* TileSize : Vector
+			Tamanho de cada Tile da tela.
+		* TileCenter : Vector
+			Localização do ponto no centro do Tile.
+		* TileCount : Vector
+			Número de Tiles (x e y) na tela.
+	- Methods
+		* GetQuadrantOf( x : Int, y : Int ) : Vector
+			Obtém quadrante de uma posição em pixels.
+		* CanGo( x : Int, y : Int ) : Bool
+			É possível visitar este quadrante?
+		* GetPositionQuad( x : Int, y : Int ) : Vector
+			Obtém a posição em pixels, passando o quadrante.
+}
+
+Vector
+{
+	- Attributes
+		* X : Float
+			Coordenada X do Vetor.
+		* Y : Float
+			Coordenada Y do Vetor.
+}
+
+Message
+{
+	- Attributes
+		* Sender : Int
+			Quem enviou a mensagem.
+		* Receiver : Int
+			Para quem é destinada a mensagem. Em caso de Broadcast, este campo será igual a -1.
+		* Text : String
+			Texto da mensagem.
+		* Attachment : Object
+			Objeto anexado da mensagem. Pode ser qualquer coisa.
+}
+
+====================================
+Scripts - Enumeradores
+====================================
+
+TypeTag
+{
+	Enemy = 0
+	Player = 1
+	Objective = 2
+	Bullet = 4
+	None = 3
+}
+
+====================================
+Script Exemplo - Lua
+====================================
+
+script = {}
+
+function script.Initialize()
+
+end
+
+function script.DoUpdate(delta)
+	entities = entity:GetNearbyEnemies()
+
+	for value in array.foreach(entities) do
+		-- Do Something
+	end
+
+	entity:Move(1,1)
+end
+
+function script.ReceiveMessage(message)
+	-- Nothing else to do!
+end
+
+return script
+
+====================================
+Script Exemplo - Python
+====================================
+
+from Enemies.Entities import BaseEntity
+from Enemies.Entities import TypeTag
+
+class ScriptEntity(BaseEntity):
+	#def Initialize(self):
+		#Nothing else to do.
+	
+	def DoUpdate(self, game_time):
+		self.Move(1,1)
+		super(ScriptEntity, self).DoUpdate(game_time)
+		
+
+====================================
+Alguns outros scripts exemplo
+====================================
+Estes scripts estão todos em Content/Scripts/Entities.
+
+* circle.py
+	Uma entidade, em python, que anda em círculos.
+	
+* pathfinder.py
+	Pathfinding em Python.
+
+* patroller.lua
+	Entidade que patrulha um caminho definido. Utiliza lib auxiliar de patrulha do Lua.
+	
+* commander.py
+* commanded.lua
+	Duas classes que se comunicam. Commander envia ordens para Commanded, que as interpreta e obedece.
+	
+* shooter.lua
+	Exemplo de classe que atira, com delay entre tiros.
+	
+* seeker.lua
+* seekanddestroy.lua
+* scaredcat.lua
+	Entidades feitas em lua que utilizam a biblioteca de steering behaviors.
+	
+====================================
+Bibliotecas Lua
+====================================
+
+Disponíveis em Content/Scripts/Libs. Caso deseje, pode-se adicionar novas implementações. A maneira como o script será chamada nos outros scripts lua depende do nome do arquivo (Ex: arquivo teste.lua terá que ser chamado como teste.atributo ou teste:metodo())
+
+* array.lua
+	Funções auxiliares para array.
+
+* case.lua
+	Switch/Case em lua.
+
+* mathlib.lua
+	Funções matemáticas auxiliares.
+
+* patrol.lua
+	Funções para entidade criar/seguir um caminho de patrulha.
+
+* polygon.lua
+	Gerador de arestas de polígonos. Pode ser utilizado para gerar patrulhas.
+
+* steering.lua
+	Funções de steering behaviors.
+
+* table.lua
+	Funções auxiliares para Tables.
+
+* tags.lua
+	Tags dos tipos de entidade, para Lua.
+
+* vector.lua
+	Funções auxiliares para vetores.
+
+====================================
+Arquivo de Mapas
+====================================
+
+Os mapas do jogo são definidos por arquivos .xml em "Content/Maps". O jogador pode editar, alterar e até mesmo criar novos mapas, editando e criando arquivos nesta pasta.
+Para adicionar um mapa criado pelo jogador ao modo Single Player, é só alterar um dos mapas existentes e colocar o novo mapa na tag <next> deste mapa.
+
+====================================
+Exemplo de arquivo de mapas
+====================================
+
+<level>
+  <!-- Definição do mapa em si. -->
+  <map height="15" width="20">
+    <![CDATA[
+      11111111111111111111
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      10000000000000000001
+      10000000000001111111
+      10000000000000000001
+      10000000001111100001
+      10000000001000000001
+      11111110001000000001
+      10000000001000000001
+      10000000000000000001
+      10000000000000000001
+      11111111111111111111
+    ]]>
+  </map>
+  <!-- Imagem utilizada para parede, grama e espaço vazio. -->
+  <tiles wall="Tile/Wall" ground="Tile/Grass" empty="Tile/Empty"/>
+  <!-- Entidades pertencentes a este mapa. Não é necessário colocar o caminho completo, o jogo procura em PlayerScripts e Content/Scripts/Entities. -->
+  <entities>
+    <entity script="scaredcat.lua" x="100" y="130" tag="player"/>
+    <entity script="scaredcat.lua" x="600" y="130" tag="player"/>
+    <entity script="shooter.lua" x ="200" y ="250" tag="enemy"/>
+    <entity script="circle.lua" x ="400" y ="200" tag="enemy"/>
+    <entity script="shooter.lua" x ="500" y ="150" tag="enemy"/>
+    <entity script="circle.py" x ="350" y ="380" tag="enemy"/>
+    <entity script="circle.py" x="600" y="400" tag="objective"/>
+  </entities>
+  <!-- Próxima fase. -->
+  <next>level_04</next>
+</level>
